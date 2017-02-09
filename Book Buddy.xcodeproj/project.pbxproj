@@ -8,12 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		56594B731E4C16FE00F6A60A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56594B721E4C16FE00F6A60A /* AppDelegate.swift */; };
-		56594B751E4C16FE00F6A60A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56594B741E4C16FE00F6A60A /* ViewController.swift */; };
 		56594B781E4C16FE00F6A60A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56594B761E4C16FE00F6A60A /* Main.storyboard */; };
 		56594B7A1E4C16FE00F6A60A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56594B791E4C16FE00F6A60A /* Assets.xcassets */; };
 		56594B7D1E4C16FE00F6A60A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56594B7B1E4C16FE00F6A60A /* LaunchScreen.storyboard */; };
-		56594B881E4C16FE00F6A60A /* Book_BuddyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56594B871E4C16FE00F6A60A /* Book_BuddyTests.swift */; };
-		56594B931E4C16FE00F6A60A /* Book_BuddyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56594B921E4C16FE00F6A60A /* Book_BuddyUITests.swift */; };
+		56594BA21E4C17C100F6A60A /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56594BA01E4C17C100F6A60A /* Bolts.framework */; };
+		569C1EB81E4C40B400428785 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569C1EB71E4C40B400428785 /* LoginViewController.swift */; };
+		569C1EBA1E4C40E400428785 /* BarcodeReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569C1EB91E4C40E400428785 /* BarcodeReaderViewController.swift */; };
+		56A371381E4CBB7700FC064E /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56594BA11E4C17C100F6A60A /* Parse.framework */; };
+		56A3713B1E4CBD9100FC064E /* libstdc++.6.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 56A3713A1E4CBD9100FC064E /* libstdc++.6.tbd */; };
+		56A3713D1E4CBD9B00FC064E /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 56A3713C1E4CBD9B00FC064E /* libsqlite3.0.tbd */; };
+		56A3713F1E4CBDAD00FC064E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56A3713E1E4CBDAD00FC064E /* SystemConfiguration.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,17 +40,19 @@
 /* Begin PBXFileReference section */
 		56594B6F1E4C16FE00F6A60A /* Book Buddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Book Buddy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		56594B721E4C16FE00F6A60A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		56594B741E4C16FE00F6A60A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		56594B771E4C16FE00F6A60A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		56594B791E4C16FE00F6A60A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		56594B7C1E4C16FE00F6A60A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		56594B7E1E4C16FE00F6A60A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		56594B831E4C16FE00F6A60A /* Book BuddyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Book BuddyTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		56594B871E4C16FE00F6A60A /* Book_BuddyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book_BuddyTests.swift; sourceTree = "<group>"; };
-		56594B891E4C16FE00F6A60A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		56594B8E1E4C16FE00F6A60A /* Book BuddyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Book BuddyUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		56594B921E4C16FE00F6A60A /* Book_BuddyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book_BuddyUITests.swift; sourceTree = "<group>"; };
-		56594B941E4C16FE00F6A60A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		56594BA01E4C17C100F6A60A /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		56594BA11E4C17C100F6A60A /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		569C1EB71E4C40B400428785 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		569C1EB91E4C40E400428785 /* BarcodeReaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeReaderViewController.swift; sourceTree = "<group>"; };
+		56A3713A1E4CBD9100FC064E /* libstdc++.6.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.tbd"; path = "usr/lib/libstdc++.6.tbd"; sourceTree = SDKROOT; };
+		56A3713C1E4CBD9B00FC064E /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		56A3713E1E4CBDAD00FC064E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +60,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				56A3713F1E4CBDAD00FC064E /* SystemConfiguration.framework in Frameworks */,
+				56A3713D1E4CBD9B00FC064E /* libsqlite3.0.tbd in Frameworks */,
+				56A3713B1E4CBD9100FC064E /* libstdc++.6.tbd in Frameworks */,
+				56594BA21E4C17C100F6A60A /* Bolts.framework in Frameworks */,
+				56A371381E4CBB7700FC064E /* Parse.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,9 +89,10 @@
 			isa = PBXGroup;
 			children = (
 				56594B711E4C16FE00F6A60A /* Book Buddy */,
-				56594B861E4C16FE00F6A60A /* Book BuddyTests */,
-				56594B911E4C16FE00F6A60A /* Book BuddyUITests */,
 				56594B701E4C16FE00F6A60A /* Products */,
+				56594BA01E4C17C100F6A60A /* Bolts.framework */,
+				56594BA11E4C17C100F6A60A /* Parse.framework */,
+				56A371391E4CBD9100FC064E /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -97,32 +109,25 @@
 		56594B711E4C16FE00F6A60A /* Book Buddy */ = {
 			isa = PBXGroup;
 			children = (
-				56594B721E4C16FE00F6A60A /* AppDelegate.swift */,
-				56594B741E4C16FE00F6A60A /* ViewController.swift */,
-				56594B761E4C16FE00F6A60A /* Main.storyboard */,
 				56594B791E4C16FE00F6A60A /* Assets.xcassets */,
+				56594B721E4C16FE00F6A60A /* AppDelegate.swift */,
+				569C1EB91E4C40E400428785 /* BarcodeReaderViewController.swift */,
+				569C1EB71E4C40B400428785 /* LoginViewController.swift */,
 				56594B7B1E4C16FE00F6A60A /* LaunchScreen.storyboard */,
+				56594B761E4C16FE00F6A60A /* Main.storyboard */,
 				56594B7E1E4C16FE00F6A60A /* Info.plist */,
 			);
 			path = "Book Buddy";
 			sourceTree = "<group>";
 		};
-		56594B861E4C16FE00F6A60A /* Book BuddyTests */ = {
+		56A371391E4CBD9100FC064E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				56594B871E4C16FE00F6A60A /* Book_BuddyTests.swift */,
-				56594B891E4C16FE00F6A60A /* Info.plist */,
+				56A3713E1E4CBDAD00FC064E /* SystemConfiguration.framework */,
+				56A3713C1E4CBD9B00FC064E /* libsqlite3.0.tbd */,
+				56A3713A1E4CBD9100FC064E /* libstdc++.6.tbd */,
 			);
-			path = "Book BuddyTests";
-			sourceTree = "<group>";
-		};
-		56594B911E4C16FE00F6A60A /* Book BuddyUITests */ = {
-			isa = PBXGroup;
-			children = (
-				56594B921E4C16FE00F6A60A /* Book_BuddyUITests.swift */,
-				56594B941E4C16FE00F6A60A /* Info.plist */,
-			);
-			path = "Book BuddyUITests";
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,7 +267,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				56594B751E4C16FE00F6A60A /* ViewController.swift in Sources */,
+				569C1EB81E4C40B400428785 /* LoginViewController.swift in Sources */,
+				569C1EBA1E4C40E400428785 /* BarcodeReaderViewController.swift in Sources */,
 				56594B731E4C16FE00F6A60A /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -271,7 +277,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				56594B881E4C16FE00F6A60A /* Book_BuddyTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,7 +284,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				56594B931E4C16FE00F6A60A /* Book_BuddyUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,6 +420,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = XDE4MANTPR;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "Book Buddy/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "BookBuddy.Book-Buddy";
@@ -429,6 +437,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = XDE4MANTPR;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "Book Buddy/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "BookBuddy.Book-Buddy";
@@ -514,6 +526,7 @@
 				56594B991E4C16FE00F6A60A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		56594B9A1E4C16FE00F6A60A /* Build configuration list for PBXNativeTarget "Book BuddyTests" */ = {
 			isa = XCConfigurationList;
@@ -522,6 +535,7 @@
 				56594B9C1E4C16FE00F6A60A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		56594B9D1E4C16FE00F6A60A /* Build configuration list for PBXNativeTarget "Book BuddyUITests" */ = {
 			isa = XCConfigurationList;
@@ -530,6 +544,7 @@
 				56594B9F1E4C16FE00F6A60A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
