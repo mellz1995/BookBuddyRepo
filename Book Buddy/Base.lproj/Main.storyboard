@@ -69,7 +69,7 @@
                                 </constraints>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="email@example.com" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zLB-UO-IYy">
                                 <rect key="frame" x="16" y="306" width="343" height="30"/>
@@ -103,13 +103,6 @@
                                     <action selector="registerButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vbp-HF-cGf"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iub-Ie-52T">
-                                <rect key="frame" x="67" y="400" width="240" height="240"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="240" id="aWt-sA-Zaa"/>
-                                    <constraint firstAttribute="width" constant="240" id="zaq-Ui-KV8"/>
-                                </constraints>
-                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ahd-C2-lS6">
                                 <rect key="frame" x="155" y="361" width="64" height="30"/>
                                 <constraints>
@@ -121,6 +114,35 @@
                                     <action selector="generate:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HZy-qI-7Km"/>
                                 </connections>
                             </button>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="8ss-as-ze5">
+                                <rect key="frame" x="67" y="393" width="240" height="114"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="114" id="GzP-7f-Bpx"/>
+                                    <constraint firstAttribute="width" constant="240" id="XWh-IK-kPd"/>
+                                </constraints>
+                                <string key="text">Pictured below is your very own QR Code! This was generated from your username. Whenever someone wants to add (link) you to their profile, just tell them to scan this, and it is done automatically!</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mIc-ED-raB">
+                                <rect key="frame" x="292" y="579" width="43" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="AJa-7V-Cnr"/>
+                                    <constraint firstAttribute="width" constant="43" id="nys-Nj-Zf8"/>
+                                </constraints>
+                                <state key="normal" title="Got It!"/>
+                                <connections>
+                                    <action selector="gotItButtonAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="f67-xH-OnB"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iub-Ie-52T">
+                                <rect key="frame" x="122" y="529" width="130" height="130"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="130" id="aWt-sA-Zaa"/>
+                                    <constraint firstAttribute="width" constant="130" id="zaq-Ui-KV8"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -128,15 +150,19 @@
                             <constraint firstItem="q7c-Ax-rhw" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-132" id="3Oa-Lv-f4L"/>
                             <constraint firstItem="q7c-Ax-rhw" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-243" id="3oT-dc-nqF"/>
                             <constraint firstItem="o45-kj-Eqh" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="42.5" id="7zC-OD-zMR"/>
+                            <constraint firstItem="8ss-as-ze5" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="116.5" id="DFm-ZV-XaS"/>
+                            <constraint firstItem="mIc-ED-raB" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="126" id="DgU-s7-m1L"/>
                             <constraint firstItem="t5p-3c-9Pj" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-151" id="JvT-xL-nBZ"/>
                             <constraint firstItem="iub-Ie-52T" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="N14-9s-WaZ"/>
                             <constraint firstItem="Uti-lA-wBM" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-116.5" id="Oui-Ke-R7O"/>
                             <constraint firstItem="t5p-3c-9Pj" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-55" id="Rqp-IJ-mmm"/>
                             <constraint firstItem="ahd-C2-lS6" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="42.5" id="Sw2-YG-4hh"/>
+                            <constraint firstItem="mIc-ED-raB" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="260.5" id="bfd-My-Iap"/>
                             <constraint firstItem="Uti-lA-wBM" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="c7e-19-tR7"/>
                             <constraint firstItem="o45-kj-Eqh" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-148.5" id="cnB-af-tic"/>
                             <constraint firstItem="zBs-Gl-roB" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="-209.5" id="hZO-Ri-3rm"/>
-                            <constraint firstItem="iub-Ie-52T" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="186.5" id="k8U-5Y-Njv"/>
+                            <constraint firstItem="iub-Ie-52T" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="260.5" id="k8U-5Y-Njv"/>
+                            <constraint firstItem="8ss-as-ze5" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="mOJ-KJ-1Qj"/>
                             <constraint firstItem="4Nq-4X-qhE" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="42.5" id="oiM-oi-eAm"/>
                             <constraint firstItem="WED-Fn-xZv" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" constant="-134.5" id="pPk-Zz-Afb"/>
                             <constraint firstItem="ahd-C2-lS6" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="pfY-d1-RY4"/>
@@ -149,10 +175,12 @@
                     <connections>
                         <outlet property="emailLabel" destination="t5p-3c-9Pj" id="QY6-Jl-ug4"/>
                         <outlet property="emailTextField" destination="zLB-UO-IYy" id="BAu-5U-cdg"/>
+                        <outlet property="gotItButtonOutlet" destination="mIc-ED-raB" id="LTV-kq-EJ5"/>
                         <outlet property="loginButtonOutlet" destination="o45-kj-Eqh" id="bUd-tq-FeD"/>
                         <outlet property="passwordLabel" destination="WED-Fn-xZv" id="yHr-lt-JB3"/>
                         <outlet property="passwordTextField" destination="Uti-lA-wBM" id="ap6-dZ-pWU"/>
                         <outlet property="qrCodeImageView" destination="iub-Ie-52T" id="U13-30-jh0"/>
+                        <outlet property="qrDescriptionTextField" destination="8ss-as-ze5" id="mUD-h7-fk2"/>
                         <outlet property="registerButtonOutlet" destination="4Nq-4X-qhE" id="sQ2-UY-x44"/>
                         <outlet property="usernameLabel" destination="q7c-Ax-rhw" id="4aN-qj-kb5"/>
                         <outlet property="usernameTextField" destination="zBs-Gl-roB" id="q4v-s1-lAV"/>

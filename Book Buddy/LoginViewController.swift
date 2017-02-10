@@ -18,6 +18,13 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Call the beginning animations method
+        beginningAnimations()
+        
+        qrDescriptionTextField.alpha = 0
+        gotItButtonOutlet.alpha = 0
+        gotItButtonOutlet.isEnabled = false
+        
         // Allows dismissal of keyboard on tap anywhere on screen besides the keyboard itself
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
@@ -45,9 +52,29 @@ class LoginViewController: UIViewController {
     // Image views
     @IBOutlet weak var qrCodeImageView: UIImageView!
     
+    // Text field for QR description
+    @IBOutlet weak var qrDescriptionTextField: UITextView!
+    
+    // Button for when the user reads the qr description
+    @IBOutlet weak var gotItButtonOutlet: UIButton!
+    @IBAction func gotItButtonAction(_ sender: UIButton) {
+        // Segue the user to the next screen
+        
+    }
+    
+    
+    
     // Test generate button
     @IBAction func generate(_ sender: UIButton) {
         qrCodeImageView.image = generateQR(usernameTextField.text!)
+        qrDescriptionTextField.alpha = 1
+        gotItButtonOutlet.alpha = 0.5
+        // Activate the button after 3 seconds
+        let wait = DispatchTime.now() + 3.0
+        DispatchQueue.main.asyncAfter(deadline: wait) {
+            self.gotItButtonOutlet.alpha = 1
+            self.gotItButtonOutlet.isEnabled = true
+        }
     }
     
     
@@ -92,6 +119,8 @@ class LoginViewController: UIViewController {
         
         // Check to see if all required fields are filled
         if usernameTextField.text == "" || passwordTextField.text == "" || emailTextField.text == "" {
+            self.activityIndicator.stopAnimating()
+            UIApplication.shared.endIgnoringInteractionEvents()
             displayAlert("Error in registration form", "A username, password, and an email is needed for registration.", "Let's fix it")
         } else {
         
@@ -125,6 +154,16 @@ class LoginViewController: UIViewController {
                     UIApplication.shared.endIgnoringInteractionEvents()
                     self.activityIndicator.stopAnimating()
                     self.qrCodeImageView.image = self.generateQR(self.usernameTextField.text!)
+                    self.qrDescriptionTextField.alpha = 1
+                    self.gotItButtonOutlet.alpha = 0.5
+                    
+                    // Activate the button after 3 seconds
+                    let wait = DispatchTime.now() + 3.0
+                    DispatchQueue.main.asyncAfter(deadline: wait) {
+                        self.gotItButtonOutlet.alpha = 1
+                        self.gotItButtonOutlet.isEnabled = true
+                       
+                    }
                 }
             })
         }
@@ -154,7 +193,7 @@ class LoginViewController: UIViewController {
         
         // Animate password label in from the right
         passwordLabel.center.x = passwordLabel.center.x + 500
-        UIView.animate(withDuration: 0.5, delay: 0.5, usingSpringWithDamping: CGFloat(springWithDamping), initialSpringVelocity: CGFloat(initialSpringVelocity), options: UIViewAnimationOptions.curveEaseIn, animations: ({
+        UIView.animate(withDuration: 0.5, delay: 0.7, usingSpringWithDamping: CGFloat(springWithDamping), initialSpringVelocity: CGFloat(initialSpringVelocity), options: UIViewAnimationOptions.curveEaseIn, animations: ({
             self.passwordLabel.center.x = self.passwordLabel.center.x - 500
         }), completion: nil)
     }
