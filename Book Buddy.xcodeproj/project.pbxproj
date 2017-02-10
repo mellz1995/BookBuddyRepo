@@ -18,6 +18,9 @@
 		56A3713B1E4CBD9100FC064E /* libstdc++.6.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 56A3713A1E4CBD9100FC064E /* libstdc++.6.tbd */; };
 		56A3713D1E4CBD9B00FC064E /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 56A3713C1E4CBD9B00FC064E /* libsqlite3.0.tbd */; };
 		56A3713F1E4CBDAD00FC064E /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56A3713E1E4CBDAD00FC064E /* SystemConfiguration.framework */; };
+		56BBD7B51E4E6C1000E3677F /* UserGus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BBD7B41E4E6C1000E3677F /* UserGus.swift */; };
+		56BBD7B71E4E730A00E3677F /* SearchAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BBD7B61E4E730A00E3677F /* SearchAPI.swift */; };
+		56BBD7BE1E4E771800E3677F /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BBD7BD1E4E771800E3677F /* Settings.swift */; };
 		56D052621E4E377E007747ED /* SetProfilePicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D052611E4E377E007747ED /* SetProfilePicViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -54,6 +57,9 @@
 		56A3713A1E4CBD9100FC064E /* libstdc++.6.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.tbd"; path = "usr/lib/libstdc++.6.tbd"; sourceTree = SDKROOT; };
 		56A3713C1E4CBD9B00FC064E /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		56A3713E1E4CBDAD00FC064E /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		56BBD7B41E4E6C1000E3677F /* UserGus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserGus.swift; sourceTree = "<group>"; };
+		56BBD7B61E4E730A00E3677F /* SearchAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchAPI.swift; sourceTree = "<group>"; };
+		56BBD7BD1E4E771800E3677F /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		56D052611E4E377E007747ED /* SetProfilePicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetProfilePicViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -111,14 +117,9 @@
 		56594B711E4C16FE00F6A60A /* Book Buddy */ = {
 			isa = PBXGroup;
 			children = (
-				56594B791E4C16FE00F6A60A /* Assets.xcassets */,
-				56594B721E4C16FE00F6A60A /* AppDelegate.swift */,
-				569C1EB91E4C40E400428785 /* BarcodeReaderViewController.swift */,
-				569C1EB71E4C40B400428785 /* LoginViewController.swift */,
-				56D052611E4E377E007747ED /* SetProfilePicViewController.swift */,
-				56594B7B1E4C16FE00F6A60A /* LaunchScreen.storyboard */,
-				56594B761E4C16FE00F6A60A /* Main.storyboard */,
-				56594B7E1E4C16FE00F6A60A /* Info.plist */,
+				56BBD7B91E4E733D00E3677F /* Swift Files */,
+				56BBD7B81E4E732800E3677F /* View Controllers */,
+				56BBD7BA1E4E738700E3677F /* Xcode Starter Files */,
 			);
 			path = "Book Buddy";
 			sourceTree = "<group>";
@@ -131,6 +132,38 @@
 				56A3713A1E4CBD9100FC064E /* libstdc++.6.tbd */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		56BBD7B81E4E732800E3677F /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				569C1EB91E4C40E400428785 /* BarcodeReaderViewController.swift */,
+				569C1EB71E4C40B400428785 /* LoginViewController.swift */,
+				56D052611E4E377E007747ED /* SetProfilePicViewController.swift */,
+			);
+			name = "View Controllers";
+			sourceTree = "<group>";
+		};
+		56BBD7B91E4E733D00E3677F /* Swift Files */ = {
+			isa = PBXGroup;
+			children = (
+				56594B721E4C16FE00F6A60A /* AppDelegate.swift */,
+				56BBD7B61E4E730A00E3677F /* SearchAPI.swift */,
+				56BBD7BD1E4E771800E3677F /* Settings.swift */,
+				56BBD7B41E4E6C1000E3677F /* UserGus.swift */,
+			);
+			name = "Swift Files";
+			sourceTree = "<group>";
+		};
+		56BBD7BA1E4E738700E3677F /* Xcode Starter Files */ = {
+			isa = PBXGroup;
+			children = (
+				56594B791E4C16FE00F6A60A /* Assets.xcassets */,
+				56594B7B1E4C16FE00F6A60A /* LaunchScreen.storyboard */,
+				56594B761E4C16FE00F6A60A /* Main.storyboard */,
+				56594B7E1E4C16FE00F6A60A /* Info.plist */,
+			);
+			name = "Xcode Starter Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -272,8 +305,11 @@
 			files = (
 				56D052621E4E377E007747ED /* SetProfilePicViewController.swift in Sources */,
 				569C1EB81E4C40B400428785 /* LoginViewController.swift in Sources */,
+				56BBD7B71E4E730A00E3677F /* SearchAPI.swift in Sources */,
 				569C1EBA1E4C40E400428785 /* BarcodeReaderViewController.swift in Sources */,
+				56BBD7BE1E4E771800E3677F /* Settings.swift in Sources */,
 				56594B731E4C16FE00F6A60A /* AppDelegate.swift in Sources */,
+				56BBD7B51E4E6C1000E3677F /* UserGus.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

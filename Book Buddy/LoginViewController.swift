@@ -23,7 +23,13 @@ class LoginViewController: UIViewController {
         
         qrDescriptionTextField.alpha = 0
         gotItButtonOutlet.alpha = 0
+        whatsThisButtonOutlet.alpha = 0
+        
         gotItButtonOutlet.isEnabled = false
+        whatsThisButtonOutlet.isEnabled = false
+        
+        qrDescriptionTextField.isEditable = false
+        
         
         // Allows dismissal of keyboard on tap anywhere on screen besides the keyboard itself
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.dismissKeyboard))
@@ -48,6 +54,7 @@ class LoginViewController: UIViewController {
     // Button Outlets
     @IBOutlet weak var loginButtonOutlet: UIButton!
     @IBOutlet weak var registerButtonOutlet: UIButton!
+    @IBOutlet weak var whatsThisButtonOutlet: UIButton!
     
     // Image views
     @IBOutlet weak var qrCodeImageView: UIImageView!
@@ -69,6 +76,8 @@ class LoginViewController: UIViewController {
         qrCodeImageView.image = generateQR(usernameTextField.text!)
         qrDescriptionTextField.alpha = 1
         gotItButtonOutlet.alpha = 0.5
+        self.whatsThisButtonOutlet.alpha = 1
+        self.whatsThisButtonOutlet.isEnabled = true
         // Activate the button after 3 seconds
         let wait = DispatchTime.now() + 3.0
         DispatchQueue.main.asyncAfter(deadline: wait) {
@@ -79,6 +88,11 @@ class LoginViewController: UIViewController {
     
     
     // Button Actions
+    @IBAction func whatsThisButtonAction(_ sender: UIButton) {
+        qrDescriptionTextField.text = "A QR code is a machine-readable code consisting of an array of black and white squares, typically used for storing URLs or other information for reading by the camera on a smartphone."
+    }
+    
+    
     @IBAction func loginButtonAction(_ sender: UIButton) {
         
         // Check to see if all required fields are filled
@@ -116,6 +130,9 @@ class LoginViewController: UIViewController {
         activityIndicator.startAnimating()
         UIApplication.shared.beginIgnoringInteractionEvents()
         
+        // Set the defualt image
+        let defaultImage = PFFile(data: UIImageJPEGRepresentation(#imageLiteral(resourceName: "smily"), 1.0)!)
+        
         
         // Check to see if all required fields are filled
         if usernameTextField.text == "" || passwordTextField.text == "" || emailTextField.text == "" {
@@ -130,6 +147,8 @@ class LoginViewController: UIViewController {
             user.password = passwordTextField.text
             user.email = emailTextField.text
             user.setValue(["test book"], forKey: "library")
+            user.setValue(defaultImage, forKey: "profilePic")
+            user.setValue(false, forKey: "didSetProfilePic")
         
             // Attempt to sign the user up
             user.signUpInBackground(block: { (success, error) in
@@ -156,6 +175,8 @@ class LoginViewController: UIViewController {
                     self.qrCodeImageView.image = self.generateQR(self.usernameTextField.text!)
                     self.qrDescriptionTextField.alpha = 1
                     self.gotItButtonOutlet.alpha = 0.5
+                    self.whatsThisButtonOutlet.alpha = 1
+                    self.whatsThisButtonOutlet.isEnabled = true
                     
                     // Activate the button after 3 seconds
                     let wait = DispatchTime.now() + 3.0
