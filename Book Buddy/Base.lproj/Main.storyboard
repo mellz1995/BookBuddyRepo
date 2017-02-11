@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -226,6 +227,9 @@
                                 <state key="normal" title="Skip"/>
                                 <connections>
                                     <action selector="skipButtonAction:" destination="LIB-We-uyZ" eventType="touchUpInside" id="XC8-Nr-5yl"/>
+                                    <segue destination="4Jy-Rz-QAz" kind="popoverPresentation" popoverAnchorView="AAI-Vf-eFh" id="ljp-Js-c4D">
+                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                    </segue>
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="tWn-dP-Mru">
@@ -294,6 +298,84 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OYc-Ls-H1e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="778" y="-16"/>
+        </scene>
+        <!--Results View Controller-->
+        <scene sceneID="LeD-zY-aZd">
+            <objects>
+                <viewController storyboardIdentifier="Results" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4Jy-Rz-QAz" customClass="ResultsViewController" customModule="Book_Buddy" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="YP7-2r-WI5"/>
+                        <viewControllerLayoutGuide type="bottom" id="KU4-ST-EhO"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Co8-HO-pct">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wbw-I7-bsq">
+                                <rect key="frame" x="168" y="617" width="39" height="30"/>
+                                <state key="normal" title="Scan!"/>
+                                <connections>
+                                    <segue destination="cWW-iU-tLX" kind="presentation" id="Yb7-sT-KdD"/>
+                                </connections>
+                            </button>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jg7-SW-FG8">
+                                <rect key="frame" x="16" y="20" width="343" height="589"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="w3T-TA-EjH">
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="589"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="335" id="6Gt-8x-Lgj"/>
+                                        </constraints>
+                                        <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="w3T-TA-EjH" firstAttribute="centerY" secondItem="jg7-SW-FG8" secondAttribute="centerY" id="CSC-Lt-GIt"/>
+                                    <constraint firstAttribute="bottom" secondItem="w3T-TA-EjH" secondAttribute="bottom" id="LcC-h9-WMG"/>
+                                    <constraint firstItem="w3T-TA-EjH" firstAttribute="trailing" secondItem="jg7-SW-FG8" secondAttribute="trailingMargin" id="TlM-T0-Dml"/>
+                                    <constraint firstItem="w3T-TA-EjH" firstAttribute="top" secondItem="jg7-SW-FG8" secondAttribute="top" id="wkc-Rz-bXb"/>
+                                    <constraint firstItem="w3T-TA-EjH" firstAttribute="leading" secondItem="jg7-SW-FG8" secondAttribute="leading" id="ymI-N8-6Dq"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="jg7-SW-FG8" firstAttribute="centerX" secondItem="wbw-I7-bsq" secondAttribute="centerX" id="0bb-MZ-CFg"/>
+                            <constraint firstItem="jg7-SW-FG8" firstAttribute="top" secondItem="YP7-2r-WI5" secondAttribute="bottom" id="52f-Lj-qAH"/>
+                            <constraint firstItem="wbw-I7-bsq" firstAttribute="top" secondItem="jg7-SW-FG8" secondAttribute="bottom" constant="8" symbolic="YES" id="73u-yM-tZQ"/>
+                            <constraint firstItem="jg7-SW-FG8" firstAttribute="leading" secondItem="Co8-HO-pct" secondAttribute="leadingMargin" id="GuF-RI-zZc"/>
+                            <constraint firstItem="jg7-SW-FG8" firstAttribute="trailing" secondItem="Co8-HO-pct" secondAttribute="trailingMargin" id="fdM-he-ZrZ"/>
+                            <constraint firstAttribute="bottom" secondItem="jg7-SW-FG8" secondAttribute="bottom" constant="58" id="kb7-a6-X6p"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="resultsTextView" destination="w3T-TA-EjH" id="WSu-dp-JjU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TOc-JJ-JVk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1520.8" y="-16.641679160419791"/>
+        </scene>
+        <!--Barcode Reader View Controller-->
+        <scene sceneID="Kmz-4O-Q3a">
+            <objects>
+                <viewController id="cWW-iU-tLX" customClass="BarcodeReaderViewController" customModule="Book_Buddy" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="RSv-wa-8gk"/>
+                        <viewControllerLayoutGuide type="bottom" id="LI0-lS-OHN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="frN-Cb-dGn">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UEm-it-F59" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2254" y="-17"/>
         </scene>
     </scenes>
 </document>

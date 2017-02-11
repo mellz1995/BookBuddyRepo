@@ -65,8 +65,8 @@ class BarcodeReaderViewController: UIViewController, AVCaptureMetadataOutputObje
             captureSession?.startRunning()
             
             // Move the message label and top bar to the front
-            view.bringSubview(toFront: messageLabel)
-            view.bringSubview(toFront: topbar)
+            //view.bringSubview(toFront: messageLabel)
+            //view.bringSubview(toFront: topbar)
             
             // Initialize QR Code Frame to highlight the QR code
             qrCodeFrameView = UIView()
@@ -95,11 +95,12 @@ class BarcodeReaderViewController: UIViewController, AVCaptureMetadataOutputObje
     func displayAlert(_ title: String, _ message: String, _ confirmation: String){
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: confirmation, style: .default, handler: { (action) in
-            self.dismiss(animated: true, completion: nil)
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let view = storyboard.instantiateViewController(withIdentifier: "ResultScreen")
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.window?.rootViewController = view
+//            self.dismiss(animated: true, completion: nil)
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            let view = storyboard.instantiateViewController(withIdentifier: "Results")
+//            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//            appDelegate.window?.rootViewController = view
+            searchScannedResult(scannedBarcode)
         }))
         self.present(alert, animated: true, completion: nil)
     }
@@ -123,7 +124,7 @@ class BarcodeReaderViewController: UIViewController, AVCaptureMetadataOutputObje
             
             if metadataObj.stringValue != nil {
                 AudioServicesPlaySystemSound(SystemSoundID(kSystemSoundID_Vibrate))
-                messageLabel.text = metadataObj.stringValue
+                //messageLabel.text = metadataObj.stringValue
                 scanned = true
                 print("Scanned was just set to true")
                 print(metadataObj.stringValue)

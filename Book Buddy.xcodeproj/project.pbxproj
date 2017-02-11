@@ -21,6 +21,7 @@
 		56BBD7B51E4E6C1000E3677F /* UserGus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BBD7B41E4E6C1000E3677F /* UserGus.swift */; };
 		56BBD7B71E4E730A00E3677F /* SearchAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BBD7B61E4E730A00E3677F /* SearchAPI.swift */; };
 		56BBD7BE1E4E771800E3677F /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BBD7BD1E4E771800E3677F /* Settings.swift */; };
+		56BBD7C01E4E8CF000E3677F /* ResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BBD7BF1E4E8CF000E3677F /* ResultsViewController.swift */; };
 		56D052621E4E377E007747ED /* SetProfilePicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D052611E4E377E007747ED /* SetProfilePicViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +61,7 @@
 		56BBD7B41E4E6C1000E3677F /* UserGus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserGus.swift; sourceTree = "<group>"; };
 		56BBD7B61E4E730A00E3677F /* SearchAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchAPI.swift; sourceTree = "<group>"; };
 		56BBD7BD1E4E771800E3677F /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		56BBD7BF1E4E8CF000E3677F /* ResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultsViewController.swift; sourceTree = "<group>"; };
 		56D052611E4E377E007747ED /* SetProfilePicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetProfilePicViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -139,6 +141,7 @@
 			children = (
 				569C1EB91E4C40E400428785 /* BarcodeReaderViewController.swift */,
 				569C1EB71E4C40B400428785 /* LoginViewController.swift */,
+				56BBD7BF1E4E8CF000E3677F /* ResultsViewController.swift */,
 				56D052611E4E377E007747ED /* SetProfilePicViewController.swift */,
 			);
 			name = "View Controllers";
@@ -310,6 +313,7 @@
 				56BBD7BE1E4E771800E3677F /* Settings.swift in Sources */,
 				56594B731E4C16FE00F6A60A /* AppDelegate.swift in Sources */,
 				56BBD7B51E4E6C1000E3677F /* UserGus.swift in Sources */,
+				56BBD7C01E4E8CF000E3677F /* ResultsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
