@@ -12,6 +12,9 @@ import Foundation
 
 let mykey = "BHPQT1PV"
 var result = ""
+var author = ""
+var title = ""
+var ISBN = ""
 
 
 // This function is called when the user scans a book's barcode

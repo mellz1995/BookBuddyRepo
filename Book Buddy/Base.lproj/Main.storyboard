@@ -227,7 +227,7 @@
                                 <state key="normal" title="Skip"/>
                                 <connections>
                                     <action selector="skipButtonAction:" destination="LIB-We-uyZ" eventType="touchUpInside" id="XC8-Nr-5yl"/>
-                                    <segue destination="4Jy-Rz-QAz" kind="popoverPresentation" popoverAnchorView="AAI-Vf-eFh" id="ljp-Js-c4D">
+                                    <segue destination="Pk9-Ew-n5C" kind="popoverPresentation" popoverAnchorView="AAI-Vf-eFh" id="gRI-bc-L6U">
                                         <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                     </segue>
                                 </connections>
@@ -297,7 +297,49 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OYc-Ls-H1e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="778" y="-16"/>
+            <point key="canvasLocation" x="453" y="-17"/>
+        </scene>
+        <!--Main Menu View Controller-->
+        <scene sceneID="qTR-ih-sv4">
+            <objects>
+                <viewController id="2N7-Qy-ENf" customClass="MainMenuViewController" customModule="Book_Buddy" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qhs-K7-hAk"/>
+                        <viewControllerLayoutGuide type="bottom" id="kh0-R5-evH"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="S1h-by-oGh">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="smily" translatesAutoresizingMaskIntoConstraints="NO" id="Qdh-Xn-W4Z">
+                                <rect key="frame" x="97" y="85" width="180" height="180"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qWk-Wi-33B">
+                                <rect key="frame" x="163" y="464" width="48" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="tintColor" red="1" green="0.14868836204528202" blue="0.19627550738594912" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Logout"/>
+                                <connections>
+                                    <action selector="logoutButtonAction:" destination="2N7-Qy-ENf" eventType="touchUpInside" id="fF5-wE-wKT"/>
+                                    <segue destination="BYZ-38-t0r" kind="popoverPresentation" popoverAnchorView="qWk-Wi-33B" id="xrz-yH-xg9">
+                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                    </segue>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="dZj-7m-pU1"/>
+                    <connections>
+                        <outlet property="logoutButtonOutlet" destination="qWk-Wi-33B" id="lho-4Z-47g"/>
+                        <outlet property="navigationBar" destination="dZj-7m-pU1" id="R6h-Xn-AGv"/>
+                        <outlet property="profilePicture" destination="Qdh-Xn-W4Z" id="0lR-JE-nVq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hFz-A0-jVY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1388" y="-17"/>
         </scene>
         <!--Results View Controller-->
         <scene sceneID="LeD-zY-aZd">
@@ -327,7 +369,7 @@
                                         <constraints>
                                             <constraint firstAttribute="width" constant="335" id="6Gt-8x-Lgj"/>
                                         </constraints>
-                                        <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                     </textView>
@@ -357,7 +399,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TOc-JJ-JVk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1520.8" y="-16.641679160419791"/>
+            <point key="canvasLocation" x="1822" y="-17"/>
         </scene>
         <!--Barcode Reader View Controller-->
         <scene sceneID="Kmz-4O-Q3a">
@@ -375,7 +417,28 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UEm-it-F59" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2254" y="-17"/>
+            <point key="canvasLocation" x="2285" y="-17"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="pq7-aG-IGP">
+            <objects>
+                <navigationController storyboardIdentifier="MainMenu" automaticallyAdjustsScrollViewInsets="NO" id="Pk9-Ew-n5C" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="yQb-UE-BM3">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="2N7-Qy-ENf" kind="relationship" relationship="rootViewController" id="Kq3-C1-mNy"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="g2Z-Fv-8og" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="899" y="-17"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="smily" width="50" height="50"/>
+    </resources>
 </document>

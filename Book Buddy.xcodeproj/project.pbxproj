@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5634D5E51E510E5500B91725 /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5634D5E41E510E5500B91725 /* MainMenuViewController.swift */; };
 		56594B731E4C16FE00F6A60A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56594B721E4C16FE00F6A60A /* AppDelegate.swift */; };
 		56594B781E4C16FE00F6A60A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56594B761E4C16FE00F6A60A /* Main.storyboard */; };
 		56594B7A1E4C16FE00F6A60A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56594B791E4C16FE00F6A60A /* Assets.xcassets */; };
@@ -43,6 +44,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5634D5E41E510E5500B91725 /* MainMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
 		56594B6F1E4C16FE00F6A60A /* Book Buddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Book Buddy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		56594B721E4C16FE00F6A60A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		56594B771E4C16FE00F6A60A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 			children = (
 				569C1EB91E4C40E400428785 /* BarcodeReaderViewController.swift */,
 				569C1EB71E4C40B400428785 /* LoginViewController.swift */,
+				5634D5E41E510E5500B91725 /* MainMenuViewController.swift */,
 				56BBD7BF1E4E8CF000E3677F /* ResultsViewController.swift */,
 				56D052611E4E377E007747ED /* SetProfilePicViewController.swift */,
 			);
@@ -306,6 +309,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5634D5E51E510E5500B91725 /* MainMenuViewController.swift in Sources */,
 				56D052621E4E377E007747ED /* SetProfilePicViewController.swift in Sources */,
 				569C1EB81E4C40B400428785 /* LoginViewController.swift in Sources */,
 				56BBD7B71E4E730A00E3677F /* SearchAPI.swift in Sources */,

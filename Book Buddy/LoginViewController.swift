@@ -18,6 +18,15 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Check to see if a user is already logged in or not
+        if PFUser.current() != nil {
+            // Send the user to the main menu
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let view = storyboard.instantiateViewController(withIdentifier: "MainMenu")
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.window?.rootViewController = view
+        }
+        
         // Call the beginning animations method
         beginningAnimations()
         
@@ -35,6 +44,7 @@ class LoginViewController: UIViewController {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -113,7 +123,12 @@ class LoginViewController: UIViewController {
                     
                 } else {
                     print("Success! User is logged in.")
-                    self.displayAlert("Success!", "\(self.usernameTextField.text!) has been logged in!", "Cool!")
+                    //self.displayAlert("Success!", "\(self.usernameTextField.text!) has been logged in!", "Cool!")
+                    // Send the user to the main menu
+                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                    let view = storyboard.instantiateViewController(withIdentifier: "MainMenu")
+                    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                    appDelegate.window?.rootViewController = view
                 }
             })
         }
@@ -142,7 +157,6 @@ class LoginViewController: UIViewController {
         } else {
         
             let user = PFUser()
-        
             user.username = usernameTextField.text
             user.password = passwordTextField.text
             user.email = emailTextField.text
@@ -177,6 +191,13 @@ class LoginViewController: UIViewController {
                     self.gotItButtonOutlet.alpha = 0.5
                     self.whatsThisButtonOutlet.alpha = 1
                     self.whatsThisButtonOutlet.isEnabled = true
+                    
+                    //Disable all buttons and text fields
+                    self.loginButtonOutlet.isEnabled = false
+                    self.registerButtonOutlet.isEnabled = false
+                    self.usernameTextField.isEnabled = false
+                    self.passwordTextField.isEnabled = false
+                    self.emailTextField.isEnabled = false
                     
                     // Activate the button after 3 seconds
                     let wait = DispatchTime.now() + 3.0
