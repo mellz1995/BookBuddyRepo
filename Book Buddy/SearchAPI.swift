@@ -9,8 +9,6 @@
 // This class's purpose is to search the api for a book result
 
 import Foundation
-
-let mykey = "BHPQT1PV"
 var result = ""
 var author = ""
 var title = ""

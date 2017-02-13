@@ -13,21 +13,24 @@ class MainMenuViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // This check is for testing purposes when I don't have a logged in user
         if PFUser.current() != nil{
             navigationBar.title = PFUser.current()!.username
             navigationBar.backBarButtonItem?.title = PFUser.current()!.username
-        }
         
-        if PFUser.current()!.object(forKey: "didSetProfilePic") as! Bool == false{
+        
+            if PFUser.current()!.object(forKey: "didSetProfilePic") as! Bool == false{
             
-        } else {
-            if let userPicture = PFUser.current()!.object(forKey: "profilePic")! as? PFFile {
-                userPicture.getDataInBackground({ (imageData: Data?, error: Error?) -> Void in
-                    let image = UIImage(data: imageData!)
-                    if image != nil {
-                        self.profilePicture.image = image
-                    }
-                })
+            } else {
+                if let userPicture = PFUser.current()!.object(forKey: "profilePic")! as? PFFile {
+                    userPicture.getDataInBackground({ (imageData: Data?, error: Error?) -> Void in
+                        let image = UIImage(data: imageData!)
+                        if image != nil {
+                            self.profilePicture.image = image
+                        }
+                    })
+                }
             }
         }
     }

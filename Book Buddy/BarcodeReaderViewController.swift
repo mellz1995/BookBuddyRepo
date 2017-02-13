@@ -96,10 +96,10 @@ class BarcodeReaderViewController: UIViewController, AVCaptureMetadataOutputObje
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: confirmation, style: .default, handler: { (action) in
 //            self.dismiss(animated: true, completion: nil)
-//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//            let view = storyboard.instantiateViewController(withIdentifier: "Results")
-//            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//            appDelegate.window?.rootViewController = view
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let view = storyboard.instantiateViewController(withIdentifier: "ResultScreen")
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.window?.rootViewController = view
             searchScannedResult(scannedBarcode)
         }))
         self.present(alert, animated: true, completion: nil)

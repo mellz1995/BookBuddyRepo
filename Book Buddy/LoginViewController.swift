@@ -14,6 +14,7 @@ class LoginViewController: UIViewController {
     var activityIndicator = UIActivityIndicatorView()
     var initialSpringVelocity = 50
     var springWithDamping = 3.0
+    var whatsThis = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -99,7 +100,15 @@ class LoginViewController: UIViewController {
     
     // Button Actions
     @IBAction func whatsThisButtonAction(_ sender: UIButton) {
-        qrDescriptionTextField.text = "A QR code is a machine-readable code consisting of an array of black and white squares, typically used for storing URLs or other information for reading by the camera on a smartphone."
+        if !whatsThis{
+            qrDescriptionTextField.text = "A QR code is a machine-readable code consisting of an array of black and white squares, typically used for storing URLs or other information for reading by the camera on a smartphone."
+            whatsThis = !whatsThis
+            whatsThisButtonOutlet.setTitle("Got it!", for: [])
+        } else {
+            qrDescriptionTextField.text = "Pictured below is your very own QR Code! This was generated from your username. Whenever someone wants to add (link) you to their profile, just tell them to scan this, and it is done automatically!"
+            whatsThis = !whatsThis
+            whatsThisButtonOutlet.setTitle("What's this?", for: [])
+        }
     }
     
     

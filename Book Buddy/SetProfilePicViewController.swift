@@ -42,6 +42,7 @@ class SetProfilePicViewController: UIViewController, UINavigationControllerDeleg
     @IBAction func clearButtonAction(_ sender: UIButton) {
         profilePicView.image = #imageLiteral(resourceName: "smily")
         updateBoolStats(false, "didSetProfilePic")
+        skipButtonOutlet.setTitle("Skip", for: [])
     }
     
     @IBAction func importPhotoButtonAction(_ sender: UIButton) {
@@ -59,9 +60,11 @@ class SetProfilePicViewController: UIViewController, UINavigationControllerDeleg
             updateBoolStats(true, "didSetProfilePic")
             updateProfilePic(uploadableImage!, "profilePic")
         } else {
-            displayAlert("Error processing image file", "There was an error processing the image file. Please try again.", "Ok")
+            self.displayAlert("Error processing image file", "There was an error processing the image file. Please try again.", "Ok")
         }
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true) {
+            self.skipButtonOutlet.setTitle("Done", for: [])
+        }
     }
     
     @IBAction func skipButtonAction(_ sender: UIButton) {
