@@ -112,10 +112,13 @@ class ResultsViewController: UIViewController {
         // Remove periods
         let noPeriods = noCommas.replacingOccurrences(of: ".", with: "")
         
+        // Replace slashes 
+        let noSlashes = noPeriods.replacingOccurrences(of: "/", with: "")
+        
         // Set the final search query
-        let finalSearchQuery = noPeriods
+        let finalSearchQuery = noSlashes
         
-        
+        // Set the url with my set api key and the final search querey
         let url = URL(string: "http://isbndb.com/api/v2/json/\(mykey)/books?q=\(finalSearchQuery)")
         let task = URLSession.shared.dataTask(with: url!) { (data, response, error) in
             
