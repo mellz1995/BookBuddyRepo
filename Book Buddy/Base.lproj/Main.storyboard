@@ -266,9 +266,6 @@
                                 <state key="normal" title="Skip"/>
                                 <connections>
                                     <action selector="skipButtonAction:" destination="LIB-We-uyZ" eventType="touchUpInside" id="XC8-Nr-5yl"/>
-                                    <segue destination="2N7-Qy-ENf" kind="popoverPresentation" popoverAnchorView="AAI-Vf-eFh" id="967-or-QIr">
-                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                    </segue>
                                 </connections>
                             </button>
                         </subviews>

@@ -36,24 +36,6 @@ class MainMenuViewController: UIViewController {
             }
         }
     }
-    
-    
-    func displayAlert(_ title: String, _ message: String, _ optionOne: String, _ optionTwo: String){
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: optionOne, style: .default, handler: { (action) in
-            PFUser.logOut()
-            // Send the user to the main menu
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let view = storyboard.instantiateViewController(withIdentifier: "LoginScreen")
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.window?.rootViewController = view
-        }))
-        
-        alert.addAction(UIAlertAction(title: optionTwo, style: .default, handler: { (action) in
-            
-        }))
-        self.present(alert, animated: true, completion: nil)
-    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -72,7 +54,20 @@ class MainMenuViewController: UIViewController {
     
     
     @IBAction func logoutButtonAction(_ sender: UIButton) {
-        displayAlert("Logut", "Are you sure you want to log out?", "Yes", "No, cancel.")
+        let alert = UIAlertController(title: "Logut?", message: "Are you sure you want to log out?", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+            PFUser.logOut()
+            // Send the user to the main menu
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let view = storyboard.instantiateViewController(withIdentifier: "LoginScreen")
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.window?.rootViewController = view
+        }))
+        
+        alert.addAction(UIAlertAction(title: "No, cancel", style: .default, handler: { (action) in
+            
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
     
     

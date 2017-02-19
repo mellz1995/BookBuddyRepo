@@ -11,7 +11,7 @@ import Parse
 
 class SetProfilePicViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
-    let setProfilePic = false
+    var setProfilePic = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +42,7 @@ class SetProfilePicViewController: UIViewController, UINavigationControllerDeleg
     @IBAction func clearButtonAction(_ sender: UIButton) {
         profilePicView.image = #imageLiteral(resourceName: "smily")
         updateBoolStats(false, "didSetProfilePic")
+        setProfilePic = false
         skipButtonOutlet.setTitle("Skip", for: [])
     }
     
@@ -59,6 +60,7 @@ class SetProfilePicViewController: UIViewController, UINavigationControllerDeleg
             let uploadableImage = PFFile(data: UIImageJPEGRepresentation(image, 1.0)!)
             updateBoolStats(true, "didSetProfilePic")
             updateProfilePic(uploadableImage!, "profilePic")
+            setProfilePic = true
         } else {
             self.displayAlert("Error processing image file", "There was an error processing the image file. Please try again.", "Ok")
         }
@@ -69,6 +71,28 @@ class SetProfilePicViewController: UIViewController, UINavigationControllerDeleg
     
     @IBAction func skipButtonAction(_ sender: UIButton) {
         
+        if setProfilePic == false {
+            // Display alert and send the user to the main menu if they choose
+            let alert = UIAlertController(title: "Sure?", message: "You can set a profile picture at any time from your profile", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+                // Send the user to the main menu
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let view = storyboard.instantiateViewController(withIdentifier: "MainMenu")
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                appDelegate.window?.rootViewController = view
+            }))
+        
+            alert.addAction(UIAlertAction(title: "No, cancel", style: .default, handler: { (action) in
+            
+            }))
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            // No alert needed for this. Just send them to the main menu
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let view = storyboard.instantiateViewController(withIdentifier: "MainMenu")
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.window?.rootViewController = view
+        }
     }
     
     func displayAlert(_ title: String, _ message: String, _ confirmation: String){
