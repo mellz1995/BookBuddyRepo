@@ -55,4 +55,20 @@ func updateProfilePic(_ changeStat: PFFile, _ key: String) {
     })
 }
 
+func updateArray(_ changeStat: [[String]], _ key: String) {
+    PFUser.current()?.setValue(changeStat, forKey: key)
+    
+    // Save User Variables
+    PFUser.current()?.saveInBackground(block: { (success, error) in
+        if error != nil {
+            print("Error with saving \(key)")
+        }
+        else {
+            print("Successfully saved \(key)")
+        }
+    })
+}
+
+
+
 

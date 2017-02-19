@@ -13,6 +13,7 @@
 		56594B7A1E4C16FE00F6A60A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56594B791E4C16FE00F6A60A /* Assets.xcassets */; };
 		56594B7D1E4C16FE00F6A60A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56594B7B1E4C16FE00F6A60A /* LaunchScreen.storyboard */; };
 		56594BA21E4C17C100F6A60A /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56594BA01E4C17C100F6A60A /* Bolts.framework */; };
+		567A9DF81E54B0FA00DB2930 /* LibraryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A9DF71E54B0FA00DB2930 /* LibraryViewController.swift */; };
 		569C1EB81E4C40B400428785 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569C1EB71E4C40B400428785 /* LoginViewController.swift */; };
 		569C1EBA1E4C40E400428785 /* BarcodeReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569C1EB91E4C40E400428785 /* BarcodeReaderViewController.swift */; };
 		56A371381E4CBB7700FC064E /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56594BA11E4C17C100F6A60A /* Parse.framework */; };
@@ -55,6 +56,7 @@
 		56594B8E1E4C16FE00F6A60A /* Book BuddyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Book BuddyUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		56594BA01E4C17C100F6A60A /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		56594BA11E4C17C100F6A60A /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		567A9DF71E54B0FA00DB2930 /* LibraryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryViewController.swift; sourceTree = "<group>"; };
 		569C1EB71E4C40B400428785 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		569C1EB91E4C40E400428785 /* BarcodeReaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeReaderViewController.swift; sourceTree = "<group>"; };
 		56A3713A1E4CBD9100FC064E /* libstdc++.6.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.tbd"; path = "usr/lib/libstdc++.6.tbd"; sourceTree = SDKROOT; };
@@ -142,6 +144,7 @@
 			isa = PBXGroup;
 			children = (
 				569C1EB91E4C40E400428785 /* BarcodeReaderViewController.swift */,
+				567A9DF71E54B0FA00DB2930 /* LibraryViewController.swift */,
 				569C1EB71E4C40B400428785 /* LoginViewController.swift */,
 				5634D5E41E510E5500B91725 /* MainMenuViewController.swift */,
 				56BBD7BF1E4E8CF000E3677F /* ResultsViewController.swift */,
@@ -315,6 +318,7 @@
 				56BBD7B71E4E730A00E3677F /* SearchAPI.swift in Sources */,
 				569C1EBA1E4C40E400428785 /* BarcodeReaderViewController.swift in Sources */,
 				56BBD7BE1E4E771800E3677F /* Settings.swift in Sources */,
+				567A9DF81E54B0FA00DB2930 /* LibraryViewController.swift in Sources */,
 				56594B731E4C16FE00F6A60A /* AppDelegate.swift in Sources */,
 				56BBD7B51E4E6C1000E3677F /* UserGus.swift in Sources */,
 				56BBD7C01E4E8CF000E3677F /* ResultsViewController.swift in Sources */,

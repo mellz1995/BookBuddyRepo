@@ -113,11 +113,32 @@ class LoginViewController: UIViewController {
     
     
     @IBAction func loginButtonAction(_ sender: UIButton) {
+        // Clear the email text field because it is not needed
+        emailTextField.text = ""
         
         // Check to see if all required fields are filled
         if usernameTextField.text == "" || passwordTextField.text == "" {
+            if usernameTextField.text == "" {
+                usernameTextField.backgroundColor = UIColor.red
+            }
+            
+            if passwordTextField.text == "" {
+                passwordTextField.backgroundColor = UIColor.red
+            }
+            
+            
             displayAlert("Error in login form", "A username and password are required to log in.", "Let's fix it.")
         } else {
+            
+            // Start the activity spinner
+            activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+            activityIndicator.center = self.view.center
+            activityIndicator.hidesWhenStopped = true
+            activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+            view.addSubview(activityIndicator)
+            activityIndicator.startAnimating()
+            UIApplication.shared.beginIgnoringInteractionEvents()
+            
             PFUser.logInWithUsername(inBackground: usernameTextField.text!, password: passwordTextField.text!, block: { (user, error) in
                 self.activityIndicator.stopAnimating()
                 UIApplication.shared.endIgnoringInteractionEvents()
@@ -145,14 +166,6 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func registerButtonAction(_ sender: UIButton) {
-        // Start the activity spinner
-        activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
-        activityIndicator.center = self.view.center
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
-        view.addSubview(activityIndicator)
-        activityIndicator.startAnimating()
-        UIApplication.shared.beginIgnoringInteractionEvents()
         
         // Set the defualt image
         let defaultImage = PFFile(data: UIImageJPEGRepresentation(#imageLiteral(resourceName: "smily"), 1.0)!)
@@ -160,18 +173,42 @@ class LoginViewController: UIViewController {
         
         // Check to see if all required fields are filled
         if usernameTextField.text == "" || passwordTextField.text == "" || emailTextField.text == "" {
-            self.activityIndicator.stopAnimating()
-            UIApplication.shared.endIgnoringInteractionEvents()
+            if usernameTextField.text == "" {
+                usernameTextField.backgroundColor = UIColor.red
+            }
+            
+            if passwordTextField.text == "" {
+                passwordTextField.backgroundColor = UIColor.red
+            }
+            
+            if emailTextField.text == "" {
+                emailTextField.backgroundColor = UIColor.red
+            }
+            
+            
             displayAlert("Error in registration form", "A username, password, and an email is needed for registration.", "Let's fix it")
         } else {
+            // Start the activity spinner
+            activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+            activityIndicator.center = self.view.center
+            activityIndicator.hidesWhenStopped = true
+            activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+            view.addSubview(activityIndicator)
+            activityIndicator.startAnimating()
+            UIApplication.shared.beginIgnoringInteractionEvents()
         
             let user = PFUser()
             user.username = usernameTextField.text
             user.password = passwordTextField.text
             user.email = emailTextField.text
-            user.setValue(["test book"], forKey: "library")
+            user.setValue([[]], forKey: "library")
+            // This value is needed so that when the user saves first book to library, it'll replace the empty array that's currently saved to the server
+            user.setValue(false, forKey: "didSaveFirstBook")
             user.setValue(defaultImage, forKey: "profilePic")
             user.setValue(false, forKey: "didSetProfilePic")
+            user.setValue(false, forKey: "libraryPrivate")
+            user.setValue(0, forKey: "rating")
+            user.setValue(0, forKey: "totalRating")
         
             // Attempt to sign the user up
             user.signUpInBackground(block: { (success, error) in
@@ -230,10 +267,14 @@ class LoginViewController: UIViewController {
         self.dismissKeyboard()
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: confirmation, style: .default, handler: { (action) in
-            
+            self.usernameTextField.backgroundColor = UIColor.white
+            self.passwordTextField.backgroundColor = UIColor.white
+            self.emailTextField.backgroundColor = UIColor.white
         }))
         self.present(alert, animated: true, completion: nil)
     }
+    
+    
     
     func beginningAnimations(){
         // Animate username label in from the left
@@ -264,6 +305,7 @@ class LoginViewController: UIViewController {
         }
         return UIImage()
     }
+    
     
     
 
