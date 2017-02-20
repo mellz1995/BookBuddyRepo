@@ -69,6 +69,41 @@ func updateArray(_ changeStat: [[String]], _ key: String) {
     })
 }
 
+// This gets the userLibrary, appends it, and sets it if the user scan's a new book. This method is needed because when parse is imported it messes with the subricts and json data gets funky
+func GUSUerLibrary(_ newBook: [String]){
+    var userLibrary = PFUser.current()!.object(forKey: "library") as! [[String]]
+    print()
+    print("Current library is \(userLibrary)")
+    
+    // Check to see if userLibrary is empty
+    if PFUser.current()!.object(forKey: "didSaveFirstBook") as! Bool == false {
+        print()
+        print("User library is empty")
+        
+        // Clear the empty array
+        userLibrary.removeAll()
+        
+        // Append the new book
+        userLibrary.append(newBook)
+        
+        // Save it to the server
+        updateArray(userLibrary, "library")
+        
+        // Update boolean stat to true
+        updateBoolStats(true, "didSaveFirstBook")
+    } else {
+        // Append it with the newBook array
+        userLibrary.append(newBook)
+        
+        // Save it on the server
+        updateArray(userLibrary, "library")
+    }
+    
+    print("User library is now \(userLibrary)")
+    print()
+    print("User library count is now \(userLibrary.count)")
+}
+
 
 
 

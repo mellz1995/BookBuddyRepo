@@ -6,9 +6,12 @@
 //  Copyright © 2017 Melvin Lee. All rights reserved.
 //
 
+
 import UIKit
 
 class ResultsViewController: UIViewController {
+    
+    var newBook = [String]()
     
     var activityIndicator = UIActivityIndicatorView()
 
@@ -132,83 +135,119 @@ class ResultsViewController: UIViewController {
                         //print(jsonResult)
         
                         // Get the title
-                        if let title = ((jsonResult["data"] as? NSArray)?[0] as? NSDictionary)?["title"] as? String{
-                            DispatchQueue.main.async(execute: {
-                                if title == "" {
-                                    print("Title not specified")
-                                    self.titleLabel.text = "Not specified"
-                                } else {
-                                    print("Title is \(title)")
-                                    self.titleLabel.text = title
-                                }
-                            })
-                        } else {
-                            print("Error with getting title")
-                        }
-                        
-                        // Get the author
-                        if ((jsonResult["data"] as? NSArray)?[0] as? NSDictionary)?["aurhot_data"] as? String == ""{
-                                print("There is no author data")
-                        } else {
-                            if let author = ((((jsonResult["data"] as? NSArray)?[0] as? NSDictionary)?["author_data"] as? NSArray)?[0] as? NSDictionary)?["name"] as? String{
-                                DispatchQueue.main.async(execute: {
-                                    if author == "" {
-                                        print("Author not specified")
-                                        self.authorLabel.text = "Not specified"
+                        if let datas = jsonResult["data"] as? [[String: Any]] {
+                            
+                            for data in datas {
+                                DispatchQueue.main.async {
+                                    // Get the title
+                                    if let title = data["title"] as? String{
+                                        if title.isEmpty {
+                                            print("The title is not specified")
+                                            self.newBook.append("Not specified")
+                                            self.titleLabel.text = "Not specified"
+                                        } else {
+                                            print("Title is \(title)")
+                                            self.newBook.append(title)
+                                            self.titleLabel.text = title
+                                        }
                                     } else {
-                                        print("Author is \(author)")
-                                        self.authorLabel.text = author
+                                        print("Error with getting title.")
+                                        self.newBook.append("Not specified")
                                     }
-                                })
-                                
-                            } else {
-                                print("Error with getting author")
+                                    
+                                    // Get the author
+                                    if let authorData = data["author_data"] as? [[String: Any]]{
+                                        for authorDatas in authorData {
+                                            if let authorName = authorDatas["name"] as? String{
+                                                if authorName.isEmpty{
+                                                    print("The authorName is not specified")
+                                                    self.newBook.append("Not specified")
+                                                    self.authorLabel.text = "Not specified"
+                                                } else {
+                                                    print("Author is \(authorName)")
+                                                    self.newBook.append(authorName)
+                                                    self.authorLabel.text = authorName
+                                                }
+                                            } else {
+                                                print("Error with getting Author.")
+                                                self.newBook.append("Not specified")
+                                            }
+                                        }
+                                    }
+                                    
+                                    // Get the ISBN10
+                                    if let isbn10 = data["isbn10"] as? String{
+                                        if isbn10.isEmpty {
+                                            print("ISBN10 is not specified")
+                                            self.newBook.append("Not specified")
+                                            self.isbn10Label.text = "Not specified"
+                                        } else {
+                                            print("ISBN10 is \(isbn10)")
+                                            self.newBook.append(isbn10)
+                                            self.isbn10Label.text = isbn10
+                                        }
+                                    } else {
+                                        print("Error with getting ISBN10.")
+                                        self.newBook.append("Not specified")
+                                    }
+                                    
+                                    // Get the ISBN13
+                                    if let isbn13 = data["isbn13"] as? String{
+                                        if isbn13.isEmpty {
+                                            print("ISBN13 is not specified")
+                                            self.newBook.append("Not specified")
+                                            self.isbn13Label.text = "Not specified"
+                                        } else {
+                                            print("ISBN13 is \(isbn13)")
+                                            self.newBook.append(isbn13)
+                                            self.isbn13Label.text = isbn13
+                                        }
+                                    } else {
+                                        print("Error with getting ISBN13.")
+                                        self.newBook.append("Not specified")
+                                    }
+                                    
+                                    // Get the publisher
+                                    if let publisher = data["publisher_name"] as? String{
+                                        if publisher.isEmpty {
+                                            print("The publisher is not specified")
+                                            self.newBook.append("Not specified")
+                                        } else {
+                                            print("Publisher is \(publisher)")
+                                            self.newBook.append(publisher)
+                                        }
+                                    } else {
+                                        print("Error with getting publisher.")
+                                        self.newBook.append("Not specified")
+                                    }
+                                    
+                                    // Get the langauge
+                                    if let langauge = data["language"] as? String{
+                                        if langauge.isEmpty{
+                                            print("The language is not specified")
+                                            self.newBook.append("Not specified")
+                                            self.langageLabel.text = "Not specified"
+                                        } else {
+                                            print("Language is \(langauge)")
+                                            self.newBook.append(langauge)
+                                            self.langageLabel.text = langauge
+                                        }
+                                    } else {
+                                        print("Error with getting langauge.")
+                                        self.newBook.append("Not specified")
+                                    }
+                                    
+                                    print()
+                                    print("End of file!")
+                                    print("newBook array is \(self.newBook)")
+                                    
+                                    // Add the new book to the server
+                                    GUSUerLibrary(self.newBook)
+                                    
+                                    // Remove all contents of the newBook array
+                                    self.newBook.removeAll()
+                                }
                             }
-                        }
-                        
-                        // Get the ISBN 10
-                        if let isbn10 = ((jsonResult["data"] as? NSArray)?[0] as? NSDictionary)?["isbn10"] as? String{
-                            DispatchQueue.main.async(execute: {
-                                if isbn10 == "" {
-                                    print("ISBN10 not specified")
-                                    self.isbn10Label.text = "Not specified"
-                                } else {
-                                    print("ISBN10 is \(isbn10)")
-                                    self.isbn10Label.text = isbn10
-                                }
-                            })
-                        } else {
-                            print("Error with getting ISBN10")
-                        }
-                        
-                        // Get the ISBN 13
-                        if let isbn13 = ((jsonResult["data"] as? NSArray)?[0] as? NSDictionary)?["isbn13"] as? String{
-                            DispatchQueue.main.async(execute: {
-                                if isbn13 == "" {
-                                    print("ISBN13 not specified")
-                                    self.isbn13Label.text = "Not specified"
-                                } else {
-                                    print("ISBN13 is \(isbn13)")
-                                    self.isbn13Label.text = isbn13
-                                }
-                            })
-                        } else {
-                            print("Error with getting ISBN13")
-                        }
-                        
-                        // Get the language
-                        if let language = ((jsonResult["data"] as? NSArray)?[0] as? NSDictionary)?["language"] as? String{
-                            DispatchQueue.main.async(execute: {
-                                if language == "" {
-                                    print("Language not specified")
-                                    self.langageLabel.text = "Not specified"
-                                } else {
-                                    print("Language is \(language)")
-                                    self.langageLabel.text = language
-                                }
-                            })
-                        } else {
-                            print("Error with getting Language")
                         }
                     } catch {
                         DispatchQueue.main.async(execute: {
@@ -219,12 +258,14 @@ class ResultsViewController: UIViewController {
                             self.isbn10Label.alpha = 0
                             self.isbn13Label.alpha = 0
                             self.langageLabel.alpha = 0
+                            
+                            // In the case of a book not being found by a scanned barcode, the newBook array will get appended with a lot of "Not specified's". To prevent this being a problem, clear the newBook array 
+                            self.newBook.removeAll()
                         })
                     }
                 }
             } 
         }
-        
         task.resume()
         stopAnimator()
     }

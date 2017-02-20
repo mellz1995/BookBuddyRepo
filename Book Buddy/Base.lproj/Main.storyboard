@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -749,6 +750,17 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vQy-8n-UC8">
+                                <rect key="frame" x="16" y="617" width="76" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="3oE-KY-Lof"/>
+                                    <constraint firstAttribute="width" constant="76" id="aut-BW-ci7"/>
+                                </constraints>
+                                <state key="normal" title="Main Menu"/>
+                                <connections>
+                                    <segue destination="2N7-Qy-ENf" kind="show" id="oub-lG-nQ7"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -767,9 +779,11 @@
                             <constraint firstItem="FSq-Ah-WyB" firstAttribute="centerX" secondItem="Co8-HO-pct" secondAttribute="centerX" constant="-152.5" id="Tvw-Fa-cW3"/>
                             <constraint firstItem="pGf-i2-49u" firstAttribute="centerY" secondItem="Co8-HO-pct" secondAttribute="centerY" constant="125" id="Vq3-Bc-Bta"/>
                             <constraint firstItem="wbw-I7-bsq" firstAttribute="centerY" secondItem="Co8-HO-pct" secondAttribute="centerY" constant="298.5" id="XN3-qO-HNQ"/>
+                            <constraint firstItem="KU4-ST-EhO" firstAttribute="top" secondItem="vQy-8n-UC8" secondAttribute="bottom" constant="20" id="ZBO-ob-8vB"/>
                             <constraint firstItem="LvW-nR-RCd" firstAttribute="centerY" secondItem="Co8-HO-pct" secondAttribute="centerY" constant="-152" id="c72-Kt-78U"/>
                             <constraint firstItem="2lb-hX-Bm4" firstAttribute="centerX" secondItem="Co8-HO-pct" secondAttribute="centerX" id="ccU-g4-RtJ"/>
                             <constraint firstItem="pU5-DM-aGg" firstAttribute="centerY" secondItem="Co8-HO-pct" secondAttribute="centerY" constant="29" id="d5q-mg-ds6"/>
+                            <constraint firstItem="vQy-8n-UC8" firstAttribute="leading" secondItem="Co8-HO-pct" secondAttribute="leadingMargin" id="g8d-dx-Pq0"/>
                             <constraint firstItem="V1C-9V-NIO" firstAttribute="centerX" secondItem="Co8-HO-pct" secondAttribute="centerX" constant="-137" id="hic-Lg-5uI"/>
                             <constraint firstItem="eAq-FX-r9g" firstAttribute="centerX" secondItem="Co8-HO-pct" secondAttribute="centerX" constant="49.5" id="iet-MC-dVg"/>
                             <constraint firstItem="pGf-i2-49u" firstAttribute="centerX" secondItem="Co8-HO-pct" secondAttribute="centerX" constant="-143.5" id="jkA-U1-RkV"/>
@@ -819,4 +833,7 @@
     <resources>
         <image name="smily" width="50" height="50"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="oub-lG-nQ7"/>
+    </inferredMetricsTieBreakers>
 </document>
