@@ -209,6 +209,10 @@ class LoginViewController: UIViewController {
             user.setValue(false, forKey: "libraryPrivate")
             user.setValue(0, forKey: "rating")
             user.setValue(0, forKey: "totalRating")
+            user.setValue([], forKey: "lentBooks")
+            user.setValue(false, forKey: "lentFirstBook")
+            user.setValue([], forKey: "borrowedBooks")
+            user.setValue(false, forKey: "borrowedFirstBook")
         
             // Attempt to sign the user up
             user.signUpInBackground(block: { (success, error) in
