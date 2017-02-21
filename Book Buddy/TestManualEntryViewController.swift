@@ -207,6 +207,8 @@ class TestManualEntryViewController: UIViewController {
                     }
                     return
                 }
+                // Clear the text field
+                titleTextField.text = ""
         }
         
         if bookFound == false {

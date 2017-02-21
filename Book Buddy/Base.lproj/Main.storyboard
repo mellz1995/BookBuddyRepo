@@ -604,20 +604,33 @@
                                     <action selector="addBookButtonAction:" destination="blA-PI-gVn" eventType="touchUpInside" id="Eq3-7P-zkX"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kbg-P4-aJS">
+                                <rect key="frame" x="243" y="28" width="45" height="30"/>
+                                <state key="normal" title="Delete">
+                                    <color key="titleColor" red="1" green="0.31168034185269999" blue="0.20284170856921357" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleShadowColor" red="1" green="0.25983426135676135" blue="0.17750962317613206" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="deleteButtonAction:" destination="blA-PI-gVn" eventType="touchUpInside" id="gOB-eK-7Mr"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="lyG-1F-VWI" firstAttribute="top" secondItem="lCt-JO-jTW" secondAttribute="top" constant="53" id="CZc-eI-GLO"/>
+                            <constraint firstItem="Kbg-P4-aJS" firstAttribute="top" secondItem="9r1-2v-b5i" secondAttribute="bottom" constant="8" id="EFc-du-El4"/>
                             <constraint firstItem="JtG-7P-IZz" firstAttribute="top" secondItem="9r1-2v-b5i" secondAttribute="bottom" id="HKz-ZL-2fE"/>
                             <constraint firstItem="Uh4-jg-h9Z" firstAttribute="top" secondItem="lyG-1F-VWI" secondAttribute="bottom" id="HR4-Cl-PmM"/>
                             <constraint firstAttribute="trailing" secondItem="50l-Rs-Jwh" secondAttribute="trailing" constant="12" id="KqB-WG-EO3"/>
                             <constraint firstAttribute="trailing" secondItem="lyG-1F-VWI" secondAttribute="trailing" id="MBK-6u-1by"/>
                             <constraint firstItem="lyG-1F-VWI" firstAttribute="leading" secondItem="lCt-JO-jTW" secondAttribute="leading" id="Y6C-gq-49I"/>
                             <constraint firstAttribute="trailing" secondItem="JtG-7P-IZz" secondAttribute="trailing" id="Zek-hJ-PM9"/>
+                            <constraint firstItem="Kbg-P4-aJS" firstAttribute="leading" secondItem="ffP-gY-jPb" secondAttribute="trailing" constant="167" id="gl2-1O-fhX"/>
                             <constraint firstItem="ffP-gY-jPb" firstAttribute="leading" secondItem="lCt-JO-jTW" secondAttribute="leading" id="i30-dM-sGg"/>
                             <constraint firstItem="JtG-7P-IZz" firstAttribute="leading" secondItem="lCt-JO-jTW" secondAttribute="leading" id="nF7-Ta-fLp"/>
                             <constraint firstItem="50l-Rs-Jwh" firstAttribute="top" secondItem="9r1-2v-b5i" secondAttribute="bottom" constant="12" id="rbz-k4-Zly"/>
                             <constraint firstItem="ffP-gY-jPb" firstAttribute="top" secondItem="9r1-2v-b5i" secondAttribute="bottom" constant="8" id="vEE-av-bAF"/>
+                            <constraint firstItem="50l-Rs-Jwh" firstAttribute="leading" secondItem="Kbg-P4-aJS" secondAttribute="trailing" constant="53" id="yFe-tE-fO2"/>
                         </constraints>
                     </view>
                     <connections>
@@ -942,6 +955,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="N0U-sT-G4n"/>
-        <segue reference="oub-lG-nQ7"/>
+        <segue reference="Gkh-BL-hXk"/>
     </inferredMetricsTieBreakers>
 </document>
