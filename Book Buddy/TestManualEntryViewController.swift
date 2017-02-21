@@ -13,6 +13,7 @@ class TestManualEntryViewController: UIViewController {
     
     var userLibrary = [[String]]()
     var newBook = [String]()
+    var bookFound = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +22,11 @@ class TestManualEntryViewController: UIViewController {
         userLibrary = PFUser.current()!.object(forKey: "library") as! [[String]]
         print()
         print("Current library is \(userLibrary)")
+        if userLibrary.count > 1 {
+            print("Currently \(userLibrary.count) books in the user's library.")
+        } else if userLibrary.count == 1 {
+            print("Currently \(userLibrary.count) book in the user's library.")
+        }
         
 
         // Allows dismissal of keyboard on tap anywhere on screen besides the keyboard itself
@@ -171,12 +177,16 @@ class TestManualEntryViewController: UIViewController {
     
     @IBAction func finalDeleteButtonAction(_ sender: UIButton) {
             // Loops through all arrays in userLibrary
-            for j in 0...userLibrary.count{
-                for k in 0...userLibrary[j].count{
-                    print(userLibrary[j][k])
+            for j in 0..<userLibrary.count{
+                
+                print(userLibrary[j])
                 // If one of the titles in the 2D array matches the title, then delete it
-                if userLibrary[j][k] == titleTextField.text {
-                    userLibrary.remove(at: [j][k])
+                if userLibrary[j][0] == titleTextField.text {
+                    bookFound = true
+                    
+                    userLibrary.remove(at: [j][0])
+                    
+                    
                     // Save it on the parse server
                     updateArray(userLibrary, "library")
                     print()
@@ -195,19 +205,17 @@ class TestManualEntryViewController: UIViewController {
                         updateBoolStats(false, "didSaveFirstBook")
                         PFUser.current()!.setValue([[]], forKey: "library")
                     }
-                    // Stop the loop when match is found
-                    return
-                } else {
-                    print("No books matching that title were found. The library was unscathed")
-                    let alert = UIAlertController(title: "Book not found!", message: "No books found matching the title: \(titleTextField.text!). Please check your entry and try again.", preferredStyle: UIAlertControllerStyle.alert)
-                    alert.addAction(UIAlertAction(title: "Cool!", style: .default, handler: { (action) in
-                    
-                    }))
-                    self.present(alert, animated: true, completion: nil)
-                    // Stop the loop when no match is found
                     return
                 }
-            }
+        }
+        
+        if bookFound == false {
+            print("No books matching that title were found. The library was unscathed")
+            let alert = UIAlertController(title: "Book not found!", message: "No books found matching the title: \(titleTextField.text!). Please check your entry and try again.", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action) in
+                
+            }))
+            self.present(alert, animated: true, completion: nil)
         }
     }
     

@@ -241,6 +241,7 @@ class ResultsViewController: UIViewController {
                                     print("End of file!")
                                     print("newBook array is \(self.newBook)")
                                     
+                                    
                                     // Add the new book to the server
                                     GUSUerLibrary(self.newBook)
                                     
