@@ -86,6 +86,8 @@ class TestLibraryViewController: UIViewController, UITableViewDelegate, UITableV
             cell.textLabel?.text = userLibrary[indexPath.row][0]
         }
         
+        
+        
         return cell
     }
 
@@ -134,6 +136,14 @@ class TestLibraryViewController: UIViewController, UITableViewDelegate, UITableV
                 if j == 5 {
                     print("Language: \(userLibrary[i][j])")
                 }
+                
+                if j == 6 {
+                    print("Status: \(userLibrary[i][j])")
+                }
+                
+//                if j == 7 {
+//                    print("Owner: \(userLibrary[i][j])")
+//                }
             }
             print()
         }

@@ -237,9 +237,44 @@ class ResultsViewController: UIViewController {
                                         self.newBook.append("Not specified")
                                     }
                                     
+                                    // Print that the book is owned since user is adding to the library
+                                    self.newBook.append("Owned")
+                                    
+                                    
                                     print()
-                                    print("End of file!")
-                                    print("newBook array is \(self.newBook)")
+                                    print("End of file! Newly added book is: ")
+                                    
+                                    //Print out the newly added book's information
+                                    for i in 0..<self.newBook.count{
+                                        if i == 0 {
+                                            print("Title: \(self.newBook[i])")
+                                        }
+                                        
+                                        if i == 1 {
+                                            print("Author: \(self.newBook[i])")
+                                        }
+                                        
+                                        if i == 2 {
+                                            print("ISBN10: \(self.newBook[i])")
+                                        }
+                                        
+                                        if i == 3 {
+                                            print("ISBN13: \(self.newBook[i])")
+                                        }
+                                        
+                                        if i == 4 {
+                                            print("Publisher: \(self.newBook[i])")
+                                        }
+                                        
+                                        if i == 5 {
+                                            print("Language: \(self.newBook[i])")
+                                        }
+                                        
+                                        if i == 6 {
+                                            print("Status: \(self.newBook[i])")
+                                        }
+                                    }
+                                    
                                     
                                     
                                     // Add the new book to the server

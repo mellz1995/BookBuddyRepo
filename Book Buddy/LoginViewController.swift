@@ -198,22 +198,29 @@ class LoginViewController: UIViewController {
             UIApplication.shared.beginIgnoringInteractionEvents()
         
             let user = PFUser()
+            
             user.username = usernameTextField.text
             user.password = passwordTextField.text
             user.email = emailTextField.text
-            user.setValue([[]], forKey: "library")
-            // This value is needed so that when the user saves first book to library, it'll replace the empty array that's currently saved to the server
-            user.setValue(false, forKey: "didSaveFirstBook")
+            
             user.setValue(defaultImage, forKey: "profilePic")
-            user.setValue(false, forKey: "didSetProfilePic")
-            user.setValue(false, forKey: "libraryPrivate")
+            
+            user.setValue([[]], forKey: "library")
+            user.setValue([], forKey: "lentBooks")
+            user.setValue([], forKey: "borrowedBooks")
+            user.setValue([], forKey: "friends")
+            user.setValue([], forKey: "friendRequests")
+            user.setValue([], forKey: "wishList")
+            
             user.setValue(0, forKey: "rating")
             user.setValue(0, forKey: "totalRating")
-            user.setValue([], forKey: "lentBooks")
+            
+            user.setValue(false, forKey: "didSaveFirstBook")
+            user.setValue(false, forKey: "didSetProfilePic")
+            user.setValue(false, forKey: "libraryPrivate")
             user.setValue(false, forKey: "lentFirstBook")
-            user.setValue([], forKey: "borrowedBooks")
             user.setValue(false, forKey: "borrowedFirstBook")
-            user.setValue([], forKey: "friends")
+            
         
             // Attempt to sign the user up
             user.signUpInBackground(block: { (success, error) in

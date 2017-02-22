@@ -1,0 +1,154 @@
+//
+//  BooksTableViewController.swift
+//  Book Buddy
+//
+//  Created by Melvin Lee on 2/22/17.
+//  Copyright © 2017 Melvin Lee. All rights reserved.
+//
+
+import UIKit
+import Parse
+
+class BooksTableViewController: UITableViewController {
+    
+    var currentLibrary = [[String]]()
+    var newBook = [String]()
+    var bookFound = false
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // Set the navigation bar title to the current user's username
+        let username = PFUser.current()?.username
+        navigationItem.title = "\(username!)'s Library"
+        navigationItem.backBarButtonItem?.title = "Library"
+        
+        tableView.dataSource = self
+        tableView.delegate = self
+        
+        // Load currentLibrary
+        currentLibrary = PFUser.current()?.object(forKey: "library") as! [[String]]
+        
+        // Uncomment the following line to preserve selection between presentations
+        // self.clearsSelectionOnViewWillAppear = false
+
+        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+
+    // MARK: - Table view data source
+
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return 1
+    }
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete implementation, return the number of rows
+        var numOfRows = 0
+        
+        // Gets the number of rows in the section
+        if PFUser.current()!.object(forKey: "didSaveFirstBook") as! Bool == false {
+            numOfRows = 1
+        } else {
+            numOfRows = currentLibrary.count
+        }
+        
+        return numOfRows
+    }
+
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // Downcasted to to BooksTableViewCell.swift to use the properties enlisted there
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? BooksTableViewCell else {
+            fatalError("The dequed cell is not an instance of BooksTableViewCell")
+        }
+        
+        if PFUser.current()!.object(forKey: "didSaveFirstBook") as! Bool == false {
+            cell.titleLabel.text = "No books"
+        } else {
+            cell.titleLabel.text = currentLibrary[indexPath.row][0]
+            if currentLibrary[indexPath.row][1] == "Not specified"{
+                cell.authorLabel.text = "No Author Listed"
+            } else {
+                cell.authorLabel.text = currentLibrary[indexPath.row][1]
+            }
+            if currentLibrary[indexPath.row][2] == "Not specified"{
+                cell.isbn10Label.text = "No ISBN for this book"
+            } else {
+                cell.isbn10Label.text = currentLibrary[indexPath.row][2]
+            }
+            
+            cell.statusImageView.image = #imageLiteral(resourceName: "smily")
+        }
+        
+
+        return cell
+    }
+    
+    
+    
+    @IBAction func unwindToBooklList(sender: UIStoryboardSegue) {
+        
+    }
+    
+
+    
+
+    /*
+    // Override to support conditional editing of the table view.
+    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        // Return false if you do not want the specified item to be editable.
+        return true
+    }
+    */
+
+    /*
+    // Override to support editing the table view.
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            // Delete the row from the data source
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        } else if editingStyle == .insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        }    
+    }
+    */
+
+    /*
+    // Override to support rearranging the table view.
+    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+
+    }
+    */
+
+    /*
+    // Override to support conditional rearranging of the table view.
+    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        // Return false if you do not want the item to be re-orderable.
+        return true
+    }
+    */
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+    */
+    
+
+}

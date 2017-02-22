@@ -18,6 +18,7 @@
  3 isbn13
  4 publisher
  5 lanugage
+ 6 status (owner, borrowed, lent)
  */
 
 /**
