@@ -278,7 +278,7 @@ class ResultsViewController: UIViewController {
                                     
                                     
                                     // Add the new book to the server
-                                    GUSUerLibrary(self.newBook)
+                                    GUSUerLibrary(self.newBook as [AnyObject])
                                     
                                     // Remove all contents of the newBook array
                                     self.newBook.removeAll()

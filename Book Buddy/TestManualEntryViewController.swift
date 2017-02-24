@@ -12,10 +12,11 @@ import os.log
 
 class TestManualEntryViewController: UIViewController {
     
-    var userLibrary = [[String]]()
-    var newBook = [String]()
+    var userLibrary = Array<Array<AnyObject>>()
+    var newBook = [AnyObject]()
     var saveButtonTimer = Timer()
     var activityIndicator = UIActivityIndicatorView()
+    var randomBookImageNumber = 0
     
     override var prefersStatusBarHidden: Bool {
         return true
@@ -101,49 +102,66 @@ class TestManualEntryViewController: UIViewController {
         // Check to see if the text fields are empty first! The user is not required to enter all information on a book if they wish not to do so
         
         if (titleTextField.text?.isEmpty)!{
-            newBook.append("Not specified")
+            newBook.append("Not specified" as AnyObject)
         } else {
-            newBook.append(titleTextField.text!)
+            newBook.append(titleTextField.text! as AnyObject)
         }
         
         if (authorTextField.text?.isEmpty)!{
-            newBook.append("Not specified")
+            newBook.append("Not specified" as AnyObject)
         } else {
-            newBook.append(authorTextField.text!)
+            newBook.append(authorTextField.text! as AnyObject)
         }
         
         if (isbn10TextField.text?.isEmpty)!{
-            newBook.append("Not specified")
+            newBook.append("Not specified" as AnyObject)
         } else {
-            newBook.append(isbn10TextField.text!)
+            newBook.append(isbn10TextField.text! as AnyObject)
         }
         
         if (isbn13TextField.text?.isEmpty)!{
-            newBook.append("Not specified")
+            newBook.append("Not specified" as AnyObject)
         } else {
-            newBook.append(isbn13TextField.text!)
+            newBook.append(isbn13TextField.text! as AnyObject)
         }
         
         if (publisherTextField.text?.isEmpty)!{
-            newBook.append("Not specified")
+            newBook.append("Not specified" as AnyObject)
         } else {
-            newBook.append(publisherTextField.text!)
+            newBook.append(publisherTextField.text! as AnyObject)
         }
         
         if (languageTextField.text?.isEmpty)! {
-            newBook.append("Not specified")
+            newBook.append("Not specified" as AnyObject)
         } else {
-            newBook.append(languageTextField.text!)
+            newBook.append(languageTextField.text! as AnyObject)
         }
         
         // Add a status to the book (Owned, Lent, Borrowed)
-        newBook.append("Owned")
+        newBook.append("Owned" as AnyObject)
+        
+        
+        //Append the newBookArray with a randomly generated book image
+        newBook.append(getBookImage())
+        
+        // Append the bookArray with a boolean false. This is whether or not the user has manually set an image for the book
+        newBook.append("False" as AnyObject)
         
         // Add the current user as owner of the book
         //newBook.append((PFUser.current()?.username!)!)
         
         // Add the new book to the server
-        GUSUerLibrary(self.newBook)
+        GUSUerLibrary(self.newBook as [AnyObject])
+        
+        let alert = UIAlertController(title: "Book Saved!", message: "Added \(titleTextField.text!) to your library!", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Great", style: .default, handler: { (action) in
+            // Send the user back to the library page
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let view = storyboard.instantiateViewController(withIdentifier: "YourLibrary")
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.window?.rootViewController = view
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
     
     func startSaveButtonTimer(){
@@ -197,16 +215,16 @@ class TestManualEntryViewController: UIViewController {
                                     if let title = data["title"] as? String{
                                         if title.isEmpty {
                                             print("The title is not specified")
-                                            self.newBook.append("Not specified")
+                                            self.newBook.append("Not specified" as AnyObject)
                                             self.titleTextField.text = "Not specified"
                                         } else {
                                             print("Title is \(title)")
-                                            self.newBook.append(title)
+                                            self.newBook.append(title as AnyObject)
                                             self.titleTextField.text = title
                                         }
                                     } else {
                                         print("Error with getting title.")
-                                        self.newBook.append("Not specified")
+                                        self.newBook.append("Not specified" as AnyObject)
                                     }
                                     
                                     // Get the author
@@ -215,16 +233,16 @@ class TestManualEntryViewController: UIViewController {
                                             if let authorName = authorDatas["name"] as? String{
                                                 if authorName.isEmpty{
                                                     print("The authorName is not specified")
-                                                    self.newBook.append("Not specified")
+                                                    self.newBook.append("Not specified" as AnyObject)
                                                     self.authorTextField.text = "Not specified"
                                                 } else {
-                                                    print("Author is \(authorName)")
-                                                    self.newBook.append(authorName)
+                                                    print("Author is \(authorName)" as AnyObject)
+                                                    self.newBook.append(authorName as AnyObject)
                                                     self.authorTextField.text = authorName
                                                 }
                                             } else {
-                                                print("Error with getting Author.")
-                                                self.newBook.append("Not specified")
+                                                print("Error with getting Author." as AnyObject)
+                                                self.newBook.append("Not specified" as AnyObject)
                                             }
                                         }
                                     }
@@ -233,68 +251,68 @@ class TestManualEntryViewController: UIViewController {
                                     if let isbn10 = data["isbn10"] as? String{
                                         if isbn10.isEmpty {
                                             print("ISBN10 is not specified")
-                                            self.newBook.append("Not specified")
+                                            self.newBook.append("Not specified" as AnyObject)
                                             self.isbn10TextField.text = "Not specified"
                                         } else {
                                             print("ISBN10 is \(isbn10)")
-                                            self.newBook.append(isbn10)
+                                            self.newBook.append(isbn10 as AnyObject)
                                             self.isbn10TextField.text = isbn10
                                         }
                                     } else {
                                         print("Error with getting ISBN10.")
-                                        self.newBook.append("Not specified")
+                                        self.newBook.append("Not specified" as AnyObject)
                                     }
                                     
                                     // Get the ISBN13
                                     if let isbn13 = data["isbn13"] as? String{
                                         if isbn13.isEmpty {
                                             print("ISBN13 is not specified")
-                                            self.newBook.append("Not specified")
+                                            self.newBook.append("Not specified" as AnyObject)
                                             self.isbn13TextField.text = "Not specified"
                                         } else {
                                             print("ISBN13 is \(isbn13)")
-                                            self.newBook.append(isbn13)
+                                            self.newBook.append(isbn13 as AnyObject)
                                             self.isbn13TextField.text = isbn13
                                         }
                                     } else {
                                         print("Error with getting ISBN13.")
-                                        self.newBook.append("Not specified")
+                                        self.newBook.append("Not specified" as AnyObject)
                                     }
                                     
                                     // Get the publisher
                                     if let publisher = data["publisher_name"] as? String{
                                         if publisher.isEmpty {
                                             print("The publisher is not specified")
-                                            self.newBook.append("Not specified")
+                                            self.newBook.append("Not specified" as AnyObject)
                                             self.publisherTextField.text = "Not specified"
                                         } else {
-                                            print("Publisher is \(publisher)")
-                                            self.newBook.append(publisher)
+                                            print("Publisher is \(publisher)" as AnyObject)
+                                            self.newBook.append(publisher as AnyObject)
                                             self.publisherTextField.text = publisher
                                         }
                                     } else {
                                         print("Error with getting publisher.")
-                                        self.newBook.append("Not specified")
+                                        self.newBook.append("Not specified" as AnyObject)
                                     }
                                     
                                     // Get the langauge
                                     if let langauge = data["language"] as? String{
                                         if langauge.isEmpty{
                                             print("The language is not specified")
-                                            self.newBook.append("Not specified")
+                                            self.newBook.append("Not specified" as AnyObject)
                                             self.languageTextField.text = "Not specified"
                                         } else {
-                                            print("Language is \(langauge)")
-                                            self.newBook.append(langauge)
+                                            print("Language is \(langauge)" as AnyObject)
+                                            self.newBook.append(langauge as AnyObject)
                                             self.languageTextField.text = langauge
                                         }
                                     } else {
                                         print("Error with getting langauge.")
-                                        self.newBook.append("Not specified")
+                                        self.newBook.append("Not specified" as AnyObject)
                                     }
                                     
                                     // Print that the book is owned since user is adding to the library
-                                    self.newBook.append("Owned")
+                                    self.newBook.append("Owned" as AnyObject)
                                     
                                     
                                     print()
@@ -362,5 +380,4 @@ class TestManualEntryViewController: UIViewController {
         UIApplication.shared.endIgnoringInteractionEvents()
         self.activityIndicator.stopAnimating()
     }
-
 }

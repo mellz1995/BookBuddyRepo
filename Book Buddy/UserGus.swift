@@ -9,6 +9,10 @@
 import Foundation
 import Parse
 
+var randomBookImageNumber = 0
+var newBookImage: PFFile? = nil
+
+
 // This class's purpose is to update all of the user's stats in one place. This is done to reduce code redundancy
 
 func updateIntStats(_ changeStat: Int, _ key: String) {
@@ -55,7 +59,7 @@ func updateProfilePic(_ changeStat: PFFile, _ key: String) {
     })
 }
 
-func updateArray(_ changeStat: [[String]], _ key: String) {
+func updateArray(_ changeStat: Array<Array<AnyObject>>, _ key: String) {
     PFUser.current()?.setValue(changeStat, forKey: key)
     
     // Save User Variables
@@ -70,8 +74,8 @@ func updateArray(_ changeStat: [[String]], _ key: String) {
 }
 
 // This gets the userLibrary, appends it, and sets it if the user scan's a new book. This method is needed because when parse is imported it messes with the subricts and json data gets funky
-func GUSUerLibrary(_ newBook: [String]){
-    var userLibrary = PFUser.current()!.object(forKey: "library") as! [[String]]
+func GUSUerLibrary(_ newBook: [AnyObject]){
+    var userLibrary = PFUser.current()!.object(forKey: "library") as! Array<Array<AnyObject>>
     print()
     print("Current library is \(userLibrary)")
     
@@ -92,6 +96,7 @@ func GUSUerLibrary(_ newBook: [String]){
         // Update boolean stat to true
         updateBoolStats(true, "didSaveFirstBook")
     } else {
+        print("User library is not empty")
         // Append it with the newBook array
         userLibrary.append(newBook)
         
@@ -102,6 +107,46 @@ func GUSUerLibrary(_ newBook: [String]){
     print("User library is now \(userLibrary)")
     print()
     print("User library count is now \(userLibrary.count)")
+}
+
+func getBookImage() -> PFFile{
+    let redImage = PFFile(data: UIImageJPEGRepresentation(#imageLiteral(resourceName: "RedBookImage"), 1.0)!)
+    let blueImage = PFFile(data: UIImageJPEGRepresentation(#imageLiteral(resourceName: "BlueBookImage"), 1.0)!)
+    let purpleImage = PFFile(data: UIImageJPEGRepresentation(#imageLiteral(resourceName: "PurpleBookImage"), 1.0)!)
+    let yellowImage = PFFile(data: UIImageJPEGRepresentation(#imageLiteral(resourceName: "YellowBookImage"), 1.0)!)
+    let greenImage = PFFile(data: UIImageJPEGRepresentation(#imageLiteral(resourceName: "GreenBookImage"), 1.0)!)
+    let orangeImage = PFFile(data: UIImageJPEGRepresentation(#imageLiteral(resourceName: "OrangeBookImage"), 1.0)!)
+    
+    
+    // Append the newBookArray with a random book image
+    // Set a random colored default book image
+    randomBookImageNumber = Int(arc4random_uniform(5))
+    
+    if randomBookImageNumber == 0 {
+        newBookImage = blueImage
+    }
+    
+    if randomBookImageNumber == 1 {
+        newBookImage = redImage
+    }
+    
+    if randomBookImageNumber == 2 {
+        newBookImage = purpleImage
+    }
+    
+    if randomBookImageNumber == 3 {
+        newBookImage = yellowImage
+    }
+    
+    if randomBookImageNumber == 4 {
+        newBookImage = greenImage
+    }
+    
+    if randomBookImageNumber == 5 {
+        newBookImage = orangeImage
+    }
+    
+    return newBookImage!
 }
 
 

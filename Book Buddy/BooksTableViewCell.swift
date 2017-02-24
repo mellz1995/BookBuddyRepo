@@ -15,6 +15,7 @@ class BooksTableViewCell: UITableViewCell {
     @IBOutlet weak var statusImageView: UIImageView!
     @IBOutlet weak var authorLabel: UILabel!
     @IBOutlet weak var isbn10Label: UILabel!
+    @IBOutlet weak var bookImage: UIImageView!
 
     override func awakeFromNib() {
         super.awakeFromNib()

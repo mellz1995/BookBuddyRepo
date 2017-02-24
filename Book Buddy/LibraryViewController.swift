@@ -19,6 +19,8 @@
  4 publisher
  5 lanugage
  6 status (owner, borrowed, lent)
+ 7 ImageFile
+ 8 Boolean whether the user has manually set an image for the book
  */
 
 /**
@@ -32,50 +34,7 @@
  
  **/
 
-import UIKit
-import Parse
 
-class LibraryViewController: UIViewController {
-    
-    var userLibrary = [[String]]()
-    var newBook = [String]()
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        setupTables()
-        
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    func setupTables(){
-        // Set a variable equal to the current userLibrary saved on the Parse server if it is not empty
-        if PFUser.current()!.object(forKey: "didSaveFirstBook") as! Bool == false {
-            // Library is empty. Boolean will be changed when user adds a new book
-            print("User library is empty")
-        } else {
-            // Library is not empty. Hooray!
-            
-            // Get the current userLibrary
-            userLibrary = PFUser.current()!.object(forKey: "library") as! [[String]]
-            
-            // Set the number of tables to be equal to the count of userLibrary
-        }
-    }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
     /**
      // Adding another book to the userLibrary
@@ -108,4 +67,3 @@ class LibraryViewController: UIViewController {
  
  **/
 
-}

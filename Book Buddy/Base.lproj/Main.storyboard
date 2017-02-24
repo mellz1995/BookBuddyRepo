@@ -597,35 +597,48 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="85"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="smily" translatesAutoresizingMaskIntoConstraints="NO" id="6eO-mQ-kie">
-                                            <rect key="frame" x="8" y="4" width="80" height="77"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Book Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="82i-2h-f3B">
-                                            <rect key="frame" x="96" y="8" width="279" height="21"/>
+                                            <rect key="frame" x="96" y="8" width="183" height="21"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Author" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wVu-tD-B5e">
-                                            <rect key="frame" x="96" y="31" width="279" height="22"/>
+                                            <rect key="frame" x="96" y="31" width="183" height="22"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ISBN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dhh-5C-0MS">
-                                            <rect key="frame" x="96" y="58" width="279" height="19"/>
+                                            <rect key="frame" x="96" y="58" width="183" height="19"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZDn-UY-w7p">
+                                            <rect key="frame" x="8" y="2" width="80" height="80"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="smily" translatesAutoresizingMaskIntoConstraints="NO" id="6eO-mQ-kie">
+                                            <rect key="frame" x="309" y="14" width="58" height="56"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="58" id="4nl-TF-XxI"/>
+                                                <constraint firstAttribute="height" constant="56" id="7mw-tN-Eri"/>
+                                            </constraints>
+                                        </imageView>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="6eO-mQ-kie" secondAttribute="bottom" constant="15" id="GaW-Rh-QVb"/>
+                                        <constraint firstItem="6eO-mQ-kie" firstAttribute="top" secondItem="8mZ-R0-IjQ" secondAttribute="top" constant="14" id="eIa-kc-EyW"/>
+                                        <constraint firstAttribute="trailing" secondItem="6eO-mQ-kie" secondAttribute="trailing" constant="8" id="qF3-IM-nBj"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="authorLabel" destination="wVu-tD-B5e" id="rvr-zz-Es3"/>
+                                    <outlet property="bookImage" destination="ZDn-UY-w7p" id="Dwx-Kt-Zet"/>
                                     <outlet property="isbn10Label" destination="dhh-5C-0MS" id="MjY-Jt-YKK"/>
                                     <outlet property="statusImageView" destination="6eO-mQ-kie" id="HOY-ST-xbP"/>
                                     <outlet property="titleLabel" destination="82i-2h-f3B" id="Nnc-fU-ZJc"/>
@@ -652,7 +665,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="FdS-6a-5eN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1308" y="632"/>
+            <point key="canvasLocation" x="1308" y="631.93403298350825"/>
         </scene>
         <!--Item-->
         <scene sceneID="qTR-ih-sv4">
@@ -1012,8 +1025,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="eA9-Wm-f6v"/>
-        <segue reference="5z7-6K-ZRX"/>
+        <segue reference="epu-4D-pUi"/>
         <segue reference="N0U-sT-G4n"/>
-        <segue reference="oub-lG-nQ7"/>
+        <segue reference="5z7-6K-ZRX"/>
     </inferredMetricsTieBreakers>
 </document>

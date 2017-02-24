@@ -11,9 +11,10 @@ import Parse
 
 class BooksTableViewController: UITableViewController {
     
-    var currentLibrary = [[String]]()
-    var newBook = [String]()
+    var currentLibrary = Array<Array<AnyObject>>()
+    var newBook = [AnyObject]()
     var bookFound = false
+    var randomBookImageNumber = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +28,7 @@ class BooksTableViewController: UITableViewController {
         tableView.delegate = self
         
         // Load currentLibrary
-        currentLibrary = PFUser.current()?.object(forKey: "library") as! [[String]]
+        currentLibrary = PFUser.current()?.object(forKey: "library") as! Array<Array<AnyObject>>
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -40,6 +41,7 @@ class BooksTableViewController: UITableViewController {
     override var prefersStatusBarHidden: Bool {
         return true
     }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -77,21 +79,40 @@ class BooksTableViewController: UITableViewController {
         if PFUser.current()!.object(forKey: "didSaveFirstBook") as! Bool == false {
             cell.titleLabel.text = "No books"
         } else {
-            cell.titleLabel.text = currentLibrary[indexPath.row][0]
-            if currentLibrary[indexPath.row][1] == "Not specified"{
+            cell.titleLabel.text = currentLibrary[indexPath.row][0] as? String
+            if currentLibrary[indexPath.row][1] as! String == "Not specified"{
                 cell.authorLabel.text = "No Author Listed"
             } else {
-                cell.authorLabel.text = currentLibrary[indexPath.row][1]
+                cell.authorLabel.text = currentLibrary[indexPath.row][1] as? String
             }
-            if currentLibrary[indexPath.row][2] == "Not specified"{
+            if currentLibrary[indexPath.row][2] as! String == "Not specified"{
                 cell.isbn10Label.text = "No ISBN for this book"
             } else {
-                cell.isbn10Label.text = currentLibrary[indexPath.row][2]
+                cell.isbn10Label.text = currentLibrary[indexPath.row][2] as? String
             }
             
-            cell.statusImageView.image = #imageLiteral(resourceName: "smily")
+            if currentLibrary[indexPath.row][6] as! String == "Owned"{
+                cell.statusImageView.image = #imageLiteral(resourceName: "OwnedImage")
+            }
+            
+            if currentLibrary[indexPath.row][6] as! String == "Lent"  {
+                cell.statusImageView.image = #imageLiteral(resourceName: "LentBlueImage")
+            }
+            
+            if currentLibrary[indexPath.row][6] as! String == "Borrowed" {
+                cell.statusImageView.image = #imageLiteral(resourceName: "BorrowedBlueImage")
+            }
+            
+            // Set the image of the book
+            if let bookPicture = currentLibrary[indexPath.row][7] as? PFFile {
+                bookPicture.getDataInBackground({ (imageData: Data?, error: Error?) -> Void in
+                    let image = UIImage(data: imageData!)
+                    if image != nil {
+                        cell.bookImage.image = image
+                    }
+                })
+            }
         }
-        
 
         return cell
     }
