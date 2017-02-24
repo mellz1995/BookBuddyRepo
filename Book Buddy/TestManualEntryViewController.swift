@@ -101,11 +101,9 @@ class TestManualEntryViewController: UIViewController {
         // Append the newBook array with the contents of the text fields
         // Check to see if the text fields are empty first! The user is not required to enter all information on a book if they wish not to do so
         
-        if (titleTextField.text?.isEmpty)!{
-            newBook.append("Not specified" as AnyObject)
-        } else {
-            newBook.append(titleTextField.text! as AnyObject)
-        }
+    
+        newBook.append(titleTextField.text! as AnyObject)
+        
         
         if (authorTextField.text?.isEmpty)!{
             newBook.append("Not specified" as AnyObject)

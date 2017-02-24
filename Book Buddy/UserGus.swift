@@ -110,6 +110,7 @@ func GUSUerLibrary(_ newBook: [AnyObject]){
 }
 
 func getBookImage() -> PFFile{
+    // Converts all images into PFFfiles
     let redImage = PFFile(data: UIImageJPEGRepresentation(#imageLiteral(resourceName: "RedBookImage"), 1.0)!)
     let blueImage = PFFile(data: UIImageJPEGRepresentation(#imageLiteral(resourceName: "BlueBookImage"), 1.0)!)
     let purpleImage = PFFile(data: UIImageJPEGRepresentation(#imageLiteral(resourceName: "PurpleBookImage"), 1.0)!)
