@@ -38,15 +38,14 @@ class BookInformationViewController: UIViewController, UINavigationControllerDel
         // Get the current userLibrary
         currentLibrary = PFUser.current()?.object(forKey: "library") as! Array<Array<AnyObject>>
         
-        // Set the labels
-        titleLabel.text = bookInformationArray[0] as? String
-        authorLabel.text = bookInformationArray[1] as? String
-        isbn10label.text = bookInformationArray[2] as? String
-        isbn13Label.text = bookInformationArray[3] as? String
-        publisherLabel.text = bookInformationArray[4] as? String
-        languageLabel.text = bookInformationArray[5] as? String
-        ownerLabel.text = bookInformationArray[9] as? String
-        bookIDLabel.text = "\(bookInformationArray[10])"
+        // Set the textFields
+        titleTextField.text = bookInformationArray[0] as? String
+        authorTextField.text = bookInformationArray[1] as? String
+        isbn10TextField.text = bookInformationArray[2] as? String
+        isbn13TextField.text = bookInformationArray[3] as? String
+        publisherTextField.text = bookInformationArray[4] as? String
+        lanuguageTextField.text = bookInformationArray[5] as? String
+        ownerLabel.text = "Owner: \(bookInformationArray[9])"
         print("Book Id?: \(bookInformationArray[10])")
         //bookIDLabel.text = "Book id?"
         
@@ -69,8 +68,19 @@ class BookInformationViewController: UIViewController, UINavigationControllerDel
     @IBOutlet weak var publisherLabel: UILabel!
     @IBOutlet weak var languageLabel: UILabel!
     @IBOutlet weak var ownerLabel: UILabel!
-    @IBOutlet weak var bookIDLabel: UILabel!
-    @IBOutlet weak var imageButtonOutlet: UIButton!
+    
+    @IBOutlet weak var titleTextField: UITextField!
+    @IBOutlet weak var authorTextField: UITextField!
+    @IBOutlet weak var isbn10TextField: UITextField!
+    @IBOutlet weak var isbn13TextField: UITextField!
+    @IBOutlet weak var publisherTextField: UITextField!
+    @IBOutlet weak var lanuguageTextField: UITextField!
+    
+    
+    
+    
+    
+    
     @IBAction func imageButtonAction(_ sender: UIButton) {
         bookID = self.bookInformationArray[10] as! Int
         let alert = UIAlertController(title: "From where?", message: "Take a picture or use one from your photo library?", preferredStyle: UIAlertControllerStyle.alert)
@@ -113,63 +123,6 @@ class BookInformationViewController: UIViewController, UINavigationControllerDel
         self.dismiss(animated: true) {
             
         }
-    }
-    
-    @IBAction func deleteButtonAction(_ sender: UIButton) {
-        var newUserLibrary = Array<Array<AnyObject>>()
-        let alert = UIAlertController(title: "Delete?", message: "Are you sure you want to delete \(titleLabel.text!) from your library?", preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "Yes, Delete", style: .default, handler: { (action) in
-            bookID = self.bookInformationArray[10] as! Int
-            
-            // Loop through the userLibrary double array
-            for i in 0..<self.currentLibrary.count{
-                
-                // If the double array at that index matches the current bookId, delete that book
-                if self.currentLibrary[i][10] as! Int == bookID {
-                    
-                    // Remove all indexes at i
-                    print(self.currentLibrary[i])
-                    self.currentLibrary[i].removeAll()
-                    
-                    print("Current library is now \(self.currentLibrary)")
-                    
-                    // When a user deletes a book, the 2D array at that index is cleared. This leaves an ampty array on the server. This for loop, loops through the currentUserLibrary to find the empty index. It appends the newUserLibrary with only the indexes that are not empty
-                    for i in 0..<self.currentLibrary.count {
-                        if self.currentLibrary[i].isEmpty == false {
-                            newUserLibrary.append(self.currentLibrary[i])
-                        }
-                    }
-                    
-                    //Update the library on the server
-                    print("New User Library is \(newUserLibrary)")
-                    updateArray(newUserLibrary, "library")
-                    
-                    // Check to see if the library is now empty.
-                    print("Current Library count is \(self.currentLibrary.count)")
-                    
-                    if self.currentLibrary.count == 1 && self.currentLibrary[0].isEmpty {
-                        // The first index is an empty array
-                        updateBoolStats(false, "didSaveFirstBook")
-                    }
-                    
-                    let alert2 = UIAlertController(title: "Book Deleted!", message: "Removed \(self.titleLabel.text!) from your library!", preferredStyle: UIAlertControllerStyle.alert)
-                    alert2.addAction(UIAlertAction(title: "Great", style: .default, handler: { (action) in
-                        // Send the user back to the library page
-                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                        let view = storyboard.instantiateViewController(withIdentifier: "YourLibrary")
-                        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-                        appDelegate.window?.rootViewController = view
-                    }))
-                    self.present(alert2, animated: true, completion: nil)
-                }
-                
-            }
-        }))
-        
-        alert.addAction(UIAlertAction(title: "No, don't delete", style: .default, handler: { (action) in
-        }))
-        self.present(alert, animated: true, completion: nil)
-       
     }
     
 

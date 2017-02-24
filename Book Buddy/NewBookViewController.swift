@@ -19,6 +19,7 @@ class NewBookViewController: UIViewController, UINavigationControllerDelegate, U
     var image: UIImage? = nil
     var setImage = false
     var usableImage: UIImage? = nil
+    var regularImage: UIImage? = nil
     
     override var prefersStatusBarHidden: Bool {
         return true
@@ -33,7 +34,8 @@ class NewBookViewController: UIViewController, UINavigationControllerDelegate, U
         // Disable the save button until user enters a title
         saveButtonOutlet.isEnabled = false
         
-        bookImageView.image = getBookImageRegular()
+        regularImage = #imageLiteral(resourceName: "QuestionMarkBook")
+        bookImageView.image = #imageLiteral(resourceName: "QuestionMarkBook")
         
         // Allows dismissal of keyboard on tap anywhere on screen besides the keyboard itself
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
@@ -111,75 +113,90 @@ class NewBookViewController: UIViewController, UINavigationControllerDelegate, U
     
     @IBOutlet weak var saveButtonOutlet: UIBarButtonItem!
     @IBAction func saveButtonAction(_ sender: UIBarButtonItem) {
-        print()
+        self.dismissKeyboard()
+        DispatchQueue.main.async {
+            // Start the activity spinner
+            self.activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+            self.activityIndicator.center = self.view.center
+            self.activityIndicator.hidesWhenStopped = true
+            self.activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+            self.view.addSubview(self.activityIndicator)
+            self.activityIndicator.startAnimating()
+            UIApplication.shared.beginIgnoringInteractionEvents()
+            print()
         
-        // Append the newBook array with the contents of the text fields
-        // Check to see if the text fields are empty first! The user is not required to enter all information on a book if they wish not to do so
+            // Append the newBook array with the contents of the text fields
+            // Check to see if the text fields are empty first! The user is not required to enter all information on a book if they wish not to do so
         
-        newBook.append(titleTextField.text! as AnyObject) // This does not need to check the title text field becasue a title is required to save a book
+            self.newBook.append(self.titleTextField.text! as AnyObject) // This does not need to check the title text field becasue a title is required to save a book
         
-        if (authorTextField.text?.isEmpty)!{
-            newBook.append("Not specified" as AnyObject)
-        } else {
-            newBook.append(authorTextField.text! as AnyObject)
+            if (self.authorTextField.text?.isEmpty)!{
+                self.newBook.append("Not specified" as AnyObject)
+            } else {
+                self.newBook.append(self.authorTextField.text! as AnyObject)
+            }
+        
+            if (self.isbn10TextField.text?.isEmpty)!{
+                self.newBook.append("Not specified" as AnyObject)
+            } else {
+                self.newBook.append(self.isbn10TextField.text! as AnyObject)
+            }
+        
+            if (self.isbn13TextField.text?.isEmpty)!{
+                self.newBook.append("Not specified" as AnyObject)
+            } else {
+                self.newBook.append(self.isbn13TextField.text! as AnyObject)
+            }
+        
+            if (self.publisherTextField.text?.isEmpty)!{
+                self.newBook.append("Not specified" as AnyObject)
+            } else {
+                self.newBook.append(self.publisherTextField.text! as AnyObject)
+            }
+        
+            if (self.languageTextField.text?.isEmpty)! {
+                self.newBook.append("Not specified" as AnyObject)
+            } else {
+                self.newBook.append(self.languageTextField.text! as AnyObject)
+            }
+        
+            // Add a status to the book (Owned, Lent, Borrowed)
+            self.newBook.append("Owned" as AnyObject)
+        
+        
+            //Append the newBookArray with a randomly generated book image if user hasn't set an image
+            if self.setImage == true {
+                self.newBook.append(getPFFileVersionOfImage(self.usableImage!))
+                self.newBook.append("True" as AnyObject)
+            } else {
+                self.newBook.append(getPFFileVersionOfImage(self.regularImage!))
+                // Append the bookArray with a boolean false. This is whether or not the user has manually set an image for the book
+                self.newBook.append("False" as AnyObject)
+            }
+        
+            // Add the current user as owner of the book
+            self.newBook.append(getUsername() as AnyObject)
+        
+            // Give the book an ID
+            self.newBook.append(getAndIncrementCurrentBookId() as AnyObject)
+        
+            // Add the new book to the server
+            GUSUerLibrary(self.newBook as [AnyObject])
+        
+            // Stop the animator
+            self.activityIndicator.stopAnimating()
+            UIApplication.shared.endIgnoringInteractionEvents()
+        
+            let alert = UIAlertController(title: "Book Saved!", message: "Added \(self.titleTextField.text!) to your library!", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Great", style: .default, handler: { (action) in
+                // Send the user back to the library page
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let view = storyboard.instantiateViewController(withIdentifier: "YourLibrary")
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                appDelegate.window?.rootViewController = view
+            }))
+            self.present(alert, animated: true, completion: nil)
         }
-        
-        if (isbn10TextField.text?.isEmpty)!{
-            newBook.append("Not specified" as AnyObject)
-        } else {
-            newBook.append(isbn10TextField.text! as AnyObject)
-        }
-        
-        if (isbn13TextField.text?.isEmpty)!{
-            newBook.append("Not specified" as AnyObject)
-        } else {
-            newBook.append(isbn13TextField.text! as AnyObject)
-        }
-        
-        if (publisherTextField.text?.isEmpty)!{
-            newBook.append("Not specified" as AnyObject)
-        } else {
-            newBook.append(publisherTextField.text! as AnyObject)
-        }
-        
-        if (languageTextField.text?.isEmpty)! {
-            newBook.append("Not specified" as AnyObject)
-        } else {
-            newBook.append(languageTextField.text! as AnyObject)
-        }
-        
-        // Add a status to the book (Owned, Lent, Borrowed)
-        newBook.append("Owned" as AnyObject)
-        
-        
-        //Append the newBookArray with a randomly generated book image if user hasn't set an image
-        if setImage == true {
-            newBook.append(getPFFileVersionOfImage(usableImage!))
-            newBook.append("True" as AnyObject)
-        } else {
-           newBook.append(getBookImage())
-            // Append the bookArray with a boolean false. This is whether or not the user has manually set an image for the book
-            newBook.append("False" as AnyObject)
-        }
-        
-        // Add the current user as owner of the book
-        newBook.append(getUsername() as AnyObject)
-        
-        // Give the book an ID
-        newBook.append(getAndIncrementCurrentBookId() as AnyObject)
-        
-        // Add the new book to the server
-        GUSUerLibrary(self.newBook as [AnyObject])
-        
-        let alert = UIAlertController(title: "Book Saved!", message: "Added \(titleTextField.text!) to your library!", preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "Great", style: .default, handler: { (action) in
-            // Send the user back to the library page
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let view = storyboard.instantiateViewController(withIdentifier: "YourLibrary")
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.window?.rootViewController = view
-        }))
-        self.present(alert, animated: true, completion: nil)
     }
     
     func startSaveButtonTimer(){

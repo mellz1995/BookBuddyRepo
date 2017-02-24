@@ -36,6 +36,10 @@ class MainMenuViewController: UIViewController {
             }
         }
     }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

@@ -9,10 +9,7 @@
 import Foundation
 import Parse
 
-var randomBookImageNumber = 0
 var newBookImage: PFFile? = nil
-var foundEmptyIndex = false
-
 
 // This class's purpose is to update all of the user's stats in one place. This is done to reduce code redundancy
 
@@ -114,77 +111,6 @@ func getUsername() -> String{
     return userName!
 }
 
-func getBookImageRegular() -> UIImage {
-    var returnableImage: UIImage? = nil
-    // Append the newBookArray with a random book image
-    randomBookImageNumber = Int(arc4random_uniform(5))
-    
-    if randomBookImageNumber == 0 {
-        returnableImage = #imageLiteral(resourceName: "BlueBookImage")
-    }
-    
-    if randomBookImageNumber == 1 {
-        returnableImage = #imageLiteral(resourceName: "RedBookImage")
-    }
-    
-    if randomBookImageNumber == 2 {
-        returnableImage = #imageLiteral(resourceName: "PurpleBookImage")
-    }
-    
-    if randomBookImageNumber == 3 {
-        returnableImage = #imageLiteral(resourceName: "YellowBookImage")
-    }
-    
-    if randomBookImageNumber == 4 {
-        returnableImage = #imageLiteral(resourceName: "GreenBookImage")
-    }
-    
-    if randomBookImageNumber == 5 {
-        returnableImage = #imageLiteral(resourceName: "OrangeBookImage")
-    }
-    
-    return returnableImage!
-}
-
-func getBookImage() -> PFFile{
-    // Converts all images into PFFfiles
-    let redImage = PFFile(data: UIImageJPEGRepresentation(#imageLiteral(resourceName: "RedBookImage"), 1.0)!)
-    let blueImage = PFFile(data: UIImageJPEGRepresentation(#imageLiteral(resourceName: "BlueBookImage"), 1.0)!)
-    let purpleImage = PFFile(data: UIImageJPEGRepresentation(#imageLiteral(resourceName: "PurpleBookImage"), 1.0)!)
-    let yellowImage = PFFile(data: UIImageJPEGRepresentation(#imageLiteral(resourceName: "YellowBookImage"), 1.0)!)
-    let greenImage = PFFile(data: UIImageJPEGRepresentation(#imageLiteral(resourceName: "GreenBookImage"), 1.0)!)
-    let orangeImage = PFFile(data: UIImageJPEGRepresentation(#imageLiteral(resourceName: "OrangeBookImage"), 1.0)!)
-    
-    
-    // Append the newBookArray with a random book image
-    randomBookImageNumber = Int(arc4random_uniform(5))
-    
-    if randomBookImageNumber == 0 {
-        newBookImage = blueImage
-    }
-    
-    if randomBookImageNumber == 1 {
-        newBookImage = redImage
-    }
-    
-    if randomBookImageNumber == 2 {
-        newBookImage = purpleImage
-    }
-    
-    if randomBookImageNumber == 3 {
-        newBookImage = yellowImage
-    }
-    
-    if randomBookImageNumber == 4 {
-        newBookImage = greenImage
-    }
-    
-    if randomBookImageNumber == 5 {
-        newBookImage = orangeImage
-    }
-    
-    return newBookImage!
-}
 
 func getAndIncrementCurrentBookId() -> Int{
     // Get the current book ID

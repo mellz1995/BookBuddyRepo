@@ -166,6 +166,7 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func registerButtonAction(_ sender: UIButton) {
+        self.dismissKeyboard()
         
         // Set the defualt image
         let defaultImage = PFFile(data: UIImageJPEGRepresentation(#imageLiteral(resourceName: "smily"), 1.0)!)
