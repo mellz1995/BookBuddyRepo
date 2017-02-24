@@ -214,6 +214,7 @@ class LoginViewController: UIViewController {
             
             user.setValue(0, forKey: "rating")
             user.setValue(0, forKey: "totalRating")
+            user.setValue(0000000, forKey: "CurrentBookId")
             
             user.setValue(false, forKey: "didSaveFirstBook")
             user.setValue(false, forKey: "didSetProfilePic")

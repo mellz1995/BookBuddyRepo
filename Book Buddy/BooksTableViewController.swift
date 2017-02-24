@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import os.log
 
 class BooksTableViewController: UITableViewController {
     
@@ -65,7 +66,7 @@ class BooksTableViewController: UITableViewController {
         } else {
             numOfRows = currentLibrary.count
         }
-        
+     
         return numOfRows
     }
 
@@ -79,40 +80,42 @@ class BooksTableViewController: UITableViewController {
         if PFUser.current()!.object(forKey: "didSaveFirstBook") as! Bool == false {
             cell.titleLabel.text = "No books"
         } else {
-            cell.titleLabel.text = currentLibrary[indexPath.row][0] as? String
-            if currentLibrary[indexPath.row][1] as! String == "Not specified"{
-                cell.authorLabel.text = "No Author Listed"
-            } else {
-                cell.authorLabel.text = currentLibrary[indexPath.row][1] as? String
-            }
-            if currentLibrary[indexPath.row][2] as! String == "Not specified"{
-                cell.isbn10Label.text = "No ISBN for this book"
-            } else {
-                cell.isbn10Label.text = currentLibrary[indexPath.row][2] as? String
-            }
-            
-            if currentLibrary[indexPath.row][6] as! String == "Owned"{
-                cell.statusImageView.image = #imageLiteral(resourceName: "OwnedImage")
-            }
-            
-            if currentLibrary[indexPath.row][6] as! String == "Lent"  {
-                cell.statusImageView.image = #imageLiteral(resourceName: "LentBlueImage")
-            }
-            
-            if currentLibrary[indexPath.row][6] as! String == "Borrowed" {
-                cell.statusImageView.image = #imageLiteral(resourceName: "BorrowedBlueImage")
-            }
-            
-            // Set the image of the book
-            if let bookPicture = currentLibrary[indexPath.row][7] as? PFFile {
-                bookPicture.getDataInBackground({ (imageData: Data?, error: Error?) -> Void in
-                    let image = UIImage(data: imageData!)
-                    if image != nil {
-                        cell.bookImage.image = image
+                if currentLibrary[indexPath.row].isEmpty == false {
+                    cell.titleLabel.text = currentLibrary[indexPath.row][0] as? String
+                    if currentLibrary[indexPath.row][1] as! String == "Not specified"{
+                        cell.authorLabel.text = "No Author Listed"
+                    } else {
+                        cell.authorLabel.text = currentLibrary[indexPath.row][1] as? String
                     }
-                })
+                    if currentLibrary[indexPath.row][2] as! String == "Not specified"{
+                        cell.isbn10Label.text = "No ISBN for this book"
+                    } else {
+                        cell.isbn10Label.text = currentLibrary[indexPath.row][2] as? String
+                    }
+            
+                    if currentLibrary[indexPath.row][6] as! String == "Owned"{
+                        cell.statusImageView.image = #imageLiteral(resourceName: "OwnedImage")
+                    }
+            
+                    if currentLibrary[indexPath.row][6] as! String == "Lent"  {
+                        cell.statusImageView.image = #imageLiteral(resourceName: "LentBlueImage")
+                    }
+            
+                    if currentLibrary[indexPath.row][6] as! String == "Borrowed" {
+                        cell.statusImageView.image = #imageLiteral(resourceName: "BorrowedBlueImage")
+                    }
+            
+                    // Set the image of the book
+                    if let bookPicture = currentLibrary[indexPath.row][7] as? PFFile {
+                        bookPicture.getDataInBackground({ (imageData: Data?, error: Error?) -> Void in
+                            let image = UIImage(data: imageData!)
+                            if image != nil {
+                                cell.bookImage.image = image
+                            }
+                        })
+                    }
+                }
             }
-        }
         return cell
     }
 
@@ -153,15 +156,42 @@ class BooksTableViewController: UITableViewController {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        super.prepare(for: segue, sender: sender)
+        switch(segue.identifier ?? ""){
+        case "ShowDetail":
+            os_log("Showing book detail", log: OSLog.default, type: .debug)
+            
+            guard let bookInformationViewController = segue.destination as? BookInformationViewController
+                else {
+                    fatalError("Unexpected destiniation: \(segue.destination)")
+            }
+            
+            guard let selectedBookCell = sender as? BooksTableViewCell else {
+                fatalError("Unexpected sender: \(sender)")
+            }
+            
+            guard let indexPath = tableView.indexPath(for: selectedBookCell) else {
+                fatalError("The selected cell is not being displayed by the table")
+            }
+            
+            let selectedBook = currentLibrary[indexPath.row]
+            bookInformationViewController.bookInformationArray = selectedBook
+            
+        case "AddBook":
+            os_log("Adding Book", log: OSLog.default, type: .debug)
+            
+        case "MainMenu":
+            os_log("Going to the main menu", log: OSLog.default, type: .debug)
+            
+        default:
+            fatalError("Unexpected Segueue Identifier: \(segue.identifier)")
+            
+        }
     }
-    */
+ 
     
 
 }

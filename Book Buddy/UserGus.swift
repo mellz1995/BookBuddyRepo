@@ -11,6 +11,7 @@ import Parse
 
 var randomBookImageNumber = 0
 var newBookImage: PFFile? = nil
+var foundEmptyIndex = false
 
 
 // This class's purpose is to update all of the user's stats in one place. This is done to reduce code redundancy
@@ -95,18 +96,54 @@ func GUSUerLibrary(_ newBook: [AnyObject]){
         
         // Update boolean stat to true
         updateBoolStats(true, "didSaveFirstBook")
+        
     } else {
         print("User library is not empty")
-        // Append it with the newBook array
-        userLibrary.append(newBook)
         
-        // Save it on the server
+        userLibrary.append(newBook)
         updateArray(userLibrary, "library")
     }
     
     print("User library is now \(userLibrary)")
     print()
     print("User library count is now \(userLibrary.count)")
+}
+
+func getUsername() -> String{
+    let userName = PFUser.current()?.username
+    return userName!
+}
+
+func getBookImageRegular() -> UIImage {
+    var returnableImage: UIImage? = nil
+    // Append the newBookArray with a random book image
+    randomBookImageNumber = Int(arc4random_uniform(5))
+    
+    if randomBookImageNumber == 0 {
+        returnableImage = #imageLiteral(resourceName: "BlueBookImage")
+    }
+    
+    if randomBookImageNumber == 1 {
+        returnableImage = #imageLiteral(resourceName: "RedBookImage")
+    }
+    
+    if randomBookImageNumber == 2 {
+        returnableImage = #imageLiteral(resourceName: "PurpleBookImage")
+    }
+    
+    if randomBookImageNumber == 3 {
+        returnableImage = #imageLiteral(resourceName: "YellowBookImage")
+    }
+    
+    if randomBookImageNumber == 4 {
+        returnableImage = #imageLiteral(resourceName: "GreenBookImage")
+    }
+    
+    if randomBookImageNumber == 5 {
+        returnableImage = #imageLiteral(resourceName: "OrangeBookImage")
+    }
+    
+    return returnableImage!
 }
 
 func getBookImage() -> PFFile{
@@ -120,7 +157,6 @@ func getBookImage() -> PFFile{
     
     
     // Append the newBookArray with a random book image
-    // Set a random colored default book image
     randomBookImageNumber = Int(arc4random_uniform(5))
     
     if randomBookImageNumber == 0 {
@@ -148,6 +184,22 @@ func getBookImage() -> PFFile{
     }
     
     return newBookImage!
+}
+
+func getAndIncrementCurrentBookId() -> Int{
+    // Get the current book ID
+    var currentBookId = PFUser.current()!.object(forKey: "CurrentBookId") as! Int
+    // Increment the current book ID
+        currentBookId += 1
+    // Set the current booo ID
+    updateIntStats(1, "CurrentBookId")
+    print("Set book id")
+    return currentBookId
+}
+
+func getPFFileVersionOfImage(_ image: UIImage) -> PFFile {
+    let uploadableImage = PFFile(data: UIImageJPEGRepresentation(image, 1.0)!)
+    return uploadableImage!
 }
 
 

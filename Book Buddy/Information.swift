@@ -21,6 +21,8 @@
  6 status (owner, borrowed, lent)
  7 ImageFile
  8 Boolean whether the user has manually set an image for the book
+ 9 Owner of the book
+ 10 Book Id
  */
 
 /**

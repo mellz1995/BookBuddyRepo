@@ -15,6 +15,8 @@ class BarcodeReaderViewController: UIViewController, AVCaptureMetadataOutputObje
     
     @IBOutlet var messageLabel:UILabel!
     @IBOutlet var topbar: UIView!
+    @IBOutlet weak var backButtonOutlet: UIButton!
+    
     
     var captureSession:AVCaptureSession?
     var videoPreviewLayer:AVCaptureVideoPreviewLayer?
@@ -30,6 +32,10 @@ class BarcodeReaderViewController: UIViewController, AVCaptureMetadataOutputObje
                               AVMetadataObjectTypeAztecCode,
                               AVMetadataObjectTypePDF417Code,
                               AVMetadataObjectTypeQRCode]
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,6 +73,7 @@ class BarcodeReaderViewController: UIViewController, AVCaptureMetadataOutputObje
             // Move the message label and top bar to the front
             //view.bringSubview(toFront: messageLabel)
             //view.bringSubview(toFront: topbar)
+            view.bringSubview(toFront: backButtonOutlet)
             
             // Initialize QR Code Frame to highlight the QR code
             qrCodeFrameView = UIView()
@@ -95,11 +102,11 @@ class BarcodeReaderViewController: UIViewController, AVCaptureMetadataOutputObje
     func displayAlert(_ title: String, _ message: String, _ confirmation: String){
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: confirmation, style: .default, handler: { (action) in
-//            self.dismiss(animated: true, completion: nil)
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let view = storyboard.instantiateViewController(withIdentifier: "NewBook")
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             appDelegate.window?.rootViewController = view
+            self.captureSession?.stopRunning()
             searchScannedResult(scannedBarcode)
         }))
         self.present(alert, animated: true, completion: nil)
@@ -132,7 +139,14 @@ class BarcodeReaderViewController: UIViewController, AVCaptureMetadataOutputObje
                 captureSession?.stopRunning()
                 
                 displayAlert("Barcode Found!!", metadataObj.stringValue, "Let's searh it!")
+                backButtonOutlet.alpha = 0
+                backButtonOutlet.isEnabled = false
             }
         }
     }
+    
+    @IBAction func backButtonAction(_ sender: UIButton) {
+        captureSession?.stopRunning()
+    }
+    
 }
