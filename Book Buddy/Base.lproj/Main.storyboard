@@ -457,17 +457,27 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lF9-ds-MyQ">
+                                <rect key="frame" x="18" y="172" width="34" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="hdk-wF-MS7"/>
+                                    <constraint firstAttribute="width" constant="34" id="z3W-9N-6np"/>
+                                </constraints>
+                                <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="saveButtonAction:" destination="GdF-in-R4N" eventType="touchUpInside" id="wiu-A0-Je7"/>
+                                </connections>
+                            </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B1Q-Uu-yhI">
-                                <rect key="frame" x="16" y="112" width="36" height="30"/>
+                                <rect key="frame" x="0.0" y="112" width="98" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="tLC-pD-dtq"/>
-                                    <constraint firstAttribute="width" constant="36" id="uZx-F9-6fQ"/>
+                                    <constraint firstAttribute="width" constant="98" id="uZx-F9-6fQ"/>
                                 </constraints>
-                                <state key="normal" title="Clear"/>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lF9-ds-MyQ">
-                                <rect key="frame" x="6" y="637" width="34" height="30"/>
-                                <state key="normal" title="Save"/>
+                                <state key="normal" title="Clear Image"/>
+                                <connections>
+                                    <action selector="clearImageButtonAction:" destination="GdF-in-R4N" eventType="touchUpInside" id="wah-gr-uuQ"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -477,15 +487,14 @@
                             <constraint firstItem="cZ3-JF-kUt" firstAttribute="centerX" secondItem="zCx-3z-5Hc" secondAttribute="centerX" id="4zU-Y2-tJr"/>
                             <constraint firstItem="OCk-Fi-rhR" firstAttribute="centerY" secondItem="zCx-3z-5Hc" secondAttribute="centerY" constant="-89" id="7bV-bj-DUm"/>
                             <constraint firstItem="7Sd-tP-tjT" firstAttribute="centerY" secondItem="zCx-3z-5Hc" secondAttribute="centerY" constant="68.5" id="9Tj-hT-QIh"/>
+                            <constraint firstItem="lF9-ds-MyQ" firstAttribute="centerX" secondItem="zCx-3z-5Hc" secondAttribute="centerX" constant="-152.5" id="AWo-Gd-gO8"/>
                             <constraint firstItem="8vN-nN-3ua" firstAttribute="centerY" secondItem="zCx-3z-5Hc" secondAttribute="centerY" constant="-32" id="Cu4-VW-yJh"/>
-                            <constraint firstItem="PT5-0Z-bwM" firstAttribute="top" secondItem="lF9-ds-MyQ" secondAttribute="bottom" id="EGU-xT-qra"/>
                             <constraint firstItem="Coy-cC-DIB" firstAttribute="centerX" secondItem="zCx-3z-5Hc" secondAttribute="centerX" id="GcS-4Z-x8s"/>
                             <constraint firstItem="bKn-Oz-5Ib" firstAttribute="centerX" secondItem="zCx-3z-5Hc" secondAttribute="centerX" constant="133" id="HSZ-UK-wT7"/>
-                            <constraint firstItem="B1Q-Uu-yhI" firstAttribute="centerX" secondItem="zCx-3z-5Hc" secondAttribute="centerX" constant="-153.5" id="Ho0-I7-a6L"/>
+                            <constraint firstItem="B1Q-Uu-yhI" firstAttribute="centerX" secondItem="zCx-3z-5Hc" secondAttribute="centerX" constant="-138.5" id="Ho0-I7-a6L"/>
                             <constraint firstItem="SLq-Y0-cd3" firstAttribute="centerX" secondItem="zCx-3z-5Hc" secondAttribute="centerX" id="KfJ-ca-GhN"/>
                             <constraint firstItem="QQB-ci-cAF" firstAttribute="centerX" secondItem="zCx-3z-5Hc" secondAttribute="centerX" id="LO2-od-05X"/>
                             <constraint firstItem="cZ3-JF-kUt" firstAttribute="centerY" secondItem="zCx-3z-5Hc" secondAttribute="centerY" constant="236" id="PVA-dA-UU9"/>
-                            <constraint firstItem="lF9-ds-MyQ" firstAttribute="leading" secondItem="zCx-3z-5Hc" secondAttribute="leading" constant="6" id="RRt-PW-aJ0"/>
                             <constraint firstItem="Lia-3d-rbJ" firstAttribute="centerY" secondItem="zCx-3z-5Hc" secondAttribute="centerY" constant="1.5" id="TUL-qg-xcb"/>
                             <constraint firstItem="42i-PJ-o0r" firstAttribute="centerX" secondItem="zCx-3z-5Hc" secondAttribute="centerX" id="TnJ-Ls-UyO"/>
                             <constraint firstItem="SLq-Y0-cd3" firstAttribute="centerY" secondItem="zCx-3z-5Hc" secondAttribute="centerY" constant="102" id="V1H-Ry-t20"/>
@@ -494,6 +503,7 @@
                             <constraint firstItem="xa1-HR-Cwj" firstAttribute="centerX" secondItem="zCx-3z-5Hc" secondAttribute="centerX" id="ZAf-J0-IuQ"/>
                             <constraint firstItem="42i-PJ-o0r" firstAttribute="centerY" secondItem="zCx-3z-5Hc" secondAttribute="centerY" constant="135.5" id="ZJI-Im-tN4"/>
                             <constraint firstItem="yFi-a3-gca" firstAttribute="centerY" secondItem="zCx-3z-5Hc" secondAttribute="centerY" constant="269.5" id="b9c-uI-csb"/>
+                            <constraint firstItem="lF9-ds-MyQ" firstAttribute="centerY" secondItem="zCx-3z-5Hc" secondAttribute="centerY" constant="-146.5" id="cXJ-Uf-z4a"/>
                             <constraint firstItem="OCk-Fi-rhR" firstAttribute="centerX" secondItem="zCx-3z-5Hc" secondAttribute="centerX" id="dXV-vr-P3K"/>
                             <constraint firstItem="Lia-3d-rbJ" firstAttribute="centerX" secondItem="zCx-3z-5Hc" secondAttribute="centerX" id="f3j-ue-8Hz"/>
                             <constraint firstItem="8vN-nN-3ua" firstAttribute="centerX" secondItem="zCx-3z-5Hc" secondAttribute="centerX" id="l1n-mf-MzR"/>
@@ -521,6 +531,7 @@
                         <outlet property="ownerLabel" destination="QQB-ci-cAF" id="bHX-tH-sf7"/>
                         <outlet property="publisherLabel" destination="xa1-HR-Cwj" id="2PY-u4-mjm"/>
                         <outlet property="publisherTextField" destination="Coy-cC-DIB" id="wJX-j2-n06"/>
+                        <outlet property="saveButtonOutlet" destination="lF9-ds-MyQ" id="eEV-GS-j3F"/>
                         <outlet property="titleLabel" destination="OCk-Fi-rhR" id="tFr-YQ-byb"/>
                         <outlet property="titleTextField" destination="TQ4-MQ-UqW" id="gfb-rd-s8X"/>
                     </connections>
@@ -744,12 +755,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <searchBar key="tableHeaderView" contentMode="redraw" text="" placeholder="Search Library" id="p3R-Lv-ZqV">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </searchBar>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="86" id="iLy-G6-QyL" customClass="BooksTableViewCell" customModule="Book_Buddy" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="86"/>
+                                <rect key="frame" x="0.0" y="72" width="375" height="86"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iLy-G6-QyL" id="8mZ-R0-IjQ">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="85.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="85"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Book Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="82i-2h-f3B">
@@ -822,6 +838,7 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="searchBar" destination="p3R-Lv-ZqV" id="K8V-by-4xY"/>
                         <outlet property="searchDisplayController" destination="wph-DI-Za9" id="K13-Zm-FJ9"/>
                     </connections>
                 </tableViewController>
@@ -964,6 +981,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="fq5-dJ-QyX"/>
-        <segue reference="i8u-CP-OAu"/>
+        <segue reference="LBg-kH-KzL"/>
     </inferredMetricsTieBreakers>
 </document>

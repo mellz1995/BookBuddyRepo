@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		5634D5E51E510E5500B91725 /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5634D5E41E510E5500B91725 /* MainMenuViewController.swift */; };
-		56380A331E606D8900521D2C /* BookInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56380A321E606D8900521D2C /* BookInformationViewController.swift */; };
 		564D22331E5B2FCB00AB7E65 /* NewBookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564D22321E5B2FCB00AB7E65 /* NewBookViewController.swift */; };
 		56594B731E4C16FE00F6A60A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56594B721E4C16FE00F6A60A /* AppDelegate.swift */; };
 		56594B781E4C16FE00F6A60A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56594B761E4C16FE00F6A60A /* Main.storyboard */; };
@@ -27,6 +26,7 @@
 		56BBD7B51E4E6C1000E3677F /* UserGus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BBD7B41E4E6C1000E3677F /* UserGus.swift */; };
 		56BBD7B71E4E730A00E3677F /* SearchAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BBD7B61E4E730A00E3677F /* SearchAPI.swift */; };
 		56BBD7BE1E4E771800E3677F /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BBD7BD1E4E771800E3677F /* Settings.swift */; };
+		56BBE80F1E611B7200D36AA0 /* BookInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BBE80E1E611B7200D36AA0 /* BookInformationViewController.swift */; };
 		56D052621E4E377E007747ED /* SetProfilePicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D052611E4E377E007747ED /* SetProfilePicViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -49,7 +49,6 @@
 
 /* Begin PBXFileReference section */
 		5634D5E41E510E5500B91725 /* MainMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
-		56380A321E606D8900521D2C /* BookInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookInformationViewController.swift; sourceTree = "<group>"; };
 		564D22321E5B2FCB00AB7E65 /* NewBookViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewBookViewController.swift; sourceTree = "<group>"; };
 		56594B6F1E4C16FE00F6A60A /* Book Buddy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Book Buddy.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		56594B721E4C16FE00F6A60A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -72,6 +71,7 @@
 		56BBD7B41E4E6C1000E3677F /* UserGus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserGus.swift; sourceTree = "<group>"; };
 		56BBD7B61E4E730A00E3677F /* SearchAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchAPI.swift; sourceTree = "<group>"; };
 		56BBD7BD1E4E771800E3677F /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		56BBE80E1E611B7200D36AA0 /* BookInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookInformationViewController.swift; sourceTree = "<group>"; };
 		56D052611E4E377E007747ED /* SetProfilePicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetProfilePicViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -150,8 +150,8 @@
 			isa = PBXGroup;
 			children = (
 				569C1EB91E4C40E400428785 /* BarcodeReaderViewController.swift */,
-				56380A321E606D8900521D2C /* BookInformationViewController.swift */,
 				5687796F1E5DD234009395DA /* BooksTableViewCell.swift */,
+				56BBE80E1E611B7200D36AA0 /* BookInformationViewController.swift */,
 				568779711E5DD5ED009395DA /* BooksTableViewController.swift */,
 				569C1EB71E4C40B400428785 /* LoginViewController.swift */,
 				5634D5E41E510E5500B91725 /* MainMenuViewController.swift */,
@@ -321,7 +321,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				56380A331E606D8900521D2C /* BookInformationViewController.swift in Sources */,
+				56BBE80F1E611B7200D36AA0 /* BookInformationViewController.swift in Sources */,
 				5634D5E51E510E5500B91725 /* MainMenuViewController.swift in Sources */,
 				56D052621E4E377E007747ED /* SetProfilePicViewController.swift in Sources */,
 				568779721E5DD5ED009395DA /* BooksTableViewController.swift in Sources */,

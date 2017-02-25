@@ -18,11 +18,15 @@ class BookInformationViewController: UIViewController, UINavigationControllerDel
     
     
     override func viewDidLoad() {
+        bookID = self.bookInformationArray[10] as! Int
         super.viewDidLoad()
 
         print("Book information array: \(bookInformationArray)")
         
         setEverythingUp()
+        
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LoginViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -33,6 +37,12 @@ class BookInformationViewController: UIViewController, UINavigationControllerDel
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    //Causes the view (or one of its embedded text fields) to resign the first responder status and drop into background
+    func dismissKeyboard() {
+        view.endEditing(true)
+    }
+    
     
     func setEverythingUp(){
         // Get the current userLibrary
@@ -76,10 +86,22 @@ class BookInformationViewController: UIViewController, UINavigationControllerDel
     @IBOutlet weak var publisherTextField: UITextField!
     @IBOutlet weak var lanuguageTextField: UITextField!
     
+    @IBAction func saveButtonAction(_ sender: UIButton) {
+        // Loop through current userLibrary until you get to the index that matches the book ID
+        for i in 0..<currentLibrary.count {
+            if currentLibrary[i][10] as! Int == bookID{
+                currentLibrary[i][0] = titleTextField.text as AnyObject
+                currentLibrary[i][1] = authorTextField.text as AnyObject
+                currentLibrary[i][2] = isbn10TextField.text as AnyObject
+                currentLibrary[i][3] = isbn13TextField.text as AnyObject
+                currentLibrary[i][4] = publisherTextField.text as AnyObject
+                currentLibrary[i][5] = lanuguageTextField.text as AnyObject
+                updateArray(currentLibrary, "library")
+            }
+        }
+    }
     
-    
-    
-    
+    @IBOutlet weak var saveButtonOutlet: UIButton!
     
     @IBAction func imageButtonAction(_ sender: UIButton) {
         bookID = self.bookInformationArray[10] as! Int
@@ -125,6 +147,18 @@ class BookInformationViewController: UIViewController, UINavigationControllerDel
         }
     }
     
+    @IBAction func clearImageButtonAction(_ sender: UIButton) {
+        bookImage.image = #imageLiteral(resourceName: "QuestionMarkBook")
+        for i in 0..<currentLibrary.count {
+            if currentLibrary[i][10] as! Int == bookID{
+                
+                currentLibrary[i][7] = getPFFileVersionOfImage(#imageLiteral(resourceName: "QuestionMarkBook")) as AnyObject
+                currentLibrary[i][8] = "False" as AnyObject
+                
+                updateArray(currentLibrary, "library")
+            }
+        }
+    }
 
     /*
     // MARK: - Navigation

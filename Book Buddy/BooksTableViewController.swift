@@ -17,9 +17,11 @@ class BooksTableViewController: UITableViewController {
     var bookFound = false
     var randomBookImageNumber = 0
     
+    @IBOutlet weak var searchBar: UISearchBar!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         navigationItem.rightBarButtonItem = editButtonItem
         
@@ -149,8 +151,6 @@ class BooksTableViewController: UITableViewController {
     }
 
     
-
-    
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         var isEditable = false
@@ -182,10 +182,12 @@ class BooksTableViewController: UITableViewController {
     }
     
 
-    /*
+    
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-        
+        let moveObject = self.currentLibrary[fromIndexPath.row]
+        currentLibrary.remove(at: fromIndexPath.row)
+        currentLibrary.insert(moveObject, at: fromIndexPath.row)
     }
  
 
@@ -195,7 +197,7 @@ class BooksTableViewController: UITableViewController {
         // Return false if you do not want the item to be re-orderable.
         return true
     }
- */
+ 
 
     
     // MARK: - Navigation
