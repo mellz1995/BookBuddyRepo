@@ -56,29 +56,6 @@ class MainMenuViewController: UIViewController {
     @IBOutlet weak var logoutButtonOutlet: UIButton!
     @IBOutlet weak var profilePicture: UIImageView!
     
-    @IBAction func addButtonAction(_ sender: UIButton) {
-        let alert = UIAlertController(title: "Add?", message: "Would you like to add manually or scan a book's barcode?", preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "Manually", style: .default, handler: { (action) in
-            // Send the user to the manual entry page
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let view = storyboard.instantiateViewController(withIdentifier: "ManualEntry")
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.window?.rootViewController = view
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Scan book's barcode", style: .default, handler: { (action) in
-            // Send the user to the barcode scanner page
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let view = storyboard.instantiateViewController(withIdentifier: "Scan")
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.window?.rootViewController = view
-        }))
-        
-        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action) in
-            
-        }))
-        self.present(alert, animated: true, completion: nil)
-    }
     
     
     @IBAction func logoutButtonAction(_ sender: UIButton) {

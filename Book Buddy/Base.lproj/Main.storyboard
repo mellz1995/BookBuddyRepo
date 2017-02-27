@@ -854,6 +854,164 @@
             </objects>
             <point key="canvasLocation" x="665" y="655"/>
         </scene>
+        <!--Deleted Books-->
+        <scene sceneID="hst-Pf-Ukt">
+            <objects>
+                <tableViewController id="YpB-nC-GJh" customClass="DeletedBooksTableViewController" customModule="Book_Buddy" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="86" sectionHeaderHeight="28" sectionFooterHeight="28" id="8mA-Jc-iI8">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="DeletedBooksCell" rowHeight="86" id="Hxg-gX-TCo" customClass="DeletedBooksTableViewCell" customModule="Book_Buddy" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="86"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hxg-gX-TCo" id="hE1-EA-crV">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="85"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UWu-Mm-mzu">
+                                            <rect key="frame" x="8" y="2" width="80" height="80"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Book Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ebh-LF-DfM">
+                                            <rect key="frame" x="96" y="8" width="271" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Author" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gMd-Sr-XEw">
+                                            <rect key="frame" x="96" y="32" width="271" height="22"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ISBN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l55-9r-aq9">
+                                            <rect key="frame" x="96" y="56" width="271" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="authorLabel" destination="gMd-Sr-XEw" id="EEL-wU-n58"/>
+                                    <outlet property="bookImage" destination="UWu-Mm-mzu" id="0tP-T8-D7f"/>
+                                    <outlet property="bookTitleLabel" destination="Ebh-LF-DfM" id="Nkr-aT-EQl"/>
+                                    <outlet property="isbnLabel" destination="l55-9r-aq9" id="705-T2-xoB"/>
+                                    <segue destination="UeK-pU-7dv" kind="show" identifier="DeletedBookInformation" id="CkZ-Qk-p9w"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="YpB-nC-GJh" id="GDE-rq-bvh"/>
+                            <outlet property="delegate" destination="YpB-nC-GJh" id="WM3-JK-tGz"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Deleted Books" id="108-tA-Cgm">
+                        <barButtonItem key="leftBarButtonItem" title="Main Menu" id="eHR-ws-dxA">
+                            <connections>
+                                <segue destination="2N7-Qy-ENf" kind="popoverPresentation" identifier="DeletedMainMenu" popoverAnchorBarButtonItem="eHR-ws-dxA" id="mAy-1q-YDG">
+                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                </segue>
+                            </connections>
+                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem title="Item" id="0ct-Qb-bIc"/>
+                            <barButtonItem systemItem="trash" id="fDm-11-UyP">
+                                <color key="tintColor" red="1" green="0.17385500249126851" blue="0.10664199562269017" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="deleteAllBooksButtonAction:" destination="YpB-nC-GJh" id="oUm-Q4-7u1"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="deleteAllBooksOutlet" destination="fDm-11-UyP" id="zxQ-Xr-PK7"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6Na-D1-xnY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="664.79999999999995" y="1325.4872563718143"/>
+        </scene>
+        <!--Deleted Book Information View Controller-->
+        <scene sceneID="1vh-cP-ohe">
+            <objects>
+                <viewController id="UeK-pU-7dv" customClass="DeletedBookInformationViewController" customModule="Book_Buddy" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="zmK-ci-FbI"/>
+                        <viewControllerLayoutGuide type="bottom" id="0a2-0E-XAY"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="grh-CR-2Re">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fmz-Fr-lXh">
+                                <rect key="frame" x="105" y="72" width="165" height="165"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Title" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ufv-v4-EmB">
+                                <rect key="frame" x="16" y="265" width="343" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Author" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y4I-uw-is6">
+                                <rect key="frame" x="16" y="309" width="343" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ISBN10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oqq-km-RqX">
+                                <rect key="frame" x="16" y="357" width="343" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ISBN13" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HRM-g7-eiu">
+                                <rect key="frame" x="16" y="411" width="343" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Publisher" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BfM-gG-4X5">
+                                <rect key="frame" x="16" y="465" width="343" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Language" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RFs-cy-9VG">
+                                <rect key="frame" x="16" y="519" width="343" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="authorLabel" destination="y4I-uw-is6" id="3aK-fC-Dhe"/>
+                        <outlet property="bookImage" destination="fmz-Fr-lXh" id="Nqj-VL-57A"/>
+                        <outlet property="isbn10Label" destination="oqq-km-RqX" id="p4v-gb-4pj"/>
+                        <outlet property="isbn13Label" destination="HRM-g7-eiu" id="0ZD-pD-lKs"/>
+                        <outlet property="languageLabel" destination="RFs-cy-9VG" id="keW-3O-uTd"/>
+                        <outlet property="publisherLabel" destination="BfM-gG-4X5" id="GSm-H2-Fil"/>
+                        <outlet property="tittleLabel" destination="ufv-v4-EmB" id="z5Z-zT-xsg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="isl-Ou-YPe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1345" y="1325"/>
+        </scene>
         <!--Item-->
         <scene sceneID="qTR-ih-sv4">
             <objects>
@@ -885,6 +1043,16 @@
                                 <state key="normal" title="Library"/>
                                 <connections>
                                     <segue destination="vSm-Eu-Spr" kind="show" id="fq5-dJ-QyX"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GgA-gT-lvd">
+                                <rect key="frame" x="137" y="534" width="100" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Deleted Books"/>
+                                <connections>
+                                    <segue destination="oRM-Kt-ug1" kind="popoverPresentation" popoverAnchorView="GgA-gT-lvd" id="awy-gX-usX">
+                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                    </segue>
                                 </connections>
                             </button>
                         </subviews>
@@ -975,12 +1143,31 @@
             </objects>
             <point key="canvasLocation" x="1346" y="655"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="L8n-tW-Zdd">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oRM-Kt-ug1" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6Qu-CW-UK3">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="YpB-nC-GJh" kind="relationship" relationship="rootViewController" id="bK2-q6-Ffg"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cBM-g2-pYd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2" y="1325"/>
+        </scene>
     </scenes>
     <resources>
         <image name="smily" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="fq5-dJ-QyX"/>
+        <segue reference="epu-4D-pUi"/>
+        <segue reference="eA9-Wm-f6v"/>
         <segue reference="LBg-kH-KzL"/>
     </inferredMetricsTieBreakers>
 </document>

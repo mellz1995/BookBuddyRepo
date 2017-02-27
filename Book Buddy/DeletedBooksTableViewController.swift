@@ -1,8 +1,8 @@
 //
-//  BooksTableViewController.swift
+//  DeletedBooksTableViewController.swift
 //  Book Buddy
 //
-//  Created by Melvin Lee on 2/22/17.
+//  Created by Melvin Lee on 2/26/17.
 //  Copyright © 2017 Melvin Lee. All rights reserved.
 //
 
@@ -10,67 +10,50 @@ import UIKit
 import Parse
 import os.log
 
-class BooksTableViewController: UITableViewController {
-    
-    var currentLibrary = Array<Array<AnyObject>>()
-    var editButtonIsActive = false
-    
-    @IBOutlet weak var searchBar: UISearchBar!
+class DeletedBooksTableViewController: UITableViewController {
 
+    // Variable for the current deleted library
+    var currentLibrary = Array<Array<AnyObject>>()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.rightBarButtonItem = editButtonItem
-        
-        navigationItem.title = "Your Library"
+        // Set the title
+        navigationItem.title = "Deleted Books"
         
         tableView.dataSource = self
         tableView.delegate = self
         
-        // Load currentLibrary
-        currentLibrary = PFUser.current()?.object(forKey: "library") as! Array<Array<AnyObject>>
+        navigationItem.rightBarButtonItem = editButtonItem
         
-        // Check to see if the user library is empty or not. If it is. Disable the edit button
-        if PFUser.current()!.object(forKey: "didSaveFirstBook") as! Bool == false {
+        // Load the current deleted user library
+        currentLibrary = PFUser.current()?.object(forKey: "deletedLibrary") as! Array<Array<AnyObject>>
+        
+        // Check to see if the user's deleted library is empty or not. If it is. Disable the edit button
+        if PFUser.current()!.object(forKey: "didDeleteFirstBook") as! Bool == false {
             editButtonItem.isEnabled = false
         } else {
             editButtonItem.isEnabled = true
         }
-    
         
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
+        deleteAllBooksOutlet.isEnabled = false
+        editButtonItem.isEnabled = false
         
-        
-    }
-    
-    func dismissKeyboard() {
-        view.endEditing(true)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        print("View did appear!")
-        DispatchQueue.main.async {
-            super.viewWillAppear(true)
-            // Check to see if the user library is empty or not. If it is. Disable the edit button
-            if self.currentLibrary.count == 0 {
-                self.editButtonItem.isEnabled = false
-            } else {
-                self.editButtonItem.isEnabled = true
-            }
-        }
     }
     
     override var prefersStatusBarHidden: Bool {
         return true
     }
 
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
+    
+    
+    
+    
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -82,54 +65,45 @@ class BooksTableViewController: UITableViewController {
         var numOfRows = 0
         
         // Gets the number of rows in the section
-        if PFUser.current()!.object(forKey: "didSaveFirstBook") as! Bool == false {
+        if PFUser.current()!.object(forKey: "didDeleteFirstBook") as! Bool == false {
             numOfRows = 1
         } else {
             numOfRows = currentLibrary.count
         }
-     
+        
         return numOfRows
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // Downcasted to to BooksTableViewCell.swift to use the properties enlisted there
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as? BooksTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "DeletedBooksCell", for: indexPath) as? DeletedBooksTableViewCell else {
             fatalError("The dequed cell is not an instance of BooksTableViewCell")
         }
-        
-        if PFUser.current()!.object(forKey: "didSaveFirstBook") as! Bool == false {
-            cell.titleLabel.text = "No books"
+
+        if PFUser.current()!.object(forKey: "didDeleteFirstBook") as! Bool == false {
+            deleteAllBooksOutlet.isEnabled = false
+            editButtonItem.isEnabled = false
+            cell.bookTitleLabel.text = "No Books"
             cell.isUserInteractionEnabled = false
-            cell.statusImageView.image = #imageLiteral(resourceName: "SadBook")
             cell.bookImage.image = #imageLiteral(resourceName: "QuestionMarkBook")
         } else {
+            deleteAllBooksOutlet.isEnabled = true
+            editButtonItem.isEnabled = true
             cell.isUserInteractionEnabled = true
             if currentLibrary[indexPath.row].isEmpty == false {
-                cell.titleLabel.text = currentLibrary[indexPath.row][0] as? String
+                cell.bookTitleLabel.text = currentLibrary[indexPath.row][0] as? String
                 if currentLibrary[indexPath.row][1] as! String == "Not specified"{
                     cell.authorLabel.text = "No Author Listed"
                 } else {
                     cell.authorLabel.text = currentLibrary[indexPath.row][1] as? String
                 }
                 if currentLibrary[indexPath.row][2] as! String == "Not specified"{
-                    cell.isbn10Label.text = "No ISBN for this book"
+                    cell.isbnLabel.text = "No ISBN for this book"
                 } else {
-                    cell.isbn10Label.text = currentLibrary[indexPath.row][2] as? String
+                    cell.isbnLabel.text = currentLibrary[indexPath.row][2] as? String
                 }
-        
-                if currentLibrary[indexPath.row][6] as! String == "Owned"{
-                    cell.statusImageView.image = #imageLiteral(resourceName: "OwnedImage")
-                }
-        
-                if currentLibrary[indexPath.row][6] as! String == "Lent"  {
-                    cell.statusImageView.image = #imageLiteral(resourceName: "LentBlueImage")
-                }
-        
-                if currentLibrary[indexPath.row][6] as! String == "Borrowed" {
-                    cell.statusImageView.image = #imageLiteral(resourceName: "BorrowedBlueImage")
-                }
-        
+                
                 // Set the image of the book
                 if let bookPicture = currentLibrary[indexPath.row][7] as? PFFile {
                     bookPicture.getDataInBackground({ (imageData: Data?, error: Error?) -> Void in
@@ -141,20 +115,23 @@ class BooksTableViewController: UITableViewController {
                 }
             }
         }
-    return cell
+        
+
+        return cell
     }
+ 
 
     
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         var isEditable = false
-        // Return false if you do not want the specified item to be editable.
         // Check to see if the user library is empty or not. If it is. Disable the edit button
-        if PFUser.current()!.object(forKey: "didSaveFirstBook") as! Bool == false {
+        if PFUser.current()!.object(forKey: "didDeleteFirstBook") as! Bool == false {
             isEditable = false
         } else {
             isEditable = true
         }
+        
         return isEditable
     }
  
@@ -162,19 +139,15 @@ class BooksTableViewController: UITableViewController {
     
     // Override to support editing the table view.
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        
-        // If the user deletes a book
         if editingStyle == .delete {
-            // Append the deleted book to the server
-            GUSUerLibrary(currentLibrary[indexPath.row], "deletedLibrary", "didDeleteFirstBook")
             
             currentLibrary.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-
+            
             if currentLibrary.count == 0 {
-                updateBoolStats(false, "didSaveFirstBook")
+                updateBoolStats(false, "didDeleteFirstBook")
             }
-            updateArray(currentLibrary, "library")
+            updateArray(currentLibrary, "deletedLibrary")
             
             self.tableView.reloadData()
             self.viewDidLoad()
@@ -183,54 +156,71 @@ class BooksTableViewController: UITableViewController {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }    
     }
-    
-
-    
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-        let moveObject = self.currentLibrary[fromIndexPath.row]
-        currentLibrary.remove(at: fromIndexPath.row)
-        currentLibrary.insert(moveObject, at: fromIndexPath.row)
-    }
  
 
-    
+    /*
+    // Override to support rearranging the table view.
+    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
+
+    }
+    */
+
+    /*
     // Override to support conditional rearranging of the table view.
     override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the item to be re-orderable.
         return true
     }
- 
+    */
+    
+    
+    @IBOutlet weak var deleteAllBooksOutlet: UIBarButtonItem!
+    @IBAction func deleteAllBooksButtonAction(_ sender: UIBarButtonItem) {
+        let alert = UIAlertController(title: "Delete all books?", message: "This will delete all books permanently. Delete?", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+            self.currentLibrary.removeAll()
+            updateBoolStats(false, "didDeleteFirstBook")
+            self.tableView.reloadData()
+            self.viewDidLoad()
+            self.editButtonItem.isEnabled = false
+            self.deleteAllBooksOutlet.isEnabled = false
+        }))
+        
+        alert.addAction(UIAlertAction(title: "No, don't delete", style: .default, handler: { (action) in
+            
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
 
     
     // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         switch(segue.identifier ?? ""){
-        case "ShowDetail":
+        case "DeletedBookInformation":
             os_log("Showing book detail", log: OSLog.default, type: .debug)
             
-            guard let bookInformationViewController = segue.destination as? BookInformationViewController
+            guard let deletedBookInformationViewController = segue.destination as? DeletedBookInformationViewController
                 else {
                     fatalError("Unexpected destiniation: \(segue.destination)")
             }
             
-            guard let selectedBookCell = sender as? BooksTableViewCell else {
+            guard let selectedBookCell = sender as? DeletedBooksTableViewCell else {
                 fatalError("Unexpected sender: \(sender)")
             }
             
             guard let indexPath = tableView.indexPath(for: selectedBookCell) else {
                 fatalError("The selected cell is not being displayed by the table")
             }
-          
+            
             let selectedBook = currentLibrary[indexPath.row]
-            bookInformationViewController.bookInformationArray = selectedBook
+            deletedBookInformationViewController.bookInformationArray = selectedBook
             
             
-        case "AddBook":
-            os_log("Adding Book", log: OSLog.default, type: .debug)
             
-        case "MainMenu":
+        case "DeletedMainMenu":
             os_log("Going to the main menu", log: OSLog.default, type: .debug)
             
         default:
@@ -238,7 +228,6 @@ class BooksTableViewController: UITableViewController {
             
         }
     }
- 
     
 
 }

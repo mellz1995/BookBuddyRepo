@@ -181,7 +181,7 @@ class NewBookViewController: UIViewController, UINavigationControllerDelegate, U
             self.newBook.append(getAndIncrementCurrentBookId() as AnyObject)
         
             // Add the new book to the server
-            GUSUerLibrary(self.newBook as [AnyObject])
+            GUSUerLibrary(self.newBook as [AnyObject], "library", "didSaveFirstBook")
         
             // Stop the animator
             self.activityIndicator.stopAnimating()

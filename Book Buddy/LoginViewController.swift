@@ -207,21 +207,23 @@ class LoginViewController: UIViewController {
             user.setValue(defaultImage, forKey: "profilePic")
             
             user.setValue([[]], forKey: "library")
-            user.setValue([], forKey: "lentBooks")
-            user.setValue([], forKey: "borrowedBooks")
-            user.setValue([], forKey: "friends")
-            user.setValue([], forKey: "friendRequests")
-            user.setValue([], forKey: "wishList")
+            user.setValue([[]], forKey: "lentBooks")
+            user.setValue([[]], forKey: "borrowedBooks")
+            user.setValue([[]], forKey: "friends")
+            user.setValue([[]], forKey: "friendRequests")
+            user.setValue([[]], forKey: "wishList")
+            user.setValue([[]], forKey: "deletedLibrary")
             
             user.setValue(0, forKey: "rating")
             user.setValue(0, forKey: "totalRating")
-            user.setValue(0000000, forKey: "CurrentBookId")
+            user.setValue(0, forKey: "CurrentBookId")
             
             user.setValue(false, forKey: "didSaveFirstBook")
             user.setValue(false, forKey: "didSetProfilePic")
             user.setValue(false, forKey: "libraryPrivate")
             user.setValue(false, forKey: "lentFirstBook")
             user.setValue(false, forKey: "borrowedFirstBook")
+            user.setValue(false, forKey: "didDeleteFirstBook")
             
         
             // Attempt to sign the user up

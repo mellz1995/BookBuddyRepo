@@ -15,11 +15,22 @@ class BookInformationViewController: UIViewController, UINavigationControllerDel
     var currentLibrary = Array<Array<AnyObject>>()
     public var bookInformationArray = Array<Any>()
     public var newBookInformationArray = Array<Any>() // For when the user edits something
+    var checkChangeTimer = Timer()
+    var titleValue = ""
+    var authorValue = ""
+    var isbn10Value = ""
+    var isbn13Value = ""
+    var publisherValue = ""
+    var languageValue = ""
+    var bookImageValue = UIImage()
+    var imageUse = UIImage()
     
     
     override func viewDidLoad() {
         bookID = self.bookInformationArray[10] as! Int
         super.viewDidLoad()
+        saveButtonOutlet.isEnabled = false
+        startDidChangeTimer()
 
         print("Book information array: \(bookInformationArray)")
         
@@ -50,11 +61,17 @@ class BookInformationViewController: UIViewController, UINavigationControllerDel
         
         // Set the textFields
         titleTextField.text = bookInformationArray[0] as? String
+        titleValue = (bookInformationArray[0] as? String)!
         authorTextField.text = bookInformationArray[1] as? String
+        authorValue = (bookInformationArray[1] as? String)!
         isbn10TextField.text = bookInformationArray[2] as? String
+        isbn10Value = (bookInformationArray[2] as? String)!
         isbn13TextField.text = bookInformationArray[3] as? String
+        isbn13Value = (bookInformationArray[3] as? String)!
         publisherTextField.text = bookInformationArray[4] as? String
+        publisherValue = (bookInformationArray[4] as? String)!
         lanuguageTextField.text = bookInformationArray[5] as? String
+        languageValue = (bookInformationArray[5] as? String)!
         ownerLabel.text = "Owner: \(bookInformationArray[9])"
         print("Book Id?: \(bookInformationArray[10])")
         //bookIDLabel.text = "Book id?"
@@ -96,9 +113,25 @@ class BookInformationViewController: UIViewController, UINavigationControllerDel
                 currentLibrary[i][3] = isbn13TextField.text as AnyObject
                 currentLibrary[i][4] = publisherTextField.text as AnyObject
                 currentLibrary[i][5] = lanuguageTextField.text as AnyObject
+                currentLibrary[i][7] = getPFFileVersionOfImage(imageUse)
+                currentLibrary[i][8] = "True" as AnyObject
+                
                 updateArray(currentLibrary, "library")
             }
         }
+        
+        
+        let alert = UIAlertController(title: "Changes Saved!", message: "Your changes were saved successfully.", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Great", style: .default, handler: { (action) in
+            // Send the user back to the library page
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let view = storyboard.instantiateViewController(withIdentifier: "YourLibrary")
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.window?.rootViewController = view
+        }))
+        self.present(alert, animated: true, completion: nil)
+        
+        saveButtonOutlet.setTitleColor(UIColor.blue, for: [])
     }
     
     @IBOutlet weak var saveButtonOutlet: UIButton!
@@ -127,23 +160,13 @@ class BookInformationViewController: UIViewController, UINavigationControllerDel
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             bookImage.image = image
-            let uploadableImage = PFFile(data: UIImageJPEGRepresentation(image, 1.0)!)
-            
-            for i in 0..<currentLibrary.count {
-                if currentLibrary[i][10] as! Int == bookID{
-                    
-                    currentLibrary[i][7] = uploadableImage! as AnyObject
-                    currentLibrary[i][8] = "True" as AnyObject
-                    
-                    updateArray(currentLibrary, "library")
-                }
-            }
-            
+            imageUse = image
         } else {
             
         }
         self.dismiss(animated: true) {
-            
+            self.saveButtonOutlet.isEnabled = true
+            self.saveButtonOutlet.setTitleColor(UIColor.red, for: [])
         }
     }
     
@@ -157,6 +180,17 @@ class BookInformationViewController: UIViewController, UINavigationControllerDel
                 
                 updateArray(currentLibrary, "library")
             }
+        }
+    }
+    
+    func startDidChangeTimer(){
+        checkChangeTimer = Timer.scheduledTimer(timeInterval: 0.001, target: self, selector: #selector(self.checkSaveButton), userInfo: nil, repeats: true)
+    }
+    
+    func checkSaveButton(){
+        if titleTextField.text != titleValue || authorTextField.text != authorValue || isbn10TextField.text != isbn10Value || isbn13TextField.text != isbn13Value || publisherTextField.text != publisherValue || lanuguageTextField.text != languageValue{
+            saveButtonOutlet.isEnabled = true
+            saveButtonOutlet.setTitleColor(UIColor.red, for: [])
         }
     }
 

@@ -16,6 +16,21 @@ class BooksTableViewCell: UITableViewCell {
     @IBOutlet weak var authorLabel: UILabel!
     @IBOutlet weak var isbn10Label: UILabel!
     @IBOutlet weak var bookImage: UIImageView!
+    @IBOutlet weak var editImageButtonOutlet: UIButton!
+    @IBAction func editImageButtonAction(_ sender: UIButton) {
+        
+    }
+    
+    func checkToEnableEditButton(_ editButtonIsActive: Bool){
+        print("Method is getting called")
+        if editButtonIsActive == false{
+            editImageButtonOutlet.isEnabled = false
+            editImageButtonOutlet.alpha = 0
+        } else {
+            editImageButtonOutlet.isEnabled = true
+            editImageButtonOutlet.alpha = 1
+        }
+    }
     
 
     override func awakeFromNib() {

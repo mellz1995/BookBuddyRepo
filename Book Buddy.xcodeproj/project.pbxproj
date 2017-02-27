@@ -28,6 +28,9 @@
 		56BBD7BE1E4E771800E3677F /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BBD7BD1E4E771800E3677F /* Settings.swift */; };
 		56BBE80F1E611B7200D36AA0 /* BookInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BBE80E1E611B7200D36AA0 /* BookInformationViewController.swift */; };
 		56D052621E4E377E007747ED /* SetProfilePicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D052611E4E377E007747ED /* SetProfilePicViewController.swift */; };
+		56DE1DB21E6388C500402774 /* DeletedBooksTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DE1DB11E6388C500402774 /* DeletedBooksTableViewCell.swift */; };
+		56DE1DB41E63893500402774 /* DeletedBooksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DE1DB31E63893500402774 /* DeletedBooksTableViewController.swift */; };
+		56DE1DB61E6390C900402774 /* DeletedBookInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56DE1DB51E6390C900402774 /* DeletedBookInformationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +76,9 @@
 		56BBD7BD1E4E771800E3677F /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		56BBE80E1E611B7200D36AA0 /* BookInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BookInformationViewController.swift; sourceTree = "<group>"; };
 		56D052611E4E377E007747ED /* SetProfilePicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetProfilePicViewController.swift; sourceTree = "<group>"; };
+		56DE1DB11E6388C500402774 /* DeletedBooksTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeletedBooksTableViewCell.swift; sourceTree = "<group>"; };
+		56DE1DB31E63893500402774 /* DeletedBooksTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeletedBooksTableViewController.swift; sourceTree = "<group>"; };
+		56DE1DB51E6390C900402774 /* DeletedBookInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeletedBookInformationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,9 +156,10 @@
 			isa = PBXGroup;
 			children = (
 				569C1EB91E4C40E400428785 /* BarcodeReaderViewController.swift */,
-				5687796F1E5DD234009395DA /* BooksTableViewCell.swift */,
 				56BBE80E1E611B7200D36AA0 /* BookInformationViewController.swift */,
 				568779711E5DD5ED009395DA /* BooksTableViewController.swift */,
+				56DE1DB51E6390C900402774 /* DeletedBookInformationViewController.swift */,
+				56DE1DB31E63893500402774 /* DeletedBooksTableViewController.swift */,
 				569C1EB71E4C40B400428785 /* LoginViewController.swift */,
 				5634D5E41E510E5500B91725 /* MainMenuViewController.swift */,
 				564D22321E5B2FCB00AB7E65 /* NewBookViewController.swift */,
@@ -165,6 +172,8 @@
 			isa = PBXGroup;
 			children = (
 				56594B721E4C16FE00F6A60A /* AppDelegate.swift */,
+				5687796F1E5DD234009395DA /* BooksTableViewCell.swift */,
+				56DE1DB11E6388C500402774 /* DeletedBooksTableViewCell.swift */,
 				567A9DF71E54B0FA00DB2930 /* Information.swift */,
 				56BBD7B61E4E730A00E3677F /* SearchAPI.swift */,
 				56BBD7BD1E4E771800E3677F /* Settings.swift */,
@@ -325,12 +334,15 @@
 				5634D5E51E510E5500B91725 /* MainMenuViewController.swift in Sources */,
 				56D052621E4E377E007747ED /* SetProfilePicViewController.swift in Sources */,
 				568779721E5DD5ED009395DA /* BooksTableViewController.swift in Sources */,
+				56DE1DB41E63893500402774 /* DeletedBooksTableViewController.swift in Sources */,
 				569C1EB81E4C40B400428785 /* LoginViewController.swift in Sources */,
 				56BBD7B71E4E730A00E3677F /* SearchAPI.swift in Sources */,
 				569C1EBA1E4C40E400428785 /* BarcodeReaderViewController.swift in Sources */,
 				56BBD7BE1E4E771800E3677F /* Settings.swift in Sources */,
 				567A9DF81E54B0FA00DB2930 /* Information.swift in Sources */,
 				56594B731E4C16FE00F6A60A /* AppDelegate.swift in Sources */,
+				56DE1DB21E6388C500402774 /* DeletedBooksTableViewCell.swift in Sources */,
+				56DE1DB61E6390C900402774 /* DeletedBookInformationViewController.swift in Sources */,
 				56BBD7B51E4E6C1000E3677F /* UserGus.swift in Sources */,
 				568779701E5DD234009395DA /* BooksTableViewCell.swift in Sources */,
 				564D22331E5B2FCB00AB7E65 /* NewBookViewController.swift in Sources */,

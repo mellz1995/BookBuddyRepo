@@ -71,16 +71,17 @@ func updateArray(_ changeStat: Array<Array<AnyObject>>, _ key: String) {
     })
 }
 
+
 // This gets the userLibrary, appends it, and sets it if the user scan's a new book. This method is needed because when parse is imported it messes with the subricts and json data gets funky
-func GUSUerLibrary(_ newBook: [AnyObject]){
-    var userLibrary = PFUser.current()!.object(forKey: "library") as! Array<Array<AnyObject>>
+func GUSUerLibrary(_ newBook: [AnyObject], _ libraryKey: String, _ saveKey: String){
+    var userLibrary = PFUser.current()!.object(forKey: libraryKey) as! Array<Array<AnyObject>>
     print()
-    print("Current library is \(userLibrary)")
+    print("Current \(libraryKey) is \(userLibrary)")
     
     // Check to see if userLibrary is empty
-    if PFUser.current()!.object(forKey: "didSaveFirstBook") as! Bool == false {
+    if PFUser.current()!.object(forKey: saveKey) as! Bool == false {
         print()
-        print("User library is empty")
+        print("Current \(libraryKey) is empty")
         
         // Clear the empty array
         userLibrary.removeAll()
@@ -89,21 +90,23 @@ func GUSUerLibrary(_ newBook: [AnyObject]){
         userLibrary.append(newBook)
         
         // Save it to the server
-        updateArray(userLibrary, "library")
+        updateArray(userLibrary, libraryKey)
         
         // Update boolean stat to true
-        updateBoolStats(true, "didSaveFirstBook")
+        updateBoolStats(true, saveKey)
         
     } else {
-        print("User library is not empty")
+        print("\(libraryKey) is not empty")
         
         userLibrary.append(newBook)
-        updateArray(userLibrary, "library")
+        updateArray(userLibrary, libraryKey)
     }
     
-    print("User library is now \(userLibrary)")
     print()
-    print("User library count is now \(userLibrary.count)")
+    print("Updated \(libraryKey) is now \(userLibrary)")
+    print()
+    print("Updated \(libraryKey) count is now \(userLibrary.count)")
+    print()
 }
 
 func getUsername() -> String{
