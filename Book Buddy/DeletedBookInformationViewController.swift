@@ -13,6 +13,8 @@ class DeletedBookInformationViewController: UIViewController {
     
     var currentLibrary = Array<Array<AnyObject>>()
     public var bookInformationArray = Array<Any>()
+    var newlyDeletedLibrary = Array<Array<AnyObject>>()
+    
     
     @IBOutlet weak var bookImage: UIImageView!
     @IBOutlet weak var tittleLabel: UILabel!
@@ -64,6 +66,44 @@ class DeletedBookInformationViewController: UIViewController {
             })
         }
     }
+    
+    @IBOutlet weak var restoreBookButtonOutlet: UIButton!
+    @IBAction func restoreBookButtonAction(_ sender: UIButton) {
+        let alert = UIAlertController(title: "Restore \(bookInformationArray[0])?", message: "The book will be restored to your library.", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+            GUSUerLibrary(self.bookInformationArray as [AnyObject], "library", "didSaveFirstBook")
+            
+            // Remove this book from the deleted library
+            for i in 0..<self.currentLibrary.count{
+                if self.currentLibrary[i][10] as! Int == bookID {
+                    self.currentLibrary.remove(at: i)
+                    if self.currentLibrary.count == 0 {
+                        updateBoolStats(false, "didDeleteFirstBook")
+                    }
+                    updateArray(self.currentLibrary, "deletedLibrary")
+                    self.currentLibrary.removeAll()
+                }
+            }
+            
+        
+            let alert2 = UIAlertController(title: "Restored \(self.bookInformationArray[0])!", message: "Book Successfully restored to your library.", preferredStyle: UIAlertControllerStyle.alert)
+            alert2.addAction(UIAlertAction(title: "Great!", style: .default, handler: { (action) in
+
+            }))
+            self.present(alert2, animated: true, completion: nil)
+            // Send the user back to the deleted library page
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let view = storyboard.instantiateViewController(withIdentifier: "DeletedBooks")
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.window?.rootViewController = view
+            
+        }))
+        
+        alert.addAction(UIAlertAction(title: "No, don't restore", style: .default, handler: { (action) in
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
 
     /*
     // MARK: - Navigation

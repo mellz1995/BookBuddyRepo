@@ -25,6 +25,14 @@
  10 Book Id
  */
 
+
+/*
+ INFORMATION ON THE FRIEND'S 2D ARRAY
+ 0 username
+ 1 profile picture
+ 
+ */
+
 /**
     HOW TO GET, APPEND, AND SET A 2D ARRAY TO THE PARSE SERVER
  1. Get the current userLibrary from the server

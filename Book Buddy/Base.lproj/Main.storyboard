@@ -205,7 +205,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-649" y="-18"/>
+            <point key="canvasLocation" x="-650" y="-6"/>
         </scene>
         <!--Set Profile Pic View Controller-->
         <scene sceneID="nMH-mo-bCO">
@@ -765,7 +765,7 @@
                                 <rect key="frame" x="0.0" y="72" width="375" height="86"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iLy-G6-QyL" id="8mZ-R0-IjQ">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="85"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="85.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Book Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="82i-2h-f3B">
@@ -852,7 +852,7 @@
                     </connections>
                 </searchDisplayController>
             </objects>
-            <point key="canvasLocation" x="665" y="655"/>
+            <point key="canvasLocation" x="665" y="632"/>
         </scene>
         <!--Deleted Books-->
         <scene sceneID="hst-Pf-Ukt">
@@ -867,7 +867,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="86"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hxg-gX-TCo" id="hE1-EA-crV">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="85"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="85.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UWu-Mm-mzu">
@@ -912,13 +912,20 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Deleted Books" id="108-tA-Cgm">
-                        <barButtonItem key="leftBarButtonItem" title="Main Menu" id="eHR-ws-dxA">
-                            <connections>
-                                <segue destination="2N7-Qy-ENf" kind="popoverPresentation" identifier="DeletedMainMenu" popoverAnchorBarButtonItem="eHR-ws-dxA" id="mAy-1q-YDG">
-                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
-                                </segue>
-                            </connections>
-                        </barButtonItem>
+                        <leftBarButtonItems>
+                            <barButtonItem title="Menu" id="eHR-ws-dxA">
+                                <connections>
+                                    <segue destination="2N7-Qy-ENf" kind="popoverPresentation" identifier="DeletedMainMenu" popoverAnchorBarButtonItem="eHR-ws-dxA" id="mAy-1q-YDG">
+                                        <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                    </segue>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="refresh" id="QNq-cC-4KE">
+                                <connections>
+                                    <action selector="restoreAllButtonAction:" destination="YpB-nC-GJh" id="gCP-0e-Bhc"/>
+                                </connections>
+                            </barButtonItem>
+                        </leftBarButtonItems>
                         <rightBarButtonItems>
                             <barButtonItem title="Item" id="0ct-Qb-bIc"/>
                             <barButtonItem systemItem="trash" id="fDm-11-UyP">
@@ -931,6 +938,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="deleteAllBooksOutlet" destination="fDm-11-UyP" id="zxQ-Xr-PK7"/>
+                        <outlet property="restoreAllButtonOutlet" destination="QNq-cC-4KE" id="15z-Pd-8Pn"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6Na-D1-xnY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -995,6 +1003,14 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ls7-9l-Qdl">
+                                <rect key="frame" x="141" y="617" width="92" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Restore Book"/>
+                                <connections>
+                                    <action selector="restoreBookButtonAction:" destination="UeK-pU-7dv" eventType="touchUpInside" id="bte-fa-yyE"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -1005,12 +1021,112 @@
                         <outlet property="isbn13Label" destination="HRM-g7-eiu" id="0ZD-pD-lKs"/>
                         <outlet property="languageLabel" destination="RFs-cy-9VG" id="keW-3O-uTd"/>
                         <outlet property="publisherLabel" destination="BfM-gG-4X5" id="GSm-H2-Fil"/>
+                        <outlet property="restoreBookButtonOutlet" destination="Ls7-9l-Qdl" id="Ftm-PZ-em1"/>
                         <outlet property="tittleLabel" destination="ufv-v4-EmB" id="z5Z-zT-xsg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="isl-Ou-YPe" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1345" y="1325"/>
+        </scene>
+        <!--Search Users View Controller-->
+        <scene sceneID="58s-WE-7ny">
+            <objects>
+                <viewController id="22y-01-gle" customClass="SearchUsersViewController" customModule="Book_Buddy" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5Rf-xt-KOQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="QBN-UG-Kor"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="OtL-Zc-EMv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tbz-2L-eCc">
+                                <rect key="frame" x="16" y="93" width="343" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="6Ee-2Z-cZO">
+                                <rect key="frame" x="67" y="269" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5eq-Xh-iyt">
+                                <rect key="frame" x="163" y="143" width="48" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Search"/>
+                                <connections>
+                                    <action selector="searchButtonAction:" destination="22y-01-gle" eventType="touchUpInside" id="K0V-NF-e7G"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RTi-JR-z4k">
+                                <rect key="frame" x="67" y="474" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="resultsTextView" destination="6Ee-2Z-cZO" id="rWu-vr-i9A"/>
+                        <outlet property="searchButtonOutlet" destination="5eq-Xh-iyt" id="IQl-GB-JGt"/>
+                        <outlet property="searchTextField" destination="Tbz-2L-eCc" id="dDy-Ak-RyK"/>
+                        <outlet property="userImageView" destination="RTi-JR-z4k" id="A7T-VG-Eta"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gbe-Fm-R36" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2.3999999999999999" y="-662.51874062968523"/>
+        </scene>
+        <!--Search User Name Table View Controller-->
+        <scene sceneID="OOf-Uu-RTY">
+            <objects>
+                <tableViewController id="HHk-Wk-MzD" customClass="SearchUserNameTableViewController" customModule="Book_Buddy" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="87" sectionHeaderHeight="28" sectionFooterHeight="28" id="wGg-sl-iP7">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchUsername" rowHeight="87" id="Esn-Qa-eik" customClass="SearchUsernameCell" customModule="Book_Buddy" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="87"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Esn-Qa-eik" id="g4U-d2-MbF">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="86"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PSd-IG-JED">
+                                            <rect key="frame" x="8" y="3" width="80" height="80"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AR3-in-cod">
+                                            <rect key="frame" x="96" y="8" width="271" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="userImage" destination="PSd-IG-JED" id="Fih-uc-E40"/>
+                                    <outlet property="userNameLabel" destination="AR3-in-cod" id="5ie-9B-Qvj"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="HHk-Wk-MzD" id="1O4-dJ-uP3"/>
+                            <outlet property="delegate" destination="HHk-Wk-MzD" id="ddz-h5-M9W"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="Cx1-oa-op0"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KjL-Br-tdd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1344.8" y="-663.41829085457277"/>
         </scene>
         <!--Item-->
         <scene sceneID="qTR-ih-sv4">
@@ -1055,6 +1171,14 @@
                                     </segue>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a73-XJ-sed">
+                                <rect key="frame" x="141" y="482" width="92" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Search Users"/>
+                                <connections>
+                                    <segue destination="22y-01-gle" kind="show" id="n84-Rt-U19"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -1068,7 +1192,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hFz-A0-jVY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2" y="-18"/>
+            <point key="canvasLocation" x="-2" y="-7"/>
         </scene>
         <!--Barcode Reader View Controller-->
         <scene sceneID="Kmz-4O-Q3a">
@@ -1123,7 +1247,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4Gh-fn-im5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2" y="656"/>
+            <point key="canvasLocation" x="-2" y="632"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="EYO-Uv-Ci8">
@@ -1141,12 +1265,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ur3-3y-XTh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1346" y="655"/>
+            <point key="canvasLocation" x="1345" y="632"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="L8n-tW-Zdd">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oRM-Kt-ug1" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="DeletedBooks" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="oRM-Kt-ug1" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="6Qu-CW-UK3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -1161,13 +1285,31 @@
             </objects>
             <point key="canvasLocation" x="-2" y="1325"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="eDw-2v-cnQ">
+            <objects>
+                <navigationController storyboardIdentifier="InitialSearchUsers" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="ME9-qH-n71" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="IAR-LP-yQV">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="HHk-Wk-MzD" kind="relationship" relationship="rootViewController" id="czg-BB-H7g"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bhO-NC-mKQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="664.79999999999995" y="-663.41829085457277"/>
+        </scene>
     </scenes>
     <resources>
         <image name="smily" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="epu-4D-pUi"/>
-        <segue reference="eA9-Wm-f6v"/>
         <segue reference="LBg-kH-KzL"/>
+        <segue reference="fq5-dJ-QyX"/>
+        <segue reference="epu-4D-pUi"/>
     </inferredMetricsTieBreakers>
 </document>

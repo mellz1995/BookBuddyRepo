@@ -38,6 +38,7 @@ class DeletedBooksTableViewController: UITableViewController {
         
         deleteAllBooksOutlet.isEnabled = false
         editButtonItem.isEnabled = false
+        restoreAllButtonOutlet.isEnabled = false
         
     }
     
@@ -90,6 +91,7 @@ class DeletedBooksTableViewController: UITableViewController {
         } else {
             deleteAllBooksOutlet.isEnabled = true
             editButtonItem.isEnabled = true
+            restoreAllButtonOutlet.isEnabled = true
             cell.isUserInteractionEnabled = true
             if currentLibrary[indexPath.row].isEmpty == false {
                 cell.bookTitleLabel.text = currentLibrary[indexPath.row][0] as? String
@@ -190,6 +192,36 @@ class DeletedBooksTableViewController: UITableViewController {
             
         }))
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    @IBOutlet weak var restoreAllButtonOutlet: UIBarButtonItem!
+    @IBAction func restoreAllButtonAction(_ sender: UIBarButtonItem) {
+        let alert = UIAlertController(title: "Restore all books?", message: "This will restore all books back to your library.", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+            // Loops through the currentLibrary (user's deleted library) and appends them to the the library on the server
+            for i in 0..<self.currentLibrary.count{
+                GUSUerLibrary(self.currentLibrary[i], "library", "didSaveFirstBook")
+            }
+            
+            self.currentLibrary.removeAll()
+            updateBoolStats(false, "didDeleteFirstBook")
+            self.tableView.reloadData()
+            self.viewDidLoad()
+            self.editButtonItem.isEnabled = false
+            self.deleteAllBooksOutlet.isEnabled = false
+            self.restoreAllButtonOutlet.isEnabled = false
+        }))
+        
+        alert.addAction(UIAlertAction(title: "No, don't restore.", style: .default, handler: { (action) in
+            
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    
+    func reloadData(){
+        self.tableView.reloadData()
+        self.viewDidLoad()
     }
 
     

@@ -224,6 +224,8 @@ class LoginViewController: UIViewController {
             user.setValue(false, forKey: "lentFirstBook")
             user.setValue(false, forKey: "borrowedFirstBook")
             user.setValue(false, forKey: "didDeleteFirstBook")
+            user.setValue(false, forKey: "didAddFirstFrend")
+            user.setValue(false, forKey: "didSaveFirstWishListBook")
             
         
             // Attempt to sign the user up
