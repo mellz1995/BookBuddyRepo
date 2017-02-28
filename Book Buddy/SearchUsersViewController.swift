@@ -43,27 +43,43 @@ class SearchUsersViewController: UIViewController {
     @IBAction func searchButtonAction(_ sender: UIButton) {
         self.dismissKeyboard()
         
+        
         let query = PFUser.query()
         query?.findObjectsInBackground { (objects, error) in
             if let users = objects {
                 for object in users {
                     if let user = object as? PFUser {
                         // If the user's username matches the search value append it to the array
-                        //if user.username == self.searchTextField.text {
+                        if (user.username?.contains(self.searchTextField.text!))!{
                             self.appendArray(user.username!)
-                        //}
+                            print("Username is \(user.username!)")
+                            individualUserArray.append(user.username as AnyObject)
+                            if let userPicture = user.object(forKey: "profilePic")! as? PFFile {
+                                userPicture.getDataInBackground({ (imageData: Data?, error: Error?) -> Void in
+                                    let image = UIImage(data: imageData!)
+                                    if image != nil {
+                                        // Append the image to index 1
+                                        print("An Image was found! Adding it to the array!")
+                                        individualUserArray.append(image!)
+                                        
+                                        self.printOutSearchResults()
+                                        // Append all of the user's information into the full user's array
+                                        userInformationArray.append(individualUserArray)
+                                        print("UserinformationArray is : \(userInformationArray)")
+                                        
+                                        // Send the user back to the search user's table view
+                                        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                                        let view = storyboard.instantiateViewController(withIdentifier: "InitialSearchUsers")
+                                        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                                        appDelegate.window?.rootViewController = view
+                                    }
+                                })
+                            }
+                        }
                     }
                 }
-                self.printOutSearchResults()
             }
         }
-        
-        // Send the user back to the search user's table view
-//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        let view = storyboard.instantiateViewController(withIdentifier: "InitialSearchUsers")
-//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//        appDelegate.window?.rootViewController = view
-        setEverythingUp()
     }
     
     func appendArray(_ username: String){
@@ -77,34 +93,39 @@ class SearchUsersViewController: UIViewController {
     func setEverythingUp(){
         print("Setting everything up...")
         let query = PFUser.query()
-        for i in 0..<userNameSearchResultsArray.count{
-            query?.findObjectsInBackground { (objects, error) in
-                if let users = objects {
-                    for object in users {
-                        if let user = object as? PFUser {
-                            // If the user's username matches the search value append it to the array
-                            print("Username is: \(user.username!)")
-                            if user.username! == userNameSearchResultsArray[i] as! String {
-                                // Append the username to index 0
-                                individualUserArray.append(user.username as AnyObject)
-                                if let userPicture = user.object(forKey: "profilePic")! as? PFFile {
-                                    userPicture.getDataInBackground({ (imageData: Data?, error: Error?) -> Void in
-                                        let image = UIImage(data: imageData!)
-                                        if image != nil {
-                                            // Append the image to index 1
-                                            individualUserArray.append(image!)
-                                        }
-                                    })
+        query?.findObjectsInBackground { (objects, error) in
+            if error != nil {
+                print(error!)
+            } else {
+                for i in 0..<userNameSearchResultsArray.count{
+                    if let users = objects {
+                        for object in users {
+                            if let user = object as? PFUser {
+                                // If the user's username matches the search value append it to the array
+                                //print("Username is: \(user.username!)")
+                                if userNameSearchResultsArray[i] as! String == user.username! {
+                                    // Append the username to index 0
+                                    individualUserArray.append(user.username as AnyObject)
+                                    if let userPicture = user.object(forKey: "profilePic")! as? PFFile {
+                                        userPicture.getDataInBackground({ (imageData: Data?, error: Error?) -> Void in
+                                            let image = UIImage(data: imageData!)
+                                            if image != nil {
+                                                // Append the image to index 1
+                                                print("An Image was found Adding it to the array!")
+                                                individualUserArray.append(image!)
+                                            }
+                                        })
+                                    }
                                 }
                             }
                         }
                     }
                 }
+                self.printOutSearchResults()
+                // Append all of the user's information into the full user's array
+                userInformationArray.append(individualUserArray)
+                print("UserinformationArray is : \(userInformationArray)")
             }
-            
-            // Append all of the user's information into the full user's array
-            userInformationArray.append(individualUserArray)
-            print("UserinformationArray is : \(userInformationArray)")
         }
     }
     

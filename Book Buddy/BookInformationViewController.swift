@@ -24,6 +24,8 @@ class BookInformationViewController: UIViewController, UINavigationControllerDel
     var languageValue = ""
     var bookImageValue = UIImage()
     var imageUse = UIImage()
+    var currentImage = UIImage()
+    var didChangePicture = false
     
     
     override func viewDidLoad() {
@@ -82,6 +84,7 @@ class BookInformationViewController: UIViewController, UINavigationControllerDel
                 let image = UIImage(data: imageData!)
                 if image != nil {
                     self.bookImage.image = image
+                    
                 }
             })
         }
@@ -113,9 +116,10 @@ class BookInformationViewController: UIViewController, UINavigationControllerDel
                 currentLibrary[i][3] = isbn13TextField.text as AnyObject
                 currentLibrary[i][4] = publisherTextField.text as AnyObject
                 currentLibrary[i][5] = lanuguageTextField.text as AnyObject
-                currentLibrary[i][7] = getPFFileVersionOfImage(imageUse)
-                currentLibrary[i][8] = "True" as AnyObject
-                
+                if didChangePicture == true {
+                    currentLibrary[i][7] = getPFFileVersionOfImage(imageUse)
+                    currentLibrary[i][8] = "True" as AnyObject
+                }
                 updateArray(currentLibrary, "library")
             }
         }
@@ -160,6 +164,7 @@ class BookInformationViewController: UIViewController, UINavigationControllerDel
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             bookImage.image = image
+            didChangePicture = true
             imageUse = image
         } else {
             
@@ -175,6 +180,7 @@ class BookInformationViewController: UIViewController, UINavigationControllerDel
         for i in 0..<currentLibrary.count {
             if currentLibrary[i][10] as! Int == bookID{
                 
+                didChangePicture = true
                 currentLibrary[i][7] = getPFFileVersionOfImage(#imageLiteral(resourceName: "QuestionMarkBook")) as AnyObject
                 currentLibrary[i][8] = "False" as AnyObject
                 
