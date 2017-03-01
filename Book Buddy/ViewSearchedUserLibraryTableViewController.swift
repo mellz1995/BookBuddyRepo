@@ -116,7 +116,7 @@ class ViewSearchedUserLibraryTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         switch(segue.identifier ?? ""){
-        case "SearchedUserLibrary":
+        case "ShowBookInformation":
             os_log("Showing book detail", log: OSLog.default, type: .debug)
             guard let userLibraryBookInformationViewController = segue.destination as? UserLibraryBookInformationViewController else {
                 fatalError("Unexpected destiniation: \(segue.destination)")
@@ -132,6 +132,10 @@ class ViewSearchedUserLibraryTableViewController: UITableViewController {
             
             let selectedBook = searcedUserLibraryArray[indexPath.row]
             userLibraryBookInformationViewController.bookInformationArray = selectedBook
+            
+            case "BackToResutls":
+            os_log("Going back to results", log: OSLog.default, type: .debug)
+            
         default:
             fatalError("Unexpected Segueue Identifier: \(segue.identifier)") 
         }

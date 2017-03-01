@@ -21,6 +21,10 @@ class SearchUserNameTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
 
     // MARK: - Table view data source
 
@@ -39,9 +43,13 @@ class SearchUserNameTableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "SearchUsername", for: indexPath) as? SearchUsernameCell else {
             fatalError("The dequed cell is not an instance of BooksTableViewCell")
         }
+
         
-            cell.userNameLabel.text = userInformationArray[indexPath.row][0] as? String
-            cell.userImage.image = userInformationArray[indexPath.row][1] as? UIImage
+        cell.userImage.layer.cornerRadius = cell.userImage.frame.size.width/2
+        cell.userImage.clipsToBounds = true
+        
+        cell.userNameLabel.text = userInformationArray[indexPath.row][0] as? String
+        cell.userImage.image = userInformationArray[indexPath.row][1] as? UIImage
         
         
 

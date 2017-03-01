@@ -21,6 +21,12 @@ class SearchedUserInformationViewController: UIViewController {
 
         setEverythingUp()
     }
+    
+    // Override function that rounds the profile picture
+    override func viewDidLayoutSubviews() {
+        userProfilePic.layer.cornerRadius = userProfilePic.frame.size.width/2
+        userProfilePic.clipsToBounds = true
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

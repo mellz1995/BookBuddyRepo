@@ -9,7 +9,8 @@
 import UIKit
 import Parse
 
-class MainMenuViewController: UIViewController {
+class MainMenuViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    var activityIndicator = UIActivityIndicatorView()
     
     var userLibrary = [[String]]()
     var book = [String]()
@@ -75,6 +76,68 @@ class MainMenuViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
+    @IBAction func changeProfilePicButtonAction(_ sender: UIButton) {
+        let alert = UIAlertController(title: "From where?", message: "Take a picture or use one from your photo library?", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (action) in
+            let imagePickerController = UIImagePickerController()
+            imagePickerController.delegate = self
+            imagePickerController.sourceType = UIImagePickerControllerSourceType.camera
+            imagePickerController.allowsEditing = false
+            self.present(imagePickerController, animated: true, completion: nil)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Photo Library", style: .default, handler: { (action) in
+            let imagePickerController = UIImagePickerController()
+            imagePickerController.delegate = self
+            imagePickerController.sourceType = UIImagePickerControllerSourceType.photoLibrary
+            imagePickerController.allowsEditing = false
+            self.present(imagePickerController, animated: true, completion: nil)
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    internal func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        // Start animator
+        activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+        activityIndicator.center = self.view.center
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        UIApplication.shared.beginIgnoringInteractionEvents()
+        profilePicture.alpha = 0
+        
+        
+        if let image = info[UIImagePickerControllerOriginalImage] as! UIImage? {
+            let imgageFile = PFFile(name: PFUser.current()!.username, data: UIImagePNGRepresentation(image)!)
+            
+            // Set the profile pic online
+            PFUser.current()?.setValue(imgageFile, forKey: "profilePic")
+            
+            
+            PFUser.current()?.saveInBackground(block: { (success, error) in
+                if error != nil {
+                    print("Error with saving proifile pic")
+                    UIApplication.shared.endIgnoringInteractionEvents()
+                    self.profilePicture.image = image
+                    self.viewDidLoad()
+                    self.activityIndicator.stopAnimating()
+                }
+                else {
+                    print("Successfully saved profile pic")
+                    updateBoolStats(true, "didSetProfilePic")
+                    UIApplication.shared.endIgnoringInteractionEvents()
+                    self.activityIndicator.stopAnimating()
+                }
+            })
+        } else {
+            print("Error picking picture from camera roll, bro.")
+            UIApplication.shared.endIgnoringInteractionEvents()
+            activityIndicator.stopAnimating()
+        }
+        
+        self.dismiss(animated: true, completion: nil)
+    }
     
 
     /*

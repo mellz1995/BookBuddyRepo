@@ -858,7 +858,7 @@
                                 <rect key="frame" x="0.0" y="72" width="375" height="86"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="iLy-G6-QyL" id="8mZ-R0-IjQ">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="85.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="85"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Book Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="82i-2h-f3B">
@@ -960,7 +960,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="86"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hxg-gX-TCo" id="hE1-EA-crV">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="85.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="85"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UWu-Mm-mzu">
@@ -1161,6 +1161,14 @@
                                 <rect key="frame" x="67" y="474" width="240" height="128"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g68-SE-CLL">
+                                <rect key="frame" x="16" y="191" width="76" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Main Menu"/>
+                                <connections>
+                                    <segue destination="2N7-Qy-ENf" kind="show" id="TNd-9j-fB6"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -1189,7 +1197,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="87"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Esn-Qa-eik" id="g4U-d2-MbF">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="86.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="86"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PSd-IG-JED">
@@ -1307,7 +1315,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="86"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ozl-j0-h7i" id="E2C-aG-iLb">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="85.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="85"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pWl-vV-LR0">
@@ -1354,14 +1362,14 @@
                     <navigationItem key="navigationItem" title="User's Library" id="G76-GB-EtP">
                         <barButtonItem key="leftBarButtonItem" title="Back to Results" id="aP2-RH-l3V">
                             <connections>
-                                <segue destination="HHk-Wk-MzD" kind="show" id="R3s-sQ-GCS"/>
+                                <segue destination="HHk-Wk-MzD" kind="show" identifier="BackToResutls" id="R3s-sQ-GCS"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EVi-rr-l75" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4073" y="-663"/>
+            <point key="canvasLocation" x="4068" y="-663"/>
         </scene>
         <!--Item-->
         <scene sceneID="qTR-ih-sv4">
@@ -1411,7 +1419,15 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Search Users"/>
                                 <connections>
-                                    <segue destination="L24-AS-MV3" kind="show" id="n84-Rt-U19"/>
+                                    <segue destination="22y-01-gle" kind="show" id="7lW-5Y-qHH"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y1E-qJ-smD">
+                                <rect key="frame" x="128" y="298" width="118" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Change Profil Pic"/>
+                                <connections>
+                                    <action selector="changeProfilePicButtonAction:" destination="2N7-Qy-ENf" eventType="touchUpInside" id="eRb-OF-YoH"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1539,24 +1555,6 @@
             <point key="canvasLocation" x="1345" y="-663"/>
         </scene>
         <!--Navigation Controller-->
-        <scene sceneID="cvv-JU-uI1">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="L24-AS-MV3" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="umY-ZS-pU9">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="22y-01-gle" kind="relationship" relationship="rootViewController" id="DgL-l6-vqy"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Z7u-1J-DMr" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-2.3999999999999999" y="-662.51874062968523"/>
-        </scene>
-        <!--Navigation Controller-->
         <scene sceneID="x90-30-bLg">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="tBa-Ev-XDK" sceneMemberID="viewController">
@@ -1579,10 +1577,10 @@
         <image name="smily" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="TNd-9j-fB6"/>
+        <segue reference="7lW-5Y-qHH"/>
+        <segue reference="fq5-dJ-QyX"/>
         <segue reference="LBg-kH-KzL"/>
-        <segue reference="eA9-Wm-f6v"/>
-        <segue reference="epu-4D-pUi"/>
         <segue reference="R3s-sQ-GCS"/>
-        <segue reference="2hp-iT-dD0"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -31,7 +31,16 @@ class UserLibraryBookInformationViewController: UIViewController {
         isbn13Label.text = bookInformationArray[3] as? String
         publisherLabel.text = bookInformationArray[4] as? String
         languageLabel.text = bookInformationArray[5] as? String
-        bookImage.image = bookInformationArray[7] as? UIImage
+        // Set the image of the book
+        if let bookPicture = bookInformationArray[7] as? PFFile {
+            bookPicture.getDataInBackground({ (imageData: Data?, error: Error?) -> Void in
+                let image = UIImage(data: imageData!)
+                if image != nil {
+                    self.bookImage.image = image
+                    
+                }
+            })
+        }
     }
     
     @IBOutlet weak var bookImage: UIImageView!
