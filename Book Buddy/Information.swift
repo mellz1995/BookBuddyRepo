@@ -27,7 +27,7 @@
 
 
 /*
- INFORMATION ON THE FRIEND'S 2D ARRAY
+ INFORMATION ON THE FRIEND'S ARRAY
  0 username
  1 profile picture
  

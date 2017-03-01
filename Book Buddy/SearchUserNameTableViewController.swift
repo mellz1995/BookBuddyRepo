@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import os.log
 
 class SearchUserNameTableViewController: UITableViewController {
 
@@ -47,15 +48,55 @@ class SearchUserNameTableViewController: UITableViewController {
         return cell
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func backToSearchButtonAction(_ sender: UIBarButtonItem) {
     }
-    */
 
+    
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        switch(segue.identifier ?? ""){
+            case "UserInformation":
+                os_log("Showing user's information", log: OSLog.default, type: .debug)
+            
+                guard let searchedUserInformationViewController = segue.destination as? SearchedUserInformationViewController else {
+                    fatalError("Unexpected sender: \(sender)")
+                }
+                guard let selectedUserCell = sender as? SearchUsernameCell else {
+                    fatalError("The selected cell is not being displayed by the table")
+                }
+                
+                guard let indexPath = tableView.indexPath(for: selectedUserCell) else {
+                    fatalError("The selected cell is not being displayed by the table")
+                }
+                
+                let selectedUser = userInformationArray[indexPath.row]
+                searchedUserInformationViewController.userInforomation = selectedUser
+            
+            case "ViewSearchedUserLibrary":
+                os_log("Viewing User's library")
+            
+            guard let searchedUserInformationViewController = segue.destination as? SearchedUserInformationViewController else {
+                fatalError("Unexpected sender: \(sender)")
+                }
+        
+                guard let selectedUserCell = sender as? SearchUsernameCell else {
+                    fatalError("The selected cell is not being displayed by the table")
+                }
+                
+                guard let indexPath = tableView.indexPath(for: selectedUserCell) else {
+                    fatalError("The selected cell is not being displayed by the table")
+                }
+            
+                let selectedUser = userInformationArray[indexPath.row]
+                searchedUserInformationViewController.userInforomation = selectedUser
+            
+            case "BackToSearchSeg":
+                os_log("Going back to search", log: OSLog.default, type: .debug)
+            
+            default:
+            fatalError("Unexpected Segueue Identifier: \(segue.identifier)")
+            
+        }
+    }
 }
