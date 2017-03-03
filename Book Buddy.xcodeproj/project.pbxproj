@@ -21,6 +21,9 @@
 		567A9DF81E54B0FA00DB2930 /* Information.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A9DF71E54B0FA00DB2930 /* Information.swift */; };
 		568779701E5DD234009395DA /* BooksTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5687796F1E5DD234009395DA /* BooksTableViewCell.swift */; };
 		568779721E5DD5ED009395DA /* BooksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568779711E5DD5ED009395DA /* BooksTableViewController.swift */; };
+		568906921E69C3D70044C016 /* WishListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568906911E69C3D70044C016 /* WishListTableViewController.swift */; };
+		568906961E69C4420044C016 /* WishListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568906951E69C4420044C016 /* WishListCell.swift */; };
+		568906981E69D5A50044C016 /* WishListBookInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568906971E69D5A50044C016 /* WishListBookInformationViewController.swift */; };
 		569C1EB81E4C40B400428785 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569C1EB71E4C40B400428785 /* LoginViewController.swift */; };
 		569C1EBA1E4C40E400428785 /* BarcodeReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569C1EB91E4C40E400428785 /* BarcodeReaderViewController.swift */; };
 		56A371381E4CBB7700FC064E /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56594BA11E4C17C100F6A60A /* Parse.framework */; };
@@ -77,6 +80,9 @@
 		567A9DF71E54B0FA00DB2930 /* Information.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Information.swift; sourceTree = "<group>"; };
 		5687796F1E5DD234009395DA /* BooksTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BooksTableViewCell.swift; sourceTree = "<group>"; };
 		568779711E5DD5ED009395DA /* BooksTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BooksTableViewController.swift; sourceTree = "<group>"; };
+		568906911E69C3D70044C016 /* WishListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WishListTableViewController.swift; sourceTree = "<group>"; };
+		568906951E69C4420044C016 /* WishListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WishListCell.swift; sourceTree = "<group>"; };
+		568906971E69D5A50044C016 /* WishListBookInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WishListBookInformationViewController.swift; sourceTree = "<group>"; };
 		569C1EB71E4C40B400428785 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		569C1EB91E4C40E400428785 /* BarcodeReaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeReaderViewController.swift; sourceTree = "<group>"; };
 		56A3713A1E4CBD9100FC064E /* libstdc++.6.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.tbd"; path = "usr/lib/libstdc++.6.tbd"; sourceTree = SDKROOT; };
@@ -181,8 +187,10 @@
 				56E68E551E647A230029D497 /* SearchUserNameTableViewController.swift */,
 				56431FD81E670A19007404C4 /* SearchedUserInformationViewController.swift */,
 				56D052611E4E377E007747ED /* SetProfilePicViewController.swift */,
-				56431FDA1E6712B6007404C4 /* ViewSearchedUserLibraryTableViewController.swift */,
 				56431FDE1E6720CE007404C4 /* UserLibraryBookInformationViewController.swift */,
+				56431FDA1E6712B6007404C4 /* ViewSearchedUserLibraryTableViewController.swift */,
+				568906911E69C3D70044C016 /* WishListTableViewController.swift */,
+				568906971E69D5A50044C016 /* WishListBookInformationViewController.swift */,
 			);
 			name = "View Controllers";
 			sourceTree = "<group>";
@@ -199,6 +207,7 @@
 				56E68E531E647A020029D497 /* SearchUsernameCell.swift */,
 				56BBD7BD1E4E771800E3677F /* Settings.swift */,
 				56BBD7B41E4E6C1000E3677F /* UserGus.swift */,
+				568906951E69C4420044C016 /* WishListCell.swift */,
 			);
 			name = "Swift Files";
 			sourceTree = "<group>";
@@ -357,6 +366,7 @@
 				5634D5E51E510E5500B91725 /* MainMenuViewController.swift in Sources */,
 				56D052621E4E377E007747ED /* SetProfilePicViewController.swift in Sources */,
 				568779721E5DD5ED009395DA /* BooksTableViewController.swift in Sources */,
+				568906921E69C3D70044C016 /* WishListTableViewController.swift in Sources */,
 				56DE1DB41E63893500402774 /* DeletedBooksTableViewController.swift in Sources */,
 				56431FDD1E6712EA007404C4 /* SearchedUserLibraryCell.swift in Sources */,
 				569C1EB81E4C40B400428785 /* LoginViewController.swift in Sources */,
@@ -364,6 +374,8 @@
 				56E68E561E647A230029D497 /* SearchUserNameTableViewController.swift in Sources */,
 				569C1EBA1E4C40E400428785 /* BarcodeReaderViewController.swift in Sources */,
 				56BBD7BE1E4E771800E3677F /* Settings.swift in Sources */,
+				568906961E69C4420044C016 /* WishListCell.swift in Sources */,
+				568906981E69D5A50044C016 /* WishListBookInformationViewController.swift in Sources */,
 				567A9DF81E54B0FA00DB2930 /* Information.swift in Sources */,
 				56594B731E4C16FE00F6A60A /* AppDelegate.swift in Sources */,
 				56DE1DB21E6388C500402774 /* DeletedBooksTableViewCell.swift in Sources */,

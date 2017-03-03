@@ -30,7 +30,7 @@
  INFORMATION ON THE FRIEND'S ARRAY
  0 username
  1 profile picture
- 
+ 2 userID
  */
 
 /**

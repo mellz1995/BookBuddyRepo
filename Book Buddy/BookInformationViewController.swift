@@ -26,9 +26,18 @@ class BookInformationViewController: UIViewController, UINavigationControllerDel
     var imageUse = UIImage()
     var currentImage = UIImage()
     var didChangePicture = false
+    var key = ""
     
     
     override func viewDidLoad() {
+        
+        // Check to see if the user is coming from the with list page.
+        if comingFromWishList == true {
+            key = "wishList"
+        } else {
+            key = "library"
+        }
+        
         bookID = self.bookInformationArray[10] as! Int
         super.viewDidLoad()
         saveButtonOutlet.isEnabled = false
@@ -59,7 +68,7 @@ class BookInformationViewController: UIViewController, UINavigationControllerDel
     
     func setEverythingUp(){
         // Get the current userLibrary
-        currentLibrary = PFUser.current()?.object(forKey: "library") as! Array<Array<AnyObject>>
+        currentLibrary = PFUser.current()?.object(forKey: key) as! Array<Array<AnyObject>>
         
         // Set the textFields
         titleTextField.text = bookInformationArray[0] as? String
@@ -120,18 +129,26 @@ class BookInformationViewController: UIViewController, UINavigationControllerDel
                     currentLibrary[i][7] = getPFFileVersionOfImage(imageUse)
                     currentLibrary[i][8] = "True" as AnyObject
                 }
-                updateArray(currentLibrary, "library")
+                updateArray(currentLibrary, key)
             }
         }
         
         
         let alert = UIAlertController(title: "Changes Saved!", message: "Your changes were saved successfully.", preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: "Great", style: .default, handler: { (action) in
-            // Send the user back to the library page
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let view = storyboard.instantiateViewController(withIdentifier: "YourLibrary")
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.window?.rootViewController = view
+            // Send the user back to the appropriate page
+            if comingFromWishList == true {
+                comingFromWishList = false
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let view = storyboard.instantiateViewController(withIdentifier: "WishListViewController")
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                appDelegate.window?.rootViewController = view
+            } else {
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let view = storyboard.instantiateViewController(withIdentifier: "YourLibrary")
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                appDelegate.window?.rootViewController = view
+            }
         }))
         self.present(alert, animated: true, completion: nil)
         
@@ -184,7 +201,7 @@ class BookInformationViewController: UIViewController, UINavigationControllerDel
                 currentLibrary[i][7] = getPFFileVersionOfImage(#imageLiteral(resourceName: "QuestionMarkBook")) as AnyObject
                 currentLibrary[i][8] = "False" as AnyObject
                 
-                updateArray(currentLibrary, "library")
+                updateArray(currentLibrary, key)
             }
         }
     }

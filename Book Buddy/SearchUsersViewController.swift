@@ -55,8 +55,14 @@ class SearchUsersViewController: UIViewController {
             if let users = objects {
                 for object in users {
                     if let user = object as? PFUser {
+                        // Set the contents of the search field to lowercase
+                        let lowerCaseSearch = self.searchTextField.text?.lowercased()
+                        
+                        // Delete the space at the end
+                        let noSpaces = lowerCaseSearch?.replacingOccurrences(of: " ", with: "")
+                        
                         // If the user's username matches the search value append it to the array
-                        if (user.username?.contains(self.searchTextField.text!))!{
+                        if (user.username?.contains(noSpaces!))!{
                             self.appendArray(user.username!)
                             print("Username is \(user.username!)")
                             individualUserArray.append(user.username as AnyObject)
@@ -68,7 +74,11 @@ class SearchUsersViewController: UIViewController {
                                         print("An Image was found! Adding it to the array!")
                                         individualUserArray.append(image!)
                                         
+                                        // Append the user's object ID
+                                        individualUserArray.append(user.objectId as AnyObject)
+                                        
                                         self.printOutSearchResults()
+                                        
                                         // Append all of the user's information into the full user's array
                                         userInformationArray.append(individualUserArray)
                                         print("UserinformationArray is : \(userInformationArray)")

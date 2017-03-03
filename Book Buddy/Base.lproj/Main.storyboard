@@ -1122,6 +1122,124 @@
             </objects>
             <point key="canvasLocation" x="1345" y="1325"/>
         </scene>
+        <!--Wish List-->
+        <scene sceneID="cm4-S5-T6W">
+            <objects>
+                <tableViewController id="Plx-lb-SDv" customClass="WishListTableViewController" customModule="Book_Buddy" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="86" sectionHeaderHeight="28" sectionFooterHeight="28" id="EnR-tu-k6S">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="WishListCell" rowHeight="86" id="HaJ-Tc-ChC" customClass="WishListCell" customModule="Book_Buddy" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="86"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HaJ-Tc-ChC" id="Wpc-0x-NBt">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="85"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="A8h-bJ-noj">
+                                            <rect key="frame" x="8" y="-2" width="80" height="80"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Book Tite" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TrV-Wj-Eqf">
+                                            <rect key="frame" x="96" y="8" width="271" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Author" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ohE-96-ek1">
+                                            <rect key="frame" x="96" y="32" width="271" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ISBN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="voA-Uq-V1R">
+                                            <rect key="frame" x="96" y="56" width="271" height="21"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="authorLabel" destination="ohE-96-ek1" id="nyr-Jw-sfV"/>
+                                    <outlet property="bookImage" destination="A8h-bJ-noj" id="9zX-Fh-Xls"/>
+                                    <outlet property="bookTitleLabel" destination="TrV-Wj-Eqf" id="TaD-yV-QHb"/>
+                                    <outlet property="isbn10Label" destination="voA-Uq-V1R" id="fem-jJ-GKx"/>
+                                    <segue destination="GdF-in-R4N" kind="show" identifier="WishListBookInformation" id="XHx-pM-Nn3"/>
+                                </connections>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="Plx-lb-SDv" id="o8s-Qv-DXw"/>
+                            <outlet property="delegate" destination="Plx-lb-SDv" id="yBx-tk-YjX"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Wish List" id="AYI-lM-s2c">
+                        <barButtonItem key="leftBarButtonItem" title="Main Menu" id="eRS-nF-iCU">
+                            <connections>
+                                <segue destination="2N7-Qy-ENf" kind="presentation" identifier="MainMenuFromWishList" id="ls1-iM-i5z"/>
+                            </connections>
+                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="edit" id="qw7-ed-aQb">
+                                <connections>
+                                    <action selector="editButtonAction:" destination="Plx-lb-SDv" id="hak-ae-OI3"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="add" id="chp-gy-u4k">
+                                <connections>
+                                    <action selector="addButtonAction:" destination="Plx-lb-SDv" id="Hlw-d1-3Pa"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="trash" id="zsz-I2-1c3">
+                                <color key="tintColor" red="1" green="0.22878393084721305" blue="0.098720052201541564" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="clearButtonAction:" destination="Plx-lb-SDv" id="Pmm-w6-KTE"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="addButtonOutlet" destination="chp-gy-u4k" id="zXk-ID-TeD"/>
+                        <outlet property="clearButtonOutlet" destination="zsz-I2-1c3" id="GbU-yr-P7a"/>
+                        <outlet property="editButtonOutlet" destination="qw7-ed-aQb" id="9We-X0-gWX"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="KNM-TH-tfM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="665" y="-1343"/>
+        </scene>
+        <!--Wish List Book Information View Controller-->
+        <scene sceneID="9pw-Bb-k1V">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="WtZ-gU-rje" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="aZn-XJ-I9z" customClass="WishListBookInformationViewController" customModule="Book_Buddy" customModuleProvider="target" sceneMemberID="viewController"/>
+            </objects>
+            <point key="canvasLocation" x="1345" y="-2042"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Tmh-PU-gp0">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0sK-LR-95D" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewController id="Esx-yf-H2x" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="UDV-Dw-shU"/>
+                        <viewControllerLayoutGuide type="bottom" id="4bB-hj-xtl"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2Qa-R1-Ojp">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+            </objects>
+            <point key="canvasLocation" x="665" y="-2041"/>
+        </scene>
         <!--Search Users View Controller-->
         <scene sceneID="58s-WE-7ny">
             <objects>
@@ -1430,6 +1548,14 @@
                                     <action selector="changeProfilePicButtonAction:" destination="2N7-Qy-ENf" eventType="touchUpInside" id="eRb-OF-YoH"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KP1-HZ-doW">
+                                <rect key="frame" x="156" y="572" width="63" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Wish List"/>
+                                <connections>
+                                    <segue destination="gfo-Z9-tTg" kind="show" id="dwy-7P-0LS"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -1572,15 +1698,34 @@
             </objects>
             <point key="canvasLocation" x="3402" y="-663"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="YtY-Q1-Fsg">
+            <objects>
+                <navigationController storyboardIdentifier="WishListViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gfo-Z9-tTg" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="d5W-st-KYk">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Plx-lb-SDv" kind="relationship" relationship="rootViewController" id="nV7-A5-bT8"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rmX-ZU-2MP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2" y="-1343"/>
+        </scene>
     </scenes>
     <resources>
         <image name="smily" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="TNd-9j-fB6"/>
-        <segue reference="7lW-5Y-qHH"/>
-        <segue reference="fq5-dJ-QyX"/>
         <segue reference="LBg-kH-KzL"/>
+        <segue reference="fq5-dJ-QyX"/>
+        <segue reference="ls1-iM-i5z"/>
+        <segue reference="7lW-5Y-qHH"/>
+        <segue reference="XUV-YA-wSX"/>
         <segue reference="R3s-sQ-GCS"/>
     </inferredMetricsTieBreakers>
 </document>

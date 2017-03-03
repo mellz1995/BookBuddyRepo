@@ -59,7 +59,36 @@ class UserLibraryBookInformationViewController: UIViewController {
     
     @IBOutlet weak var addToWishListButtonOutlet: UIButton!
     @IBAction func addToWithListButtonAction(_ sender: UIButton) {
+        let alert = UIAlertController(title: "Add book?", message: "Add \(bookInformationArray[0]) to your wish list?", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+            
+            
+            // Change the index of BIA to no owner since this book is being added to the wish list
+            self.bookInformationArray[9] = "No owner. Wanted"
+            
+            // Change the ID of the book to make it relevant to the current user
+            self.bookInformationArray[10] = getAndIncrementCurrentBookId() as AnyObject
+            
+            GUSUerLibrary(self.bookInformationArray as [AnyObject], "wishList", "didSaveFirstWishListBook")
+            
+            let alert2 = UIAlertController(title: "Book added!?", message: "Added \(self.bookInformationArray[0]) to your wish list?", preferredStyle: UIAlertControllerStyle.alert)
+            alert2.addAction(UIAlertAction(title: "Great", style: .default, handler: { (action) in
+                
+                
+            }))
+            self.present(alert2, animated: true, completion: nil)
+            
+        }))
         
+        alert.addAction(UIAlertAction(title: "No, don't add", style: .default, handler: { (action) in
+            
+        }))
+        
+        
+        
+        
+        
+        self.present(alert, animated: true, completion: nil)
     }
 
     /*

@@ -36,11 +36,6 @@ class BooksTableViewController: UITableViewController {
         } else {
             editButtonItem.isEnabled = true
         }
-    
-        
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-        
         
     }
     
@@ -185,7 +180,7 @@ class BooksTableViewController: UITableViewController {
     }
     
 
-    
+    /*
     // Override to support rearranging the table view.
     override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
         let moveObject = self.currentLibrary[fromIndexPath.row]
@@ -200,7 +195,7 @@ class BooksTableViewController: UITableViewController {
         // Return false if you do not want the item to be re-orderable.
         return true
     }
- 
+ */
 
     
     // MARK: - Navigation

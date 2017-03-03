@@ -9,6 +9,8 @@
 import UIKit
 import Parse
 
+var comingFromWishList = false
+
 class MainMenuViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     var activityIndicator = UIActivityIndicatorView()
     
@@ -16,6 +18,7 @@ class MainMenuViewController: UIViewController, UINavigationControllerDelegate, 
     var book = [String]()
     
     override func viewDidLoad() {
+        comingFromWishList = false
         super.viewDidLoad()
         // This check is for testing purposes when I don't have a logged in user
         if PFUser.current() != nil{
