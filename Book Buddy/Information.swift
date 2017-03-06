@@ -27,10 +27,18 @@
 
 
 /*
- INFORMATION ON THE FRIEND'S ARRAY
+ INFORMATION ON THE SEARCH FOR USERS ARRAY
  0 username
  1 profile picture
  2 userID
+ */
+
+
+/* 
+  INFORMATION ON THE LINKS ARRAY'S INDEXES
+ 0 User ID
+ 1 Username
+ 2 User's photo
  */
 
 /**

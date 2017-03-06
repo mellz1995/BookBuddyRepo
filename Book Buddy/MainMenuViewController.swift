@@ -10,12 +10,20 @@ import UIKit
 import Parse
 
 var comingFromWishList = false
+// Get their current Friends 2D array
+var currentFriends = PFUser.current()!.object(forKey: "friends") as! Array<Array<Any>>
 
 class MainMenuViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     var activityIndicator = UIActivityIndicatorView()
     
     var userLibrary = [[String]]()
     var book = [String]()
+    
+    var friendsIDArray = Array<Any>()
+    var friendsArray = Array<Any>()
+    
+    // Get their current Friends 2D array
+    var currentFriends = PFUser.current()!.object(forKey: "friends") as! Array<Array<Any>>
     
     override func viewDidLoad() {
         comingFromWishList = false
@@ -142,6 +150,59 @@ class MainMenuViewController: UIViewController, UINavigationControllerDelegate, 
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBOutlet weak var linksButtonOutlet: UIButton!
+    @IBAction func linksButtonAction(_ sender: UIButton) {
+        // Perform the action of getting the user's friends
+        if PFUser.current()!.object(forKey: "didAddFirstFrend") as! Bool == false {
+            let alert = UIAlertController(title: "Oops", message: "It doesn't look like you have any friends.", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action) in
+               
+                self.present(alert, animated: true, completion: nil)
+            }))
+        } else {
+            // Get the user's ID's and append them to the friendsArray. This will be information
+            for i in 0..<currentFriends.count {
+                friendsIDArray.append(currentFriends[i][0])
+            }
+            
+            let query = PFUser.query()
+            query?.findObjectsInBackground(block: { (objects, error) in
+                if let users = objects {
+                    for object in users {
+                        if let user = object as? PFUser {
+                            // Loop through the friendsIDArray to get the ID's to get the current username
+                            for j in 0..<self.friendsArray.count{
+                                if user.objectId == self.friendsArray[j] as? String{
+                                    self.friendsArray.append(user.objectId!)
+                                    self.friendsArray.append(user.username!)
+                                    
+                                    // Get the user's profile picture and append it as well
+                                    if let userPicture = user.object(forKey: "profilePic")! as? PFFile {
+                                        userPicture.getDataInBackground({ (imageData: Data?, error: Error?) -> Void in
+                                            let image = UIImage(data: imageData!)
+                                            if image != nil {
+                                                // Append the image to index 1
+                                                self.friendsArray.append(image!)
+                                            }
+                                        })
+                                    }
+                                }
+                            }
+                            
+                        }
+                    }
+                    // Append the currentFriendsArray
+                    self.currentFriends.append(self.friendsArray)
+                    print("The friends array is \(self.currentFriends)")
+                }
+            })
+            
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let view = storyboard.instantiateViewController(withIdentifier: "Links")
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            appDelegate.window?.rootViewController = view
+        }
+    }
 
     /*
     // MARK: - Navigation

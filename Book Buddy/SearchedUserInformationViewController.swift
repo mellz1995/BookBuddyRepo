@@ -57,6 +57,74 @@ class SearchedUserInformationViewController: UIViewController {
     @IBOutlet weak var viewUserLibraryButtonOutlet: UIButton!
     
     @IBAction func requestToLinkButtonAction(_ sender: UIButton) {
+        let alert = UIAlertController(title: "Add \(userInforomation[0]) as a friend?", message: "This will add this user as a friend.", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+            var currentFriends = PFUser.current()!.object(forKey: "friends") as! Array<Array<Any>>
+            
+            // Add the user as a friend for testing purposes now!
+            var addFriendArray = Array<AnyObject>()
+            
+            // Get the userID of the user and append it to the array at index 0, username at index 1, and user's profile picture at index 2
+            let query = PFUser.query()
+            query?.findObjectsInBackground(block: { (objects, error) in
+                
+                if error != nil {
+                    let alert2 = UIAlertController(title: "Error", message: error as! String?, preferredStyle: UIAlertControllerStyle.alert)
+                    alert2.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+                    }))
+                    self.present(alert2, animated: true, completion: nil)
+                } else {
+                    
+                    if PFUser.current()!.object(forKey: "didAddFirstFrend") as! Bool == false {
+                        currentFriends.removeAll()
+                        updateBoolStats(true, "didAddFirstFrend")
+                    }
+                    
+                    if let users = objects {
+                        for object in users {
+                            if let user = object as? PFUser {
+                                if user.username! == self.userInforomation[0] as! String {
+                                    addFriendArray.append(user.objectId! as AnyObject)
+                                    addFriendArray.append(user.username! as AnyObject)
+                                    
+                                    // Get the user's profile picture and append it as well
+                                    if let userPicture = user.object(forKey: "profilePic")! as? PFFile {
+                                        userPicture.getDataInBackground({ (imageData: Data?, error: Error?) -> Void in
+                                            let image = UIImage(data: imageData!)
+                                            if image != nil {
+                                                // Append the image to index 2
+                                                addFriendArray.append(image!)
+                                                currentFriends.append(addFriendArray)
+                                                print("addFriendArray is \(addFriendArray)")
+                                                // Save the new friend online
+                                                updateArray(currentFriends as Array<Array<AnyObject>>, "friends")
+                                            }
+                                        })
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            })
+        }))
+        
+        alert.addAction(UIAlertAction(title: "No, don't add", style: .default, handler: { (action) in
+          
+        }))
+        self.present(alert, animated: true, completion: nil)
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+    
     }
     
     @IBAction func viewUserLibraryButtonAction(_ sender: UIButton) {

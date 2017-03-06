@@ -41,6 +41,9 @@
 		56E68E521E6474310029D497 /* SearchUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E68E511E6474310029D497 /* SearchUsersViewController.swift */; };
 		56E68E541E647A020029D497 /* SearchUsernameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E68E531E647A020029D497 /* SearchUsernameCell.swift */; };
 		56E68E561E647A230029D497 /* SearchUserNameTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E68E551E647A230029D497 /* SearchUserNameTableViewController.swift */; };
+		56F911351E6DC0E3004C08D6 /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F911341E6DC0E3004C08D6 /* FriendsTableViewController.swift */; };
+		56F911371E6DC103004C08D6 /* FriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F911361E6DC103004C08D6 /* FriendsCell.swift */; };
+		56F911391E6DC118004C08D6 /* FriendsInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F911381E6DC118004C08D6 /* FriendsInformationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -99,6 +102,9 @@
 		56E68E511E6474310029D497 /* SearchUsersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUsersViewController.swift; sourceTree = "<group>"; };
 		56E68E531E647A020029D497 /* SearchUsernameCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUsernameCell.swift; sourceTree = "<group>"; };
 		56E68E551E647A230029D497 /* SearchUserNameTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUserNameTableViewController.swift; sourceTree = "<group>"; };
+		56F911341E6DC0E3004C08D6 /* FriendsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
+		56F911361E6DC103004C08D6 /* FriendsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsCell.swift; sourceTree = "<group>"; };
+		56F911381E6DC118004C08D6 /* FriendsInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsInformationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +186,8 @@
 				568779711E5DD5ED009395DA /* BooksTableViewController.swift */,
 				56DE1DB51E6390C900402774 /* DeletedBookInformationViewController.swift */,
 				56DE1DB31E63893500402774 /* DeletedBooksTableViewController.swift */,
+				56F911381E6DC118004C08D6 /* FriendsInformationViewController.swift */,
+				56F911341E6DC0E3004C08D6 /* FriendsTableViewController.swift */,
 				569C1EB71E4C40B400428785 /* LoginViewController.swift */,
 				5634D5E41E510E5500B91725 /* MainMenuViewController.swift */,
 				564D22321E5B2FCB00AB7E65 /* NewBookViewController.swift */,
@@ -201,6 +209,7 @@
 				56594B721E4C16FE00F6A60A /* AppDelegate.swift */,
 				5687796F1E5DD234009395DA /* BooksTableViewCell.swift */,
 				56DE1DB11E6388C500402774 /* DeletedBooksTableViewCell.swift */,
+				56F911361E6DC103004C08D6 /* FriendsCell.swift */,
 				567A9DF71E54B0FA00DB2930 /* Information.swift */,
 				56BBD7B61E4E730A00E3677F /* SearchAPI.swift */,
 				56431FDC1E6712EA007404C4 /* SearchedUserLibraryCell.swift */,
@@ -364,6 +373,7 @@
 				56431FDB1E6712B6007404C4 /* ViewSearchedUserLibraryTableViewController.swift in Sources */,
 				56431FD91E670A19007404C4 /* SearchedUserInformationViewController.swift in Sources */,
 				5634D5E51E510E5500B91725 /* MainMenuViewController.swift in Sources */,
+				56F911391E6DC118004C08D6 /* FriendsInformationViewController.swift in Sources */,
 				56D052621E4E377E007747ED /* SetProfilePicViewController.swift in Sources */,
 				568779721E5DD5ED009395DA /* BooksTableViewController.swift in Sources */,
 				568906921E69C3D70044C016 /* WishListTableViewController.swift in Sources */,
@@ -380,12 +390,14 @@
 				56594B731E4C16FE00F6A60A /* AppDelegate.swift in Sources */,
 				56DE1DB21E6388C500402774 /* DeletedBooksTableViewCell.swift in Sources */,
 				56431FDF1E6720CE007404C4 /* UserLibraryBookInformationViewController.swift in Sources */,
+				56F911351E6DC0E3004C08D6 /* FriendsTableViewController.swift in Sources */,
 				56DE1DB61E6390C900402774 /* DeletedBookInformationViewController.swift in Sources */,
 				56BBD7B51E4E6C1000E3677F /* UserGus.swift in Sources */,
 				568779701E5DD234009395DA /* BooksTableViewCell.swift in Sources */,
 				56E68E521E6474310029D497 /* SearchUsersViewController.swift in Sources */,
 				564D22331E5B2FCB00AB7E65 /* NewBookViewController.swift in Sources */,
 				56E68E541E647A020029D497 /* SearchUsernameCell.swift in Sources */,
+				56F911371E6DC103004C08D6 /* FriendsCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
