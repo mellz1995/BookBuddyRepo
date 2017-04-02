@@ -68,7 +68,7 @@ class SearchUserNameTableViewController: UITableViewController {
                 os_log("Showing user's information", log: OSLog.default, type: .debug)
             
                 guard let searchedUserInformationViewController = segue.destination as? SearchedUserInformationViewController else {
-                    fatalError("Unexpected sender: \(sender)")
+                    fatalError("Unexpected sender: \(String(describing: sender))")
                 }
                 guard let selectedUserCell = sender as? SearchUsernameCell else {
                     fatalError("The selected cell is not being displayed by the table")
@@ -85,7 +85,7 @@ class SearchUserNameTableViewController: UITableViewController {
                 os_log("Viewing User's library")
             
             guard let searchedUserInformationViewController = segue.destination as? SearchedUserInformationViewController else {
-                fatalError("Unexpected sender: \(sender)")
+                fatalError("Unexpected sender: \(String(describing: sender))")
                 }
         
                 guard let selectedUserCell = sender as? SearchUsernameCell else {
@@ -103,7 +103,7 @@ class SearchUserNameTableViewController: UITableViewController {
                 os_log("Going back to search", log: OSLog.default, type: .debug)
             
             default:
-            fatalError("Unexpected Segueue Identifier: \(segue.identifier)")
+            fatalError("Unexpected Segueue Identifier: \(String(describing: segue.identifier))")
             
         }
     }

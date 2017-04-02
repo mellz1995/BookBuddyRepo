@@ -9,7 +9,7 @@
 import UIKit
 import Parse
 
-let mykey = "BHPQT1PV"
+let mykey = "L0RA52QG"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

@@ -211,7 +211,7 @@ class BooksTableViewController: UITableViewController {
             }
             
             guard let selectedBookCell = sender as? BooksTableViewCell else {
-                fatalError("Unexpected sender: \(sender)")
+                fatalError("Unexpected sender: \(String(describing: sender))")
             }
             
             guard let indexPath = tableView.indexPath(for: selectedBookCell) else {
@@ -229,7 +229,7 @@ class BooksTableViewController: UITableViewController {
             os_log("Going to the main menu", log: OSLog.default, type: .debug)
             
         default:
-            fatalError("Unexpected Segueue Identifier: \(segue.identifier)")
+            fatalError("Unexpected Segueue Identifier: \(String(describing: segue.identifier))")
             
         }
     }

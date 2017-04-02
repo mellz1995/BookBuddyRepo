@@ -147,7 +147,7 @@ class LoginViewController: UIViewController {
                 UIApplication.shared.endIgnoringInteractionEvents()
                 if error != nil {
                     var displayErrorMessage = "Please try again later."
-                    if let errorMessage = error as? NSError {
+                    if let errorMessage = error as NSError? {
                         displayErrorMessage = errorMessage.userInfo["error"] as! String
                     }
                     self.displayAlert("Login Error", displayErrorMessage, "Ok")
@@ -242,7 +242,7 @@ class LoginViewController: UIViewController {
             
                 if error != nil {
                     var displayErrorMessage = "Please try again later."
-                    if let errorMessage = error as? NSError {
+                    if let errorMessage = error as NSError? {
                         displayErrorMessage = errorMessage.userInfo["error"] as! String
                         UIApplication.shared.endIgnoringInteractionEvents()
                         self.activityIndicator.stopAnimating()

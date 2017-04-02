@@ -49,7 +49,6 @@ class SearchUsersViewController: UIViewController {
     @IBAction func searchButtonAction(_ sender: UIButton) {
         self.dismissKeyboard()
         
-        
         let query = PFUser.query()
         query?.findObjectsInBackground { (objects, error) in
             if let users = objects {
