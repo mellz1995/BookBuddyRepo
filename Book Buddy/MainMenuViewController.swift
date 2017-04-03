@@ -26,6 +26,7 @@ class MainMenuViewController: UIViewController, UINavigationControllerDelegate, 
     var currentFriends = PFUser.current()!.object(forKey: "friends") as! Array<Array<Any>>
     
     override func viewDidLoad() {
+        playerNameLabel.text = PFUser.current()!.username!
         comingFromWishList = false
         super.viewDidLoad()
         // This check is for testing purposes when I don't have a logged in user
@@ -48,6 +49,7 @@ class MainMenuViewController: UIViewController, UINavigationControllerDelegate, 
             }
         }
     }
+    @IBOutlet weak var playerNameLabel: UILabel!
     
     override var prefersStatusBarHidden: Bool {
         return true

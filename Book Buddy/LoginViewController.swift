@@ -42,6 +42,10 @@ class LoginViewController: UIViewController {
         view.addGestureRecognizer(tap)
     }
     
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -372,7 +376,7 @@ class LoginViewController: UIViewController {
         }), completion: nil)
         
         UIView.animate(withDuration: 0.5, delay: 0.5, usingSpringWithDamping: CGFloat(springWithDamping), initialSpringVelocity: 20, options: UIViewAnimationOptions.curveEaseIn, animations: ({
-            self.bottomQRBackgroundImage.center.x = self.bottomQRBackgroundImage.center.x - 1000
+            self.bottomQRBackgroundImage.center.y = self.bottomQRBackgroundImage.center.y - 1000
             self.qrCodeImageView.center.y = self.qrCodeImageView.center.y - 1000
         }), completion: nil)
         

@@ -72,7 +72,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fRV-b5-LcZ">
-                                <rect key="frame" x="47" y="561" width="74" height="42"/>
+                                <rect key="frame" x="39" y="565" width="74" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="RegisterButton Copy"/>
                                 <connections>
@@ -146,11 +146,11 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Rectangle 5" translatesAutoresizingMaskIntoConstraints="NO" id="8pd-bI-alH">
-                                <rect key="frame" x="121" y="517" width="130" height="130"/>
+                                <rect key="frame" x="116" y="514" width="142" height="145"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iub-Ie-52T">
-                                <rect key="frame" x="129" y="525" width="115" height="115"/>
+                                <rect key="frame" x="129" y="530" width="115" height="115"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Rectangle 5" translatesAutoresizingMaskIntoConstraints="NO" id="33E-M5-dvq">
@@ -174,7 +174,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mIc-ED-raB">
-                                <rect key="frame" x="252" y="561" width="74" height="42"/>
+                                <rect key="frame" x="261" y="565" width="74" height="42"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="RegisterButton Copy 2"/>
                                 <connections>
@@ -220,76 +220,48 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="tWn-dP-Mru">
-                                <rect key="frame" x="67" y="42" width="240" height="128"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="240" id="mmt-Hs-aPH"/>
-                                    <constraint firstAttribute="height" constant="128" id="pqT-UU-kgq"/>
-                                </constraints>
-                                <string key="text">Now, let's set up a nice looking profile picture! Click the 'import photo' button down below! You'll have to allow access to the camera roll. Don't worry; your photo is safe with us!</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Kmn-0D-sPY">
-                                <rect key="frame" x="62" y="274" width="250" height="250"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="250" id="VIy-XT-yjV"/>
-                                    <constraint firstAttribute="height" constant="250" id="ue5-TQ-Sbj"/>
-                                </constraints>
-                            </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Uz-E0-5Aq">
-                                <rect key="frame" x="142" y="178" width="90" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="90" id="NXi-Tb-p28"/>
-                                    <constraint firstAttribute="height" constant="30" id="lOI-KR-9IJ"/>
-                                </constraints>
-                                <state key="normal" title="Import Photo"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Uz-E0-5Aq">
+                                <rect key="frame" x="115" y="462" width="147" height="53"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="ImportPhotoButton"/>
                                 <connections>
                                     <action selector="importPhotoButtonAction:" destination="LIB-We-uyZ" eventType="touchUpInside" id="aIv-E4-T4v"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JVg-qu-6hj">
-                                <rect key="frame" x="169" y="579" width="36" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="36" id="IGY-yk-Fvg"/>
-                                    <constraint firstAttribute="height" constant="30" id="XYj-fq-bFs"/>
-                                </constraints>
-                                <state key="normal" title="Clear"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JVg-qu-6hj">
+                                <rect key="frame" x="114" y="523" width="147" height="53"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="ClearButton"/>
                                 <connections>
                                     <action selector="clearButtonAction:" destination="LIB-We-uyZ" eventType="touchUpInside" id="v3r-uS-nrZ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AAI-Vf-eFh">
-                                <rect key="frame" x="151" y="629" width="73" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="73" id="Icn-0R-iYB"/>
-                                    <constraint firstAttribute="height" constant="30" id="QFy-Zb-vhs"/>
-                                </constraints>
-                                <state key="normal" title="Skip"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ImageParagraph" translatesAutoresizingMaskIntoConstraints="NO" id="hAh-zE-Qx2">
+                                <rect key="frame" x="47" y="27" width="282" height="231"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ImagePlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="PSw-Tb-5cM">
+                                <rect key="frame" x="108" y="284" width="160" height="160"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="InitialSadBook" translatesAutoresizingMaskIntoConstraints="NO" id="Kmn-0D-sPY">
+                                <rect key="frame" x="131" y="307" width="115" height="115"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AAI-Vf-eFh">
+                                <rect key="frame" x="115" y="584" width="147" height="53"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="SkipButton"/>
                                 <connections>
                                     <action selector="skipButtonAction:" destination="LIB-We-uyZ" eventType="touchUpInside" id="XC8-Nr-5yl"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="Kmn-0D-sPY" firstAttribute="centerX" secondItem="XFc-mb-ywF" secondAttribute="centerX" id="82a-Dp-Wm9"/>
-                            <constraint firstItem="tWn-dP-Mru" firstAttribute="centerY" secondItem="XFc-mb-ywF" secondAttribute="centerY" constant="-227.5" id="MOW-vC-tik"/>
-                            <constraint firstItem="Kmn-0D-sPY" firstAttribute="centerY" secondItem="XFc-mb-ywF" secondAttribute="centerY" constant="65.5" id="NR9-xI-R27"/>
-                            <constraint firstItem="7Uz-E0-5Aq" firstAttribute="centerX" secondItem="XFc-mb-ywF" secondAttribute="centerX" id="QPW-uZ-Y0Y"/>
-                            <constraint firstItem="JVg-qu-6hj" firstAttribute="centerY" secondItem="XFc-mb-ywF" secondAttribute="centerY" constant="260.5" id="TMY-g2-jmr"/>
-                            <constraint firstItem="tWn-dP-Mru" firstAttribute="centerX" secondItem="XFc-mb-ywF" secondAttribute="centerX" id="ZBJ-Ow-4SQ"/>
-                            <constraint firstItem="AAI-Vf-eFh" firstAttribute="centerX" secondItem="XFc-mb-ywF" secondAttribute="centerX" id="dzR-cY-9iL"/>
-                            <constraint firstItem="AAI-Vf-eFh" firstAttribute="centerY" secondItem="XFc-mb-ywF" secondAttribute="centerY" constant="310.5" id="eWe-fC-xKg"/>
-                            <constraint firstItem="JVg-qu-6hj" firstAttribute="centerX" secondItem="XFc-mb-ywF" secondAttribute="centerX" id="o6m-4B-Y7N"/>
-                            <constraint firstItem="7Uz-E0-5Aq" firstAttribute="centerY" secondItem="XFc-mb-ywF" secondAttribute="centerY" constant="-140.5" id="sDh-0r-xe6"/>
-                        </constraints>
+                        <color key="backgroundColor" red="0.012886563315987587" green="0.45937305688858032" blue="0.88728392124176025" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
                         <outlet property="clearButtonOutlet" destination="JVg-qu-6hj" id="v0n-r4-HR9"/>
                         <outlet property="importPhotoButtonOutlet" destination="7Uz-E0-5Aq" id="JMR-cl-PXX"/>
-                        <outlet property="photoDescriptionTextView" destination="tWn-dP-Mru" id="y0f-Ds-eVI"/>
                         <outlet property="profilePicView" destination="Kmn-0D-sPY" id="qay-6g-QBm"/>
                         <outlet property="skipButtonOutlet" destination="AAI-Vf-eFh" id="4G9-CI-WM9"/>
                     </connections>
@@ -1327,27 +1299,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qWk-Wi-33B">
-                                <rect key="frame" x="157" y="617" width="48" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qWk-Wi-33B">
+                                <rect key="frame" x="119" y="573" width="147" height="53"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="tintColor" red="1" green="0.14868836204528202" blue="0.19627550738594912" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Logout"/>
+                                <state key="normal" image="LogoutButton"/>
                                 <connections>
                                     <action selector="logoutButtonAction:" destination="2N7-Qy-ENf" eventType="touchUpInside" id="fF5-wE-wKT"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dyp-oD-npr">
-                                <rect key="frame" x="157" y="425" width="48" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dyp-oD-npr">
+                                <rect key="frame" x="210" y="334" width="147" height="53"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Library"/>
+                                <state key="normal" image="LibraryButton"/>
                                 <connections>
                                     <segue destination="vSm-Eu-Spr" kind="show" id="fq5-dJ-QyX"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GgA-gT-lvd">
-                                <rect key="frame" x="137" y="534" width="100" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GgA-gT-lvd">
+                                <rect key="frame" x="29" y="490" width="147" height="53"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Deleted Books"/>
+                                <state key="normal" image="DeletedBooksButton"/>
                                 <connections>
                                     <segue destination="oRM-Kt-ug1" kind="popoverPresentation" popoverAnchorView="GgA-gT-lvd" id="awy-gX-usX">
                                         <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
@@ -1355,7 +1327,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a73-XJ-sed">
-                                <rect key="frame" x="141" y="482" width="92" height="30"/>
+                                <rect key="frame" x="267" y="79" width="92" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Search Users"/>
                                 <connections>
@@ -1363,39 +1335,64 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Y1E-qJ-smD">
-                                <rect key="frame" x="128" y="298" width="118" height="30"/>
+                                <rect key="frame" x="16" y="79" width="118" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Change Profil Pic"/>
                                 <connections>
                                     <action selector="changeProfilePicButtonAction:" destination="2N7-Qy-ENf" eventType="touchUpInside" id="eRb-OF-YoH"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KP1-HZ-doW">
-                                <rect key="frame" x="156" y="572" width="63" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iUd-0y-tur">
+                                <rect key="frame" x="28" y="415" width="147" height="53"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Wish List"/>
-                                <connections>
-                                    <segue destination="gfo-Z9-tTg" kind="show" id="dwy-7P-0LS"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iUd-0y-tur">
-                                <rect key="frame" x="163" y="367" width="36" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Links"/>
+                                <state key="normal" image="LinksButton"/>
                                 <connections>
                                     <action selector="linksButtonAction:" destination="2N7-Qy-ENf" eventType="touchUpInside" id="P12-6j-ePr"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ProfilePicture" translatesAutoresizingMaskIntoConstraints="NO" id="t99-1F-zyL">
-                                <rect key="frame" x="0.0" y="46" width="375" height="180"/>
+                                <rect key="frame" x="1" y="97" width="375" height="180"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="smily" translatesAutoresizingMaskIntoConstraints="NO" id="Qdh-Xn-W4Z">
-                                <rect key="frame" x="117" y="66" width="140" height="140"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="InitialSadBook" translatesAutoresizingMaskIntoConstraints="NO" id="Qdh-Xn-W4Z">
+                                <rect key="frame" x="118" y="117" width="140" height="140"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="MainMenuTitle" translatesAutoresizingMaskIntoConstraints="NO" id="ucU-4j-VpE">
+                                <rect key="frame" x="0.0" y="25" width="375" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="PlayerName" translatesAutoresizingMaskIntoConstraints="NO" id="LWk-Xz-joK">
+                                <rect key="frame" x="28" y="262" width="319" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pdp-O9-x3O">
+                                <rect key="frame" x="28" y="334" width="147" height="53"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="ProfileButton"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IWk-1P-Dx4">
+                                <rect key="frame" x="210" y="490" width="147" height="53"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="SettingsButton"/>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PlayerName" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PLu-yY-dTX">
+                                <rect key="frame" x="40" y="265" width="296" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KP1-HZ-doW">
+                                <rect key="frame" x="210" y="415" width="147" height="53"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="WishListButton"/>
+                                <connections>
+                                    <segue destination="gfo-Z9-tTg" kind="show" id="dwy-7P-0LS"/>
+                                </connections>
+                            </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.012886563315987587" green="0.45937305688858032" blue="0.88728392124176025" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="gac-5l-rAZ"/>
                     <navigationItem key="navigationItem" id="dZj-7m-pU1"/>
@@ -1403,6 +1400,7 @@
                         <outlet property="linksButtonOutlet" destination="iUd-0y-tur" id="old-qh-xSw"/>
                         <outlet property="logoutButtonOutlet" destination="qWk-Wi-33B" id="lho-4Z-47g"/>
                         <outlet property="navigationBar" destination="dZj-7m-pU1" id="R6h-Xn-AGv"/>
+                        <outlet property="playerNameLabel" destination="PLu-yY-dTX" id="YVW-je-njn"/>
                         <outlet property="profilePicture" destination="Qdh-Xn-W4Z" id="0lR-JE-nVq"/>
                     </connections>
                 </viewController>
@@ -1575,22 +1573,37 @@
         </scene>
     </scenes>
     <resources>
+        <image name="ClearButton" width="147" height="53"/>
+        <image name="DeletedBooksButton" width="147" height="53"/>
+        <image name="ImageParagraph" width="292" height="241"/>
+        <image name="ImagePlaceholder" width="170" height="170"/>
+        <image name="ImportPhotoButton" width="147" height="53"/>
+        <image name="InitialSadBook" width="131" height="130"/>
+        <image name="LibraryButton" width="147" height="53"/>
+        <image name="LinksButton" width="147" height="53"/>
         <image name="LoginBox" width="330" height="332"/>
         <image name="LoginButton" width="147" height="53"/>
+        <image name="LogoutButton" width="147" height="53"/>
+        <image name="MainMenuTitle" width="375" height="52"/>
+        <image name="PlayerName" width="329" height="42"/>
+        <image name="ProfileButton" width="147" height="53"/>
         <image name="ProfilePicture" width="375" height="198"/>
         <image name="Rectangle 5" width="170" height="170"/>
         <image name="RegisterButton" width="147" height="53"/>
         <image name="RegisterButton Copy" width="84" height="52"/>
         <image name="RegisterButton Copy 2" width="84" height="52"/>
+        <image name="SettingsButton" width="147" height="53"/>
+        <image name="SkipButton" width="147" height="53"/>
         <image name="TitleBar" width="375" height="52"/>
+        <image name="WishListButton" width="147" height="53"/>
         <image name="smily" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="R3s-sQ-GCS"/>
-        <segue reference="i8u-CP-OAu"/>
-        <segue reference="eA9-Wm-f6v"/>
         <segue reference="ls1-iM-i5z"/>
         <segue reference="XHx-pM-Nn3"/>
         <segue reference="7lW-5Y-qHH"/>
+        <segue reference="fq5-dJ-QyX"/>
+        <segue reference="i8u-CP-OAu"/>
     </inferredMetricsTieBreakers>
 </document>
