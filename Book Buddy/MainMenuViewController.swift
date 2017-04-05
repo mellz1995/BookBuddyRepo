@@ -55,6 +55,15 @@ class MainMenuViewController: UIViewController, UINavigationControllerDelegate, 
         return true
     }
 
+    @IBOutlet weak var profileButtonOutlet: UIButton!
+    @IBAction func profileButtonAction(_ sender: UIButton) {
+        
+        
+        
+    }
+    
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

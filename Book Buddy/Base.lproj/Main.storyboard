@@ -59,6 +59,259 @@
             </objects>
             <point key="canvasLocation" x="54" y="-687"/>
         </scene>
+        <!--Profile View Controller-->
+        <scene sceneID="eYh-ZX-bYl">
+            <objects>
+                <viewController id="kpF-l9-1x3" customClass="ProfileViewController" customModule="Book_Buddy" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rfp-0W-Fyb"/>
+                        <viewControllerLayoutGuide type="bottom" id="jMm-Eb-Lmr"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="V1w-mX-rqg">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ProfileTitle" translatesAutoresizingMaskIntoConstraints="NO" id="Bih-To-Hwb">
+                                <rect key="frame" x="19" y="74" width="337" height="209"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="ProfileBackground" translatesAutoresizingMaskIntoConstraints="NO" id="ny3-p6-kqF">
+                                <rect key="frame" x="0.0" y="18" width="375" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Player Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pg2-Cj-vdQ">
+                                <rect key="frame" x="0.0" y="26" width="375" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="81" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="ZUv-Wh-8hY">
+                                <rect key="frame" x="0.0" y="337" width="375" height="277"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProfileLibraryID" rowHeight="81" id="ppj-Ki-8Lh" customClass="ProfileLibraryTableViewCell" customModule="Book_Buddy" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="81"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ppj-Ki-8Lh" id="jOz-aQ-ZhX">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="80.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jvh-Xl-JQm">
+                                                    <rect key="frame" x="8" y="2" width="80" height="80"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Book Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lqZ-Hk-iS5">
+                                                    <rect key="frame" x="96" y="8" width="183" height="21"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Author" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BVf-AL-Z23">
+                                                    <rect key="frame" x="96" y="31" width="183" height="22"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="ISBN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YkZ-dr-bG5">
+                                                    <rect key="frame" x="96" y="58" width="183" height="19"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="t6r-bJ-CFX">
+                                                    <rect key="frame" x="309" y="14" width="58" height="56"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                </imageView>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="authorLabel" destination="BVf-AL-Z23" id="eAW-U6-Pjc"/>
+                                            <outlet property="bookImage" destination="Jvh-Xl-JQm" id="MBV-9n-hgs"/>
+                                            <outlet property="isbn10Label" destination="YkZ-dr-bG5" id="Dha-Az-PId"/>
+                                            <outlet property="statusImageView" destination="t6r-bJ-CFX" id="eN6-6u-0ZQ"/>
+                                            <outlet property="titleLabel" destination="lqZ-Hk-iS5" id="ic7-mQ-cG8"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="kpF-l9-1x3" id="Rsj-12-aYX"/>
+                                    <outlet property="delegate" destination="kpF-l9-1x3" id="XbA-xi-k6M"/>
+                                </connections>
+                            </tableView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ufz-SI-KEE">
+                                <rect key="frame" x="33" y="86" width="120" height="120"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jkX-G7-X4s">
+                                <rect key="frame" x="33" y="86" width="120" height="120"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <connections>
+                                    <action selector="profilePictureAction:" destination="kpF-l9-1x3" eventType="touchUpInside" id="Zti-QC-vsB"/>
+                                    <segue destination="aCg-tP-Enj" kind="show" id="t4g-ih-K17"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iPG-1M-je7">
+                                <rect key="frame" x="285" y="86" width="61" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="EditProfileButton"/>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="orq-ns-wv1">
+                                <rect key="frame" x="16" y="291" width="85" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="OwnedHighlighted"/>
+                                <connections>
+                                    <action selector="ownedAction:" destination="kpF-l9-1x3" eventType="touchUpInside" id="ib6-Z6-iuD"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Jc-k9-Xay">
+                                <rect key="frame" x="100" y="291" width="85" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="BorrowedHighlighted"/>
+                                <connections>
+                                    <action selector="borrowedAction:" destination="kpF-l9-1x3" eventType="touchUpInside" id="tfj-Nd-XRj"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JU7-Bt-Jxp">
+                                <rect key="frame" x="185" y="291" width="85" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="LentHighlighted"/>
+                                <connections>
+                                    <action selector="lentAction:" destination="kpF-l9-1x3" eventType="touchUpInside" id="joJ-QK-YzF"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K8g-MX-Nix">
+                                <rect key="frame" x="271" y="291" width="85" height="46"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" image="DeletedHighLighted"/>
+                                <connections>
+                                    <action selector="deletedAction:" destination="kpF-l9-1x3" eventType="touchUpInside" id="9hg-lz-XTT"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zzu-FB-ejK">
+                                <rect key="frame" x="30" y="242" width="72" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
+                                <state key="normal" title="Links">
+                                    <color key="titleColor" red="0.012886563315987587" green="0.45937305688858032" blue="0.88728392124176025" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mpn-A7-4CJ">
+                                <rect key="frame" x="110" y="242" width="78" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
+                                <state key="normal" title="Requests">
+                                    <color key="titleColor" red="0.012886563320000001" green="0.45937305690000002" blue="0.88728392119999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Om-Zg-iBa">
+                                <rect key="frame" x="37" y="224" width="58" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Upcoming:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QUs-Oj-oeu">
+                                <rect key="frame" x="159" y="112" width="90" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Nothing due soon" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PBI-B4-k2j">
+                                <rect key="frame" x="159" y="185" width="145" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gK6-76-gp7">
+                                <rect key="frame" x="120" y="223" width="58" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7L9-ST-J9i">
+                                <rect key="frame" x="317" y="629" width="39" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Menu">
+                                    <color key="titleColor" red="2.3112122616080783e-05" green="0.0015282078197397634" blue="0.0029941307106599035" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <segue destination="2N7-Qy-ENf" kind="show" id="EUP-A2-cC8"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bdz-5a-MrN">
+                                <rect key="frame" x="247" y="242" width="72" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" name="ArialRoundedMTBold" family="Arial Rounded MT Bold" pointSize="17"/>
+                                <state key="normal" title="History">
+                                    <color key="titleColor" red="0.012886563320000001" green="0.45937305690000002" blue="0.88728392119999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.012886563315987587" green="0.45937305688858032" blue="0.88728392124176025" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                    <connections>
+                        <outlet property="borrowedOutlet" destination="1Jc-k9-Xay" id="JRb-3X-pQ2"/>
+                        <outlet property="deletedOutlet" destination="K8g-MX-Nix" id="U61-Zj-Pbs"/>
+                        <outlet property="lentOutlet" destination="JU7-Bt-Jxp" id="mil-xD-7oy"/>
+                        <outlet property="linksAmountLabel" destination="3Om-Zg-iBa" id="Rv0-gr-tvw"/>
+                        <outlet property="nameLabel" destination="pg2-Cj-vdQ" id="rlc-6U-kaC"/>
+                        <outlet property="ownedOutlet" destination="orq-ns-wv1" id="x6e-tX-hCi"/>
+                        <outlet property="profilePic" destination="Ufz-SI-KEE" id="qmG-22-9KE"/>
+                        <outlet property="profilePictureOutlet" destination="jkX-G7-X4s" id="DXh-nk-nap"/>
+                        <outlet property="requestAmountLabel" destination="gK6-76-gp7" id="dhl-7Z-RZd"/>
+                        <outlet property="tableViewMel" destination="ZUv-Wh-8hY" id="Z1e-iF-Crh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9T9-vj-gzS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4092" y="572.56371814092961"/>
+        </scene>
+        <!--View Profile Picture View Controller-->
+        <scene sceneID="ttl-q5-yed">
+            <objects>
+                <viewController storyboardIdentifier="viewProfilePicture" useStoryboardIdentifierAsRestorationIdentifier="YES" id="aCg-tP-Enj" customClass="ViewProfilePictureViewController" customModule="Book_Buddy" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ASS-wQ-TpA"/>
+                        <viewControllerLayoutGuide type="bottom" id="G3g-tL-Mmz"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="QSc-NE-6IT">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hk6-KH-whb">
+                                <rect key="frame" x="22" y="20" width="34" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.0068490713214376673" green="0.45287075208288663" blue="0.88728392124176025" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="Back">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <segue destination="kpF-l9-1x3" kind="show" id="YDz-cl-7aV"/>
+                                </connections>
+                            </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wnf-Np-hwh">
+                                <rect key="frame" x="0.0" y="146" width="375" height="375"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.012886563315987587" green="0.45937305688858032" blue="0.88728392124176025" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                    <connections>
+                        <outlet property="profilePicture" destination="wnf-Np-hwh" id="rPF-0Q-zXj"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NzY-Va-rjP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-3239" y="573"/>
+        </scene>
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -206,7 +459,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-698.39999999999998" y="-0.44977511244377816"/>
+            <point key="canvasLocation" x="-5106" y="-170"/>
         </scene>
         <!--Set Profile Pic View Controller-->
         <scene sceneID="nMH-mo-bCO">
@@ -268,7 +521,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OYc-Ls-H1e" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-698" y="682"/>
+            <point key="canvasLocation" x="-5106" y="551"/>
         </scene>
         <!--Book Information View Controller-->
         <scene sceneID="fw0-fZ-9CH">
@@ -1370,6 +1623,10 @@
                                 <rect key="frame" x="28" y="334" width="147" height="53"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="ProfileButton"/>
+                                <connections>
+                                    <action selector="profileButtonAction:" destination="2N7-Qy-ENf" eventType="touchUpInside" id="oRk-bY-k1F"/>
+                                    <segue destination="kpF-l9-1x3" kind="show" id="KaN-PR-adz"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IWk-1P-Dx4">
                                 <rect key="frame" x="210" y="490" width="147" height="53"/>
@@ -1401,12 +1658,13 @@
                         <outlet property="logoutButtonOutlet" destination="qWk-Wi-33B" id="lho-4Z-47g"/>
                         <outlet property="navigationBar" destination="dZj-7m-pU1" id="R6h-Xn-AGv"/>
                         <outlet property="playerNameLabel" destination="PLu-yY-dTX" id="YVW-je-njn"/>
+                        <outlet property="profileButtonOutlet" destination="Pdp-O9-x3O" id="d2v-yw-Tfr"/>
                         <outlet property="profilePicture" destination="Qdh-Xn-W4Z" id="0lR-JE-nVq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hFz-A0-jVY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="53.600000000000001" y="-7.6461769115442282"/>
+            <point key="canvasLocation" x="-4092" y="-170"/>
         </scene>
         <!--Barcode Reader View Controller-->
         <scene sceneID="Kmz-4O-Q3a">
@@ -1573,21 +1831,28 @@
         </scene>
     </scenes>
     <resources>
+        <image name="BorrowedHighlighted" width="85" height="46"/>
         <image name="ClearButton" width="147" height="53"/>
         <image name="DeletedBooksButton" width="147" height="53"/>
+        <image name="DeletedHighLighted" width="85" height="46"/>
+        <image name="EditProfileButton" width="77" height="31"/>
         <image name="ImageParagraph" width="292" height="241"/>
         <image name="ImagePlaceholder" width="170" height="170"/>
         <image name="ImportPhotoButton" width="147" height="53"/>
         <image name="InitialSadBook" width="131" height="130"/>
+        <image name="LentHighlighted" width="85" height="46"/>
         <image name="LibraryButton" width="147" height="53"/>
         <image name="LinksButton" width="147" height="53"/>
         <image name="LoginBox" width="330" height="332"/>
         <image name="LoginButton" width="147" height="53"/>
         <image name="LogoutButton" width="147" height="53"/>
         <image name="MainMenuTitle" width="375" height="52"/>
+        <image name="OwnedHighlighted" width="85" height="46"/>
         <image name="PlayerName" width="329" height="42"/>
+        <image name="ProfileBackground" width="375" height="36"/>
         <image name="ProfileButton" width="147" height="53"/>
         <image name="ProfilePicture" width="375" height="198"/>
+        <image name="ProfileTitle" width="337" height="209"/>
         <image name="Rectangle 5" width="170" height="170"/>
         <image name="RegisterButton" width="147" height="53"/>
         <image name="RegisterButton Copy" width="84" height="52"/>
@@ -1600,10 +1865,11 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="R3s-sQ-GCS"/>
-        <segue reference="ls1-iM-i5z"/>
-        <segue reference="XHx-pM-Nn3"/>
-        <segue reference="7lW-5Y-qHH"/>
+        <segue reference="EUP-A2-cC8"/>
+        <segue reference="YDz-cl-7aV"/>
         <segue reference="fq5-dJ-QyX"/>
-        <segue reference="i8u-CP-OAu"/>
+        <segue reference="7lW-5Y-qHH"/>
+        <segue reference="LBg-kH-KzL"/>
+        <segue reference="XUV-YA-wSX"/>
     </inferredMetricsTieBreakers>
 </document>
