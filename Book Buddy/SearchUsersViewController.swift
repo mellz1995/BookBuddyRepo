@@ -78,6 +78,17 @@ class SearchUsersViewController: UIViewController {
                                         
                                         self.printOutSearchResults()
                                         
+                                        var didSaveFirst = false
+                                        
+                                        if user.object(forKey: "didSaveFirstBook") as! Bool == false {
+                                            didSaveFirst = false
+                                        } else {
+                                            didSaveFirst = true
+                                        }
+                                        
+                                        // Append the user's DidAddFirstBook to array
+                                        individualUserArray.append(didSaveFirst as AnyObject)
+                                        
                                         // Append all of the user's information into the full user's array
                                         userInformationArray.append(individualUserArray)
                                         print("UserinformationArray is : \(userInformationArray)")

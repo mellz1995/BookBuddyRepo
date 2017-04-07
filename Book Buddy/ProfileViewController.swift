@@ -13,7 +13,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     var currentLibrary = Array<Array<AnyObject>>()
     var mode = "owned"
-
+    var requestedLibrary = PFUser.current()!.object(forKey: "requestedLibrary") as! Array<Array<AnyObject>>
     
     
     @IBOutlet weak var profilePic: UIImageView!
@@ -97,6 +97,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         refresh()
         
+        
+        
         // Load the current library
         currentLibrary = PFUser.current()?.object(forKey: "library") as! Array<Array<AnyObject>>
         
@@ -123,6 +125,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func refresh(){
         var linksAmount = 0
+        
         if PFUser.current()!.object(forKey: "didAddFirstFrend") as! Bool == false {
             linksAmount = 0
         } else {
@@ -130,7 +133,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             linksAmount = linksList.count
         }
         linksAmountLabel.text = "\(linksAmount)"
-        requestAmountLabel.text = "0"
+        requestAmountLabel.text = "\(requestedLibrary.count)"
     }
     
     // Override function that rounds the profile picture
@@ -191,6 +194,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ProfileLibraryID", for: indexPath) as? ProfileLibraryTableViewCell else {
             fatalError("The dequed cell is not an instance of BooksTableViewCell")
         }
+        
+        cell.multipleSelectionBackgroundView?.alpha = 0.3
         
         if mode == "owned" {
             if PFUser.current()!.object(forKey: "didSaveFirstBook") as! Bool == false {

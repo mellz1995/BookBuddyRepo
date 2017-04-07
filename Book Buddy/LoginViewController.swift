@@ -222,6 +222,8 @@ class LoginViewController: UIViewController {
             user.setValue([[]], forKey: "friendRequests")
             user.setValue([[]], forKey: "wishList")
             user.setValue([[]], forKey: "deletedLibrary")
+            user.setValue([[]], forKey: "requestedLibrary")
+            
             
             user.setValue(0, forKey: "rating")
             user.setValue(0, forKey: "totalRating")
@@ -235,6 +237,7 @@ class LoginViewController: UIViewController {
             user.setValue(false, forKey: "didDeleteFirstBook")
             user.setValue(false, forKey: "didAddFirstFrend")
             user.setValue(false, forKey: "didSaveFirstWishListBook")
+            user.setValue(false, forKey: "didRequestFirstBook")
             
         
             // Attempt to sign the user up

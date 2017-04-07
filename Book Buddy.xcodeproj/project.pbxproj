@@ -45,6 +45,8 @@
 		56E68E521E6474310029D497 /* SearchUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E68E511E6474310029D497 /* SearchUsersViewController.swift */; };
 		56E68E541E647A020029D497 /* SearchUsernameCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E68E531E647A020029D497 /* SearchUsernameCell.swift */; };
 		56E68E561E647A230029D497 /* SearchUserNameTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E68E551E647A230029D497 /* SearchUserNameTableViewController.swift */; };
+		56E9FF361E97DB0900EDBA2B /* RequestedBooksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E9FF351E97DB0900EDBA2B /* RequestedBooksTableViewController.swift */; };
+		56E9FF381E97E1D700EDBA2B /* RequestedBookInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E9FF371E97E1D700EDBA2B /* RequestedBookInformationViewController.swift */; };
 		56F911351E6DC0E3004C08D6 /* FriendsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F911341E6DC0E3004C08D6 /* FriendsTableViewController.swift */; };
 		56F911371E6DC103004C08D6 /* FriendsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F911361E6DC103004C08D6 /* FriendsCell.swift */; };
 		56F911391E6DC118004C08D6 /* FriendsInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F911381E6DC118004C08D6 /* FriendsInformationViewController.swift */; };
@@ -110,6 +112,8 @@
 		56E68E511E6474310029D497 /* SearchUsersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUsersViewController.swift; sourceTree = "<group>"; };
 		56E68E531E647A020029D497 /* SearchUsernameCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUsernameCell.swift; sourceTree = "<group>"; };
 		56E68E551E647A230029D497 /* SearchUserNameTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUserNameTableViewController.swift; sourceTree = "<group>"; };
+		56E9FF351E97DB0900EDBA2B /* RequestedBooksTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestedBooksTableViewController.swift; sourceTree = "<group>"; };
+		56E9FF371E97E1D700EDBA2B /* RequestedBookInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestedBookInformationViewController.swift; sourceTree = "<group>"; };
 		56F911341E6DC0E3004C08D6 /* FriendsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsTableViewController.swift; sourceTree = "<group>"; };
 		56F911361E6DC103004C08D6 /* FriendsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsCell.swift; sourceTree = "<group>"; };
 		56F911381E6DC118004C08D6 /* FriendsInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsInformationViewController.swift; sourceTree = "<group>"; };
@@ -200,6 +204,8 @@
 				5634D5E41E510E5500B91725 /* MainMenuViewController.swift */,
 				564D22321E5B2FCB00AB7E65 /* NewBookViewController.swift */,
 				56460B781E952756003D2DC5 /* ProfileViewController.swift */,
+				56E9FF371E97E1D700EDBA2B /* RequestedBookInformationViewController.swift */,
+				56E9FF351E97DB0900EDBA2B /* RequestedBooksTableViewController.swift */,
 				56E68E511E6474310029D497 /* SearchUsersViewController.swift */,
 				56E68E551E647A230029D497 /* SearchUserNameTableViewController.swift */,
 				56431FD81E670A19007404C4 /* SearchedUserInformationViewController.swift */,
@@ -396,6 +402,7 @@
 				56460B791E952756003D2DC5 /* ProfileViewController.swift in Sources */,
 				56E68E561E647A230029D497 /* SearchUserNameTableViewController.swift in Sources */,
 				569C1EBA1E4C40E400428785 /* BarcodeReaderViewController.swift in Sources */,
+				56E9FF381E97E1D700EDBA2B /* RequestedBookInformationViewController.swift in Sources */,
 				56460B7F1E952F1D003D2DC5 /* ProfileLibraryTableViewCell.swift in Sources */,
 				56460B7B1E952C6A003D2DC5 /* TableViewController.swift in Sources */,
 				56BBD7BE1E4E771800E3677F /* Settings.swift in Sources */,
@@ -410,6 +417,7 @@
 				56BBD7B51E4E6C1000E3677F /* UserGus.swift in Sources */,
 				568779701E5DD234009395DA /* BooksTableViewCell.swift in Sources */,
 				56460B811E953F6D003D2DC5 /* ViewProfilePictureViewController.swift in Sources */,
+				56E9FF361E97DB0900EDBA2B /* RequestedBooksTableViewController.swift in Sources */,
 				56E68E521E6474310029D497 /* SearchUsersViewController.swift in Sources */,
 				564D22331E5B2FCB00AB7E65 /* NewBookViewController.swift in Sources */,
 				56E68E541E647A020029D497 /* SearchUsernameCell.swift in Sources */,

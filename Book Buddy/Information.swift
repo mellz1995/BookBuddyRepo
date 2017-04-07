@@ -31,6 +31,8 @@
  0 username
  1 profile picture
  2 userID
+ 3 didAddFirstBook
+ 4 isLibraryPrivate
  */
 
 
@@ -40,6 +42,10 @@
  1 Username
  2 User's photo
  */
+
+
+
+
 
 /**
     HOW TO GET, APPEND, AND SET A 2D ARRAY TO THE PARSE SERVER
