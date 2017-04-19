@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import UserNotifications
 
 class RequestedBookInformationViewController: UIViewController {
     
@@ -21,6 +22,8 @@ class RequestedBookInformationViewController: UIViewController {
     @IBOutlet weak var isbn13Label: UILabel!
     @IBOutlet weak var publisherLabel: UILabel!
     @IBOutlet weak var languageLabel: UILabel!
+    @IBOutlet weak var cancelRequestOutlet: UIButton!
+    @IBOutlet weak var requestedFromOutlet: UILabel!
     
 
     override func viewDidLoad() {
@@ -28,6 +31,9 @@ class RequestedBookInformationViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         setEverythingUp()
+        
+        
+       
     }
 
     override func didReceiveMemoryWarning() {
@@ -37,6 +43,8 @@ class RequestedBookInformationViewController: UIViewController {
     
     func setEverythingUp(){
         currentRequestedLibrary = PFUser.current()!.object(forKey: "requestedLibrary") as! Array<Array<AnyObject>>
+        
+        requestedFromOutlet.text = "Pending request from \(requestedBookInformation[9])'s library."
         
         // Set the labels
         titleLabel.text = requestedBookInformation[0] as? String
@@ -58,6 +66,34 @@ class RequestedBookInformationViewController: UIViewController {
             })
         }
     }
+    
+    @IBAction func cancelRequestAction(_ sender: UIButton) {
+        let alert = UIAlertController(title: "Cancel Request?", message: "Cancel request to borrow '\(self.requestedBookInformation[0])'?", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+            
+            
+            for i in 0..<self.currentRequestedLibrary.count{
+                // if the title of the book about to be deleted matches the title of the book in the user's array
+                if self.currentRequestedLibrary[i][0] as! String == self.requestedBookInformation[0] as! String {
+                    self.currentRequestedLibrary.remove(at: i)
+                    print("MATCH FOUND! \(self.currentRequestedLibrary[i][0])")
+                }
+            }
+            
+            if self.currentRequestedLibrary.count == 0 {
+                updateBoolStats(false, "didSaveFirstBook")
+            }
+            
+            // update it on the server
+            updateArray(self.currentRequestedLibrary, "requestedLibrary")
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+            
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     
 
     /*

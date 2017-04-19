@@ -160,11 +160,28 @@ class BooksTableViewController: UITableViewController {
         
         // If the user deletes a book
         if editingStyle == .delete {
-            // Append the deleted book to the server
-            GUSUerLibrary(currentLibrary[indexPath.row], "deletedLibrary", "didDeleteFirstBook")
+            let alert = UIAlertController(title: "Delete Book?", message: "Delete '\(currentLibrary[indexPath.row][0])' from your library?", preferredStyle:    UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+                // Append the deleted book to the server
+                GUSUerLibrary(self.currentLibrary[indexPath.row], "deletedLibrary", "didDeleteFirstBook")
+                
+                self.currentLibrary.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+                
+                if self.currentLibrary.count == 0 {
+                    updateBoolStats(false, "didSaveFirstBook")
+                }
+                updateArray(self.currentLibrary, "library")
+                
+                self.viewDidLoad()
+            }))
             
-            currentLibrary.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+                self.viewDidLoad()
+            }))
+            
+            
+            self.present(alert, animated: true, completion: nil)
 
             if currentLibrary.count == 0 {
                 updateBoolStats(false, "didSaveFirstBook")

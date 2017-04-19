@@ -41,6 +41,7 @@ class BookInformationViewController: UIViewController, UINavigationControllerDel
         bookID = self.bookInformationArray[10] as! Int
         super.viewDidLoad()
         saveButtonOutlet.isEnabled = false
+        saveButtonOutlet.setImage(#imageLiteral(resourceName: "SaveBlue"), for: [])
         startDidChangeTimer()
 
         print("Book information array: \(bookInformationArray)")
@@ -152,7 +153,8 @@ class BookInformationViewController: UIViewController, UINavigationControllerDel
         }))
         self.present(alert, animated: true, completion: nil)
         
-        saveButtonOutlet.setTitleColor(UIColor.blue, for: [])
+        //saveButtonOutlet.setTitleColor(UIColor.blue, for: [])
+        saveButtonOutlet.setImage(#imageLiteral(resourceName: "SaveBlue"), for: [])
     }
     
     @IBOutlet weak var saveButtonOutlet: UIButton!
@@ -188,7 +190,8 @@ class BookInformationViewController: UIViewController, UINavigationControllerDel
         }
         self.dismiss(animated: true) {
             self.saveButtonOutlet.isEnabled = true
-            self.saveButtonOutlet.setTitleColor(UIColor.red, for: [])
+           // self.saveButtonOutlet.setTitleColor(UIColor.red, for: [])
+            self.saveButtonOutlet.setImage(#imageLiteral(resourceName: "SaveRed"), for: [])
         }
     }
     
@@ -213,7 +216,8 @@ class BookInformationViewController: UIViewController, UINavigationControllerDel
     func checkSaveButton(){
         if titleTextField.text != titleValue || authorTextField.text != authorValue || isbn10TextField.text != isbn10Value || isbn13TextField.text != isbn13Value || publisherTextField.text != publisherValue || lanuguageTextField.text != languageValue{
             saveButtonOutlet.isEnabled = true
-            saveButtonOutlet.setTitleColor(UIColor.red, for: [])
+            //saveButtonOutlet.setTitleColor(UIColor.red, for: [])
+            saveButtonOutlet.setImage(#imageLiteral(resourceName: "SaveRed"), for: [])
         }
     }
 

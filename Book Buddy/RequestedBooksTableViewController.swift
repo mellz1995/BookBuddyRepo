@@ -18,6 +18,8 @@ class RequestedBooksTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        navigationItem.title = "Requested"
+        
         // Change the book's status to requested
         for i in 0..<requestedLibrary.count {
             requestedLibrary[i][6] = "Requested" as AnyObject
