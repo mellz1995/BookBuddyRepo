@@ -9,8 +9,10 @@
 import UIKit
 import Parse
 import UserNotifications
+import GoogleMobileAds
 
 let mykey = "L0RA52QG"
+var adApID = "ca-app-pub-9692686923892592~7094346466"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

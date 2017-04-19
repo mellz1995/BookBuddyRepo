@@ -8,6 +8,7 @@
 
 import UIKit
 import os.log
+import GoogleMobileAds
 
 class NewBookViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
@@ -25,9 +26,19 @@ class NewBookViewController: UIViewController, UINavigationControllerDelegate, U
         return true
     }
     
+    @IBOutlet weak var bannerView: GADBannerView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        bannerView.alpha = 1
+        print("Google Mobile Ads SDK version: " + GADRequest.sdkVersion())
+        // You have to add your app id when you register your admob account!! This is just a test ad that won't make you any money, fool
+        
+        //The other place you have this is in the app delegate
+        bannerView.adUnitID = "ca-app-pub-9692686923892592/9608344067"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
         
         // Start the timer to see if to enable save button or not
         startSaveButtonTimer()

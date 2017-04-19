@@ -9,6 +9,7 @@
 import UIKit
 import Parse
 import os.log
+import GoogleMobileAds
 
 class DeletedBooksTableViewController: UITableViewController {
 
@@ -17,6 +18,15 @@ class DeletedBooksTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        bannerView.alpha = 1
+        print("Google Mobile Ads SDK version: " + GADRequest.sdkVersion())
+        // You have to add your app id when you register your admob account!! This is just a test ad that won't make you any money, fool
+        
+        //The other place you have this is in the app delegate
+        bannerView.adUnitID = "ca-app-pub-9692686923892592/9608344067"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
         
         // Set the title
         navigationItem.title = "Deleted Books"
@@ -41,6 +51,7 @@ class DeletedBooksTableViewController: UITableViewController {
         restoreAllButtonOutlet.isEnabled = false
         
     }
+    @IBOutlet weak var bannerView: GADBannerView!
     
     override var prefersStatusBarHidden: Bool {
         return true

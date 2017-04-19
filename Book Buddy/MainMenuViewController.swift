@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import GoogleMobileAds
 
 var comingFromWishList = false
 // Get their current Friends 2D array
@@ -22,10 +23,23 @@ class MainMenuViewController: UIViewController, UINavigationControllerDelegate, 
     var friendsIDArray = Array<Any>()
     var friendsArray = Array<Any>()
     
+    @IBOutlet weak var bannerView: GADBannerView!
+
+    
     // Get their current Friends 2D array
     var currentFriends = PFUser.current()!.object(forKey: "friends") as! Array<Array<Any>>
     
     override func viewDidLoad() {
+        bannerView.alpha = 1
+        print("Google Mobile Ads SDK version: " + GADRequest.sdkVersion())
+        // You have to add your app id when you register your admob account!! This is just a test ad that won't make you any money, fool
+        
+        //The other place you have this is in the app delegate
+        bannerView.adUnitID = "ca-app-pub-9692686923892592/9608344067"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
+        
+        
         playerNameLabel.text = PFUser.current()!.username!
         comingFromWishList = false
         super.viewDidLoad()

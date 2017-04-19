@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import GoogleMobileAds
 
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
@@ -22,6 +23,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBAction func profilePictureAction(_ sender: UIButton) {
         
     }
+    
+    @IBOutlet weak var bannerView: GADBannerView!
     
     @IBOutlet weak var ownedOutlet: UIButton!
     @IBOutlet weak var borrowedOutlet: UIButton!
@@ -90,6 +93,15 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        bannerView.alpha = 1
+        print("Google Mobile Ads SDK version: " + GADRequest.sdkVersion())
+        // You have to add your app id when you register your admob account!! This is just a test ad that won't make you any money, fool
+        
+        //The other place you have this is in the app delegate
+        bannerView.adUnitID = "ca-app-pub-9692686923892592/9608344067"
+        bannerView.rootViewController = self
+        bannerView.load(GADRequest())
 
         nameLabel.text = "\(PFUser.current()!.username!)"
         

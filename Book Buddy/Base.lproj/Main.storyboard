@@ -90,7 +90,7 @@
                                 <rect key="frame" x="0.0" y="345" width="375" height="322"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <view key="tableFooterView" contentMode="scaleToFill" id="h4d-Nf-8oo">
+                                <view key="tableFooterView" contentMode="scaleToFill" id="h4d-Nf-8oo" customClass="GADBannerView">
                                     <rect key="frame" x="0.0" y="109" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -274,6 +274,7 @@
                         <color key="backgroundColor" red="0.012886563315987587" green="0.45937305688858032" blue="0.88728392124176025" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <connections>
+                        <outlet property="bannerView" destination="h4d-Nf-8oo" id="JO7-EE-yY6"/>
                         <outlet property="borrowedOutlet" destination="1Jc-k9-Xay" id="JRb-3X-pQ2"/>
                         <outlet property="deletedOutlet" destination="K8g-MX-Nix" id="U61-Zj-Pbs"/>
                         <outlet property="lentOutlet" destination="JU7-Bt-Jxp" id="mil-xD-7oy"/>
@@ -1074,7 +1075,7 @@
                                 <rect key="frame" x="115" y="72" width="120" height="120"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             </imageView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qqp-Aa-OAa">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qqp-Aa-OAa" customClass="GADBannerView">
                                 <rect key="frame" x="0.0" y="626" width="375" height="41"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -1120,6 +1121,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="authorTextField" destination="g4n-hY-VYZ" id="CKH-TZ-iva"/>
+                        <outlet property="bannerView" destination="Qqp-Aa-OAa" id="erB-Jp-YGZ"/>
                         <outlet property="bookImageView" destination="9pK-LD-PzH" id="v2s-yW-MOP"/>
                         <outlet property="isbn10TextField" destination="lkk-9C-bA9" id="fVR-vB-4hM"/>
                         <outlet property="isbn13TextField" destination="wQw-ba-xj6" id="AqJ-vJ-XMH"/>
@@ -1248,7 +1250,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <view key="tableFooterView" contentMode="scaleToFill" id="MHv-nT-jHq">
+                        <view key="tableFooterView" contentMode="scaleToFill" id="MHv-nT-jHq" customClass="GADBannerView">
                             <rect key="frame" x="0.0" y="114" width="375" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" red="0.0077246734872460365" green="0.011709232814610004" blue="0.015889693051576614" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1328,6 +1330,7 @@
                         </rightBarButtonItems>
                     </navigationItem>
                     <connections>
+                        <outlet property="bannerView" destination="MHv-nT-jHq" id="ctM-Qz-xrW"/>
                         <outlet property="deleteAllBooksOutlet" destination="fDm-11-UyP" id="zxQ-Xr-PK7"/>
                         <outlet property="restoreAllButtonOutlet" destination="QNq-cC-4KE" id="15z-Pd-8Pn"/>
                     </connections>
@@ -1460,7 +1463,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xui-bx-eHv">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xui-bx-eHv" customClass="GADBannerView">
                                 <rect key="frame" x="0.0" y="626" width="375" height="41"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -1485,6 +1488,7 @@
                     </view>
                     <connections>
                         <outlet property="authorLabel" destination="y4I-uw-is6" id="3aK-fC-Dhe"/>
+                        <outlet property="bannerView" destination="xui-bx-eHv" id="JqQ-ei-1c6"/>
                         <outlet property="bookImage" destination="fmz-Fr-lXh" id="Nqj-VL-57A"/>
                         <outlet property="isbn10Label" destination="oqq-km-RqX" id="p4v-gb-4pj"/>
                         <outlet property="isbn13Label" destination="HRM-g7-eiu" id="0ZD-pD-lKs"/>
@@ -2041,7 +2045,7 @@
                                     <segue destination="22y-01-gle" kind="show" id="7lW-5Y-qHH"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CAK-SI-at7">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CAK-SI-at7" customClass="GADBannerView">
                                 <rect key="frame" x="0.0" y="626" width="375" height="41"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -2059,6 +2063,7 @@
                     <tabBarItem key="tabBarItem" title="Item" id="gac-5l-rAZ"/>
                     <navigationItem key="navigationItem" id="dZj-7m-pU1"/>
                     <connections>
+                        <outlet property="bannerView" destination="CAK-SI-at7" id="hGm-tC-jZu"/>
                         <outlet property="linksButtonOutlet" destination="iUd-0y-tur" id="old-qh-xSw"/>
                         <outlet property="logoutButtonOutlet" destination="qWk-Wi-33B" id="lho-4Z-47g"/>
                         <outlet property="navigationBar" destination="dZj-7m-pU1" id="R6h-Xn-AGv"/>
@@ -2258,14 +2263,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="BookDetailTitleBar" width="375" height="36"/>
         <image name="BookNoPencilTextField" width="375" height="30"/>
         <image name="BookTextfield" width="375" height="30"/>
         <image name="Border" width="375" height="10"/>
         <image name="BorrowedHighlighted" width="85" height="46"/>
-        <image name="ChangeImageButton" width="85" height="46"/>
         <image name="ClearButton" width="147" height="53"/>
-        <image name="ClearPictureImage" width="85" height="46"/>
         <image name="DeletedBooksButton" width="147" height="53"/>
         <image name="DeletedHighLighted" width="85" height="46"/>
         <image name="EditProfileButton" width="77" height="31"/>
@@ -2292,7 +2294,6 @@
         <image name="RegisterButton Copy" width="84" height="52"/>
         <image name="RegisterButton Copy 2" width="84" height="52"/>
         <image name="RestoreBookButton" width="85" height="46"/>
-        <image name="SaveBlue" width="85" height="46"/>
         <image name="SearchButton" width="142" height="42"/>
         <image name="SettingsButton" width="147" height="53"/>
         <image name="SkipButton" width="147" height="53"/>
@@ -2302,13 +2303,13 @@
         <image name="smily" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="KaN-PR-adz"/>
-        <segue reference="EUP-A2-cC8"/>
-        <segue reference="7lW-5Y-qHH"/>
-        <segue reference="XHx-pM-Nn3"/>
-        <segue reference="6iz-lp-snu"/>
-        <segue reference="R3s-sQ-GCS"/>
         <segue reference="eA9-Wm-f6v"/>
         <segue reference="LBg-kH-KzL"/>
+        <segue reference="XUV-YA-wSX"/>
+        <segue reference="mAy-1q-YDG"/>
+        <segue reference="KaN-PR-adz"/>
+        <segue reference="7lW-5Y-qHH"/>
+        <segue reference="6iz-lp-snu"/>
+        <segue reference="R3s-sQ-GCS"/>
     </inferredMetricsTieBreakers>
 </document>
