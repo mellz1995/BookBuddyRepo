@@ -12,7 +12,7 @@ import Parse
 class LoginViewController: UIViewController {
     
     var activityIndicator = UIActivityIndicatorView()
-    var initialSpringVelocity = 50
+    var initialSpringVelocity = 35
     var springWithDamping = 3.0
     var whatsThis = false
 
@@ -31,10 +31,6 @@ class LoginViewController: UIViewController {
         // Call the beginning animations method
         beginningAnimations()
         
-        qrDescriptionTextField.alpha = 0
-        gotItButtonOutlet.alpha = 0
-        whatsThisButtonOutlet.alpha = 0
-        
         gotItButtonOutlet.isEnabled = false
         whatsThisButtonOutlet.isEnabled = false
         
@@ -46,11 +42,21 @@ class LoginViewController: UIViewController {
         view.addGestureRecognizer(tap)
     }
     
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    @IBOutlet weak var titleBarView: UIImageView!
+    @IBOutlet weak var loginBox: UIImageView!
+    @IBOutlet weak var qrBackgroundImage: UIImageView!
+    @IBOutlet weak var bottomQRBackgroundImage: UIImageView!
+    
     
     // Labels
     @IBOutlet weak var usernameLabel: UILabel!
@@ -84,6 +90,7 @@ class LoginViewController: UIViewController {
     
     // Test generate button
     @IBAction func generate(_ sender: UIButton) {
+        QRAnimations()
         qrCodeImageView.image = generateQR(usernameTextField.text!)
         qrDescriptionTextField.alpha = 1
         gotItButtonOutlet.alpha = 0.5
@@ -103,11 +110,11 @@ class LoginViewController: UIViewController {
         if !whatsThis{
             qrDescriptionTextField.text = "A QR code is a machine-readable code consisting of an array of black and white squares, typically used for storing URLs or other information for reading by the camera on a smartphone."
             whatsThis = !whatsThis
-            whatsThisButtonOutlet.setTitle("Got it!", for: [])
+            whatsThisButtonOutlet.setImage(#imageLiteral(resourceName: "GREAT"), for: [])
         } else {
             qrDescriptionTextField.text = "Pictured below is your very own QR Code! This was generated from your username. Whenever someone wants to add (link) you to their profile, just tell them to scan this, and it is done automatically!"
             whatsThis = !whatsThis
-            whatsThisButtonOutlet.setTitle("What's this?", for: [])
+            whatsThisButtonOutlet.setImage(#imageLiteral(resourceName: "RegisterButton Copy"), for: [])
         }
     }
     
@@ -144,7 +151,7 @@ class LoginViewController: UIViewController {
                 UIApplication.shared.endIgnoringInteractionEvents()
                 if error != nil {
                     var displayErrorMessage = "Please try again later."
-                    if let errorMessage = error as? NSError {
+                    if let errorMessage = error as NSError? {
                         displayErrorMessage = errorMessage.userInfo["error"] as! String
                     }
                     self.displayAlert("Login Error", displayErrorMessage, "Ok")
@@ -189,6 +196,8 @@ class LoginViewController: UIViewController {
             
             displayAlert("Error in registration form", "A username, password, and an email is needed for registration.", "Let's fix it")
         } else {
+            QRAnimations()
+            
             // Start the activity spinner
             activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
             activityIndicator.center = self.view.center
@@ -213,6 +222,8 @@ class LoginViewController: UIViewController {
             user.setValue([[]], forKey: "friendRequests")
             user.setValue([[]], forKey: "wishList")
             user.setValue([[]], forKey: "deletedLibrary")
+            user.setValue([[]], forKey: "requestedLibrary")
+            
             
             user.setValue(0, forKey: "rating")
             user.setValue(0, forKey: "totalRating")
@@ -226,6 +237,7 @@ class LoginViewController: UIViewController {
             user.setValue(false, forKey: "didDeleteFirstBook")
             user.setValue(false, forKey: "didAddFirstFrend")
             user.setValue(false, forKey: "didSaveFirstWishListBook")
+            user.setValue(false, forKey: "didRequestFirstBook")
             
         
             // Attempt to sign the user up
@@ -237,7 +249,7 @@ class LoginViewController: UIViewController {
             
                 if error != nil {
                     var displayErrorMessage = "Please try again later."
-                    if let errorMessage = error as? NSError {
+                    if let errorMessage = error as NSError? {
                         displayErrorMessage = errorMessage.userInfo["error"] as! String
                         UIApplication.shared.endIgnoringInteractionEvents()
                         self.activityIndicator.stopAnimating()
@@ -295,19 +307,90 @@ class LoginViewController: UIViewController {
     
     
     func beginningAnimations(){
+        // Animate the title bar in from the top
+        titleBarView.center.y = titleBarView.center.y - 1000
+        UIView.animate(withDuration: 0.5, delay: 1.0, usingSpringWithDamping: CGFloat(springWithDamping), initialSpringVelocity: 30, options: UIViewAnimationOptions.curveEaseIn, animations: ({
+            self.titleBarView.center.y = self.titleBarView.center.y + 1000
+        }), completion: nil)
+        
+        // Animate the login box from the bottom
+        loginBox.center.y = loginBox.center.y + 1000
+        UIView.animate(withDuration: 0.5, delay: 1.4, usingSpringWithDamping: CGFloat(springWithDamping), initialSpringVelocity: 25, options: UIViewAnimationOptions.curveEaseIn, animations: ({
+            self.loginBox.center.y = self.loginBox.center.y - 1000
+        }), completion: nil)
+        
         // Animate username label in from the left
         usernameLabel.center.x = usernameLabel.center.x - 500
-        UIView.animate(withDuration: 0.5, delay: 0.5, usingSpringWithDamping: CGFloat(springWithDamping), initialSpringVelocity: CGFloat(initialSpringVelocity), options: UIViewAnimationOptions.curveEaseIn, animations: ({
+        UIView.animate(withDuration: 0.5, delay: 1.8, usingSpringWithDamping: CGFloat(springWithDamping), initialSpringVelocity: CGFloat(initialSpringVelocity), options: UIViewAnimationOptions.curveEaseIn, animations: ({
             self.usernameLabel.center.x = self.usernameLabel.center.x + 500
         }), completion: nil)
         
         // Animate password label in from the right
         passwordLabel.center.x = passwordLabel.center.x + 500
-        UIView.animate(withDuration: 0.5, delay: 0.7, usingSpringWithDamping: CGFloat(springWithDamping), initialSpringVelocity: CGFloat(initialSpringVelocity), options: UIViewAnimationOptions.curveEaseIn, animations: ({
+        UIView.animate(withDuration: 0.5, delay: 2.0, usingSpringWithDamping: CGFloat(springWithDamping), initialSpringVelocity: CGFloat(initialSpringVelocity), options: UIViewAnimationOptions.curveEaseIn, animations: ({
             self.passwordLabel.center.x = self.passwordLabel.center.x - 500
         }), completion: nil)
+        
+        // Animate email label in from the left
+        emailLabel.center.x = emailLabel.center.x - 500
+        UIView.animate(withDuration: 0.5, delay: 2.2, usingSpringWithDamping: CGFloat(springWithDamping), initialSpringVelocity: CGFloat(initialSpringVelocity), options: UIViewAnimationOptions.curveEaseIn, animations: ({
+            self.emailLabel.center.x = self.emailLabel.center.x + 500
+        }), completion: nil)
+        
+        // Animate username text field in from the right
+        usernameTextField.center.x = usernameTextField.center.x + 500
+        UIView.animate(withDuration: 0.5, delay: 2.4, usingSpringWithDamping: CGFloat(springWithDamping), initialSpringVelocity: CGFloat(initialSpringVelocity), options: UIViewAnimationOptions.curveEaseIn, animations: ({
+            self.usernameTextField.center.x = self.usernameTextField.center.x - 500
+        }), completion: nil)
+        
+        // Animate password text field in from the left
+        passwordTextField.center.x = passwordTextField.center.x - 500
+        UIView.animate(withDuration: 0.5, delay: 2.6, usingSpringWithDamping: CGFloat(springWithDamping), initialSpringVelocity: CGFloat(initialSpringVelocity), options: UIViewAnimationOptions.curveEaseIn, animations: ({
+            self.passwordTextField.center.x = self.passwordTextField.center.x + 500
+        }), completion: nil)
+        
+        // Animate username text field in from the right
+        emailTextField.center.x = emailTextField.center.x + 500
+        UIView.animate(withDuration: 0.5, delay: 2.8, usingSpringWithDamping: CGFloat(springWithDamping), initialSpringVelocity: CGFloat(initialSpringVelocity), options: UIViewAnimationOptions.curveEaseIn, animations: ({
+            self.emailTextField.center.x = self.emailTextField.center.x - 500
+        }), completion: nil)
+        
+        // Animate the login and register buttons in from the bottom
+        loginButtonOutlet.center.y = loginButtonOutlet.center.y + 1000
+        registerButtonOutlet.center.y = registerButtonOutlet.center.y + 1000
+        UIView.animate(withDuration: 0.5, delay: 3.4, usingSpringWithDamping: 25, initialSpringVelocity: 25, options: UIViewAnimationOptions.curveEaseIn, animations: ({
+            self.loginButtonOutlet.center.y = self.loginButtonOutlet.center.y - 1000
+            self.registerButtonOutlet.center.y = self.registerButtonOutlet.center.y - 1000
+        }), completion: nil)
+        
+        qrBackgroundImage.center.x = qrBackgroundImage.center.x - 1000
+        bottomQRBackgroundImage.center.y = bottomQRBackgroundImage.center.y + 1000
+        whatsThisButtonOutlet.center.x = whatsThisButtonOutlet.center.x - 1000
+        gotItButtonOutlet.center.x = gotItButtonOutlet.center.x + 1000
+        qrDescriptionTextField.center.x = qrDescriptionTextField.center.x + 1000
+        qrCodeImageView.center.y = qrCodeImageView.center.y + 1000
+        
     }
     
+    func QRAnimations(){
+        UIView.animate(withDuration: 0.5, delay: 0, usingSpringWithDamping: CGFloat(springWithDamping), initialSpringVelocity: 20, options: UIViewAnimationOptions.curveEaseIn, animations: ({
+            self.qrBackgroundImage.center.x = self.qrBackgroundImage.center.x + 1000
+            self.qrDescriptionTextField.center.x = self.qrDescriptionTextField.center.x - 1000
+        }), completion: nil)
+        
+        UIView.animate(withDuration: 0.5, delay: 0.5, usingSpringWithDamping: CGFloat(springWithDamping), initialSpringVelocity: 20, options: UIViewAnimationOptions.curveEaseIn, animations: ({
+            self.bottomQRBackgroundImage.center.y = self.bottomQRBackgroundImage.center.y - 1000
+            self.qrCodeImageView.center.y = self.qrCodeImageView.center.y - 1000
+        }), completion: nil)
+        
+        UIView.animate(withDuration: 0.5, delay: 2.0, usingSpringWithDamping: CGFloat(springWithDamping), initialSpringVelocity: 20, options: UIViewAnimationOptions.curveEaseIn, animations: ({
+            self.whatsThisButtonOutlet.center.x = self.whatsThisButtonOutlet.center.x + 1000
+        }), completion: nil)
+        
+        UIView.animate(withDuration: 0.5, delay: 3.5, usingSpringWithDamping: CGFloat(springWithDamping), initialSpringVelocity: 20, options: UIViewAnimationOptions.curveEaseIn, animations: ({
+            self.gotItButtonOutlet.center.x = self.gotItButtonOutlet.center.x - 1000
+        }), completion: nil)
+    }
     
     func generateQR(_ string: String) -> UIImage? {
         

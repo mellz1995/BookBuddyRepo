@@ -49,7 +49,6 @@ class SearchUsersViewController: UIViewController {
     @IBAction func searchButtonAction(_ sender: UIButton) {
         self.dismissKeyboard()
         
-        
         let query = PFUser.query()
         query?.findObjectsInBackground { (objects, error) in
             if let users = objects {
@@ -78,6 +77,17 @@ class SearchUsersViewController: UIViewController {
                                         individualUserArray.append(user.objectId as AnyObject)
                                         
                                         self.printOutSearchResults()
+                                        
+                                        var didSaveFirst = false
+                                        
+                                        if user.object(forKey: "didSaveFirstBook") as! Bool == false {
+                                            didSaveFirst = false
+                                        } else {
+                                            didSaveFirst = true
+                                        }
+                                        
+                                        // Append the user's DidAddFirstBook to array
+                                        individualUserArray.append(didSaveFirst as AnyObject)
                                         
                                         // Append all of the user's information into the full user's array
                                         userInformationArray.append(individualUserArray)

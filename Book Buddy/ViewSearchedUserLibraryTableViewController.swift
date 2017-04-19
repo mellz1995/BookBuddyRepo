@@ -123,7 +123,7 @@ class ViewSearchedUserLibraryTableViewController: UITableViewController {
             }
             
             guard let selectedBookCell = sender as? SearchedUserLibraryCell else {
-                fatalError("Unexpected sender: \(sender)")
+                fatalError("Unexpected sender: \(String(describing: sender))")
             }
             
             guard let indexPath = tableView.indexPath(for: selectedBookCell) else {
@@ -137,7 +137,7 @@ class ViewSearchedUserLibraryTableViewController: UITableViewController {
             os_log("Going back to results", log: OSLog.default, type: .debug)
             
         default:
-            fatalError("Unexpected Segueue Identifier: \(segue.identifier)") 
+            fatalError("Unexpected Segueue Identifier: \(String(describing: segue.identifier))") 
         }
     }
     

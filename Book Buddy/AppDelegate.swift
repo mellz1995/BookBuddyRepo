@@ -8,8 +8,9 @@
 
 import UIKit
 import Parse
+import UserNotifications
 
-let mykey = "BHPQT1PV"
+let mykey = "L0RA52QG"
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

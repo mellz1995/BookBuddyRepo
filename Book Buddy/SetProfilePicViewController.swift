@@ -16,8 +16,8 @@ class SetProfilePicViewController: UIViewController, UINavigationControllerDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
     // Set the picture to the default smily
-        profilePicView.image = #imageLiteral(resourceName: "smily")
-        
+       // profilePicView.image = #imageLiteral(resourceName: "smily")
+        clearButtonOutlet.isEnabled = false
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,10 +40,23 @@ class SetProfilePicViewController: UIViewController, UINavigationControllerDeleg
     
     
     @IBAction func clearButtonAction(_ sender: UIButton) {
-        profilePicView.image = #imageLiteral(resourceName: "smily")
-        updateBoolStats(false, "didSetProfilePic")
-        setProfilePic = false
-        skipButtonOutlet.setTitle("Skip", for: [])
+        let alert = UIAlertController(title: "Clear photo?", message: "Do you want to clear this photo?", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Yes, clear", style: .default, handler: { (action) in
+            self.profilePicView.image = #imageLiteral(resourceName: "InitialSadBook")
+            updateBoolStats(false, "didSetProfilePic")
+            self.setProfilePic = false
+            self.skipButtonOutlet.setImage(#imageLiteral(resourceName: "SkipButton"), for: [])
+            self.clearButtonOutlet.isEnabled = false
+        }))
+        
+        alert.addAction(UIAlertAction(title: "No, don't clear", style: .default, handler: { (action) in
+            let imagePickerController = UIImagePickerController()
+            imagePickerController.delegate = self
+            imagePickerController.sourceType = UIImagePickerControllerSourceType.photoLibrary
+            imagePickerController.allowsEditing = false
+            self.present(imagePickerController, animated: true, completion: nil)
+        }))
+        self.present(alert, animated: true, completion: nil)
     }
     
     @IBAction func importPhotoButtonAction(_ sender: UIButton) {
@@ -69,15 +82,17 @@ class SetProfilePicViewController: UIViewController, UINavigationControllerDeleg
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             profilePicView.image = image
-            let uploadableImage = PFFile(data: UIImageJPEGRepresentation(image, 1.0)!)
-            updateBoolStats(true, "didSetProfilePic")
-            updateProfilePic(uploadableImage!, "profilePic")
+            // Uncomment the next three lines when done with testing
+            //let uploadableImage = PFFile(data: UIImageJPEGRepresentation(image, 1.0)!)
+            //updateBoolStats(true, "didSetProfilePic")
+            //updateProfilePic(uploadableImage!, "profilePic")
             setProfilePic = true
         } else {
             self.displayAlert("Error processing image file", "There was an error processing the image file. Please try again.", "Ok")
         }
         self.dismiss(animated: true) {
-            self.skipButtonOutlet.setTitle("Done", for: [])
+            self.skipButtonOutlet.setImage(#imageLiteral(resourceName: "NextButton"), for: [])
+            self.clearButtonOutlet.isEnabled = true
         }
     }
     
