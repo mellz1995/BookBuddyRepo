@@ -223,6 +223,7 @@ class LoginViewController: UIViewController {
             user.setValue([[]], forKey: "wishList")
             user.setValue([[]], forKey: "deletedLibrary")
             user.setValue([[]], forKey: "requestedLibrary")
+            user.setValue([[]], forKey: "receivedRequestsLibrary")
             
             
             user.setValue(0, forKey: "rating")
@@ -238,6 +239,12 @@ class LoginViewController: UIViewController {
             user.setValue(false, forKey: "didAddFirstFrend")
             user.setValue(false, forKey: "didSaveFirstWishListBook")
             user.setValue(false, forKey: "didRequestFirstBook")
+            user.setValue(false, forKey: "didReceiveFirstRequest")
+            
+            
+//            user.linkWithAuthType(inBackground: "User", authData: ["User": "ReceivedRequests"])
+//            
+//            print(user.isAuthenticated, " User auth")
             
         
             // Attempt to sign the user up

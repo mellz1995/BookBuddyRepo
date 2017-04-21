@@ -9,6 +9,8 @@
 import UIKit
 import Parse
 
+var requestedBookArray = Array<Any>()
+
 class UserLibraryBookInformationViewController: UIViewController {
     
     public var bookInformationArray = Array<Any>()
@@ -53,7 +55,7 @@ class UserLibraryBookInformationViewController: UIViewController {
     
     @IBOutlet weak var requestToBorrowBookButtonOutlet: UIButton!
     @IBAction func requestToBorrowBookButtonAction(_ sender: UIButton) {
-        
+        requestedBookArray = bookInformationArray
         
     }
     

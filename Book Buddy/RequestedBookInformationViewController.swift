@@ -44,7 +44,7 @@ class RequestedBookInformationViewController: UIViewController {
     func setEverythingUp(){
         currentRequestedLibrary = PFUser.current()!.object(forKey: "requestedLibrary") as! Array<Array<AnyObject>>
         
-        requestedFromOutlet.text = "Pending request from \(requestedBookInformation[9])'s library."
+        requestedFromOutlet.text = "Requested from \(requestedBookInformation[9])'s library until \(requestedBookInformation[11])."
         
         // Set the labels
         titleLabel.text = requestedBookInformation[0] as? String

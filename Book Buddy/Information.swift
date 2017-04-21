@@ -23,6 +23,7 @@
  8 Boolean whether the user has manually set an image for the book
  9 Owner of the book
  10 Book Id
+ 11 Date of the book requested to be borrowed
  */
 
 

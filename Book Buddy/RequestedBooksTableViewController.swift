@@ -10,10 +10,27 @@ import UIKit
 import Parse
 import os.log
 
+var mode = "Sent"
+
 class RequestedBooksTableViewController: UITableViewController {
     
     var requestedLibrary = PFUser.current()!.object(forKey: "requestedLibrary") as! Array<Array<AnyObject>>
     
+    @IBOutlet var requestedTableView: UITableView!
+    
+    @IBOutlet weak var segmentedControl: UISegmentedControl!
+    
+    @IBAction func segmentedControlAction(_ sender: UISegmentedControl) {
+        if segmentedControl.selectedSegmentIndex == 0 {
+            mode = "Sent"
+            print("Mode is sent")
+            requestedTableView.reloadData()
+        } else if segmentedControl.selectedSegmentIndex == 1 {
+            mode = "Received"
+            print("Mode is received")
+            requestedTableView.reloadData()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,52 +75,64 @@ class RequestedBooksTableViewController: UITableViewController {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "requestedBooksCell", for: indexPath) as? ProfileLibraryTableViewCell else {
             fatalError("The dequed cell is not an instance of BooksTableViewCell")
         }
+        
+        if mode == "Sent" {
 
-        if PFUser.current()!.object(forKey: "didRequestFirstBook") as! Bool == false {
-            cell.titleLabel.text = "No books"
-            cell.isUserInteractionEnabled = false
-            cell.statusImageView.image = #imageLiteral(resourceName: "SadBook")
-            cell.bookImage.image = #imageLiteral(resourceName: "QuestionMarkBook")
-        } else {
-            cell.isUserInteractionEnabled = true
-            if requestedLibrary[indexPath.row].isEmpty == false {
-                cell.titleLabel.text = requestedLibrary[indexPath.row][0] as? String
-                if requestedLibrary[indexPath.row][1] as! String == "Not specified"{
-                    cell.authorLabel.text = "No Author Listed"
-                } else {
-                    cell.authorLabel.text = requestedLibrary[indexPath.row][1] as? String
-                }
-                if requestedLibrary[indexPath.row][2] as! String == "Not specified"{
-                    cell.isbn10Label.text = "No ISBN for this book"
-                } else {
-                    cell.isbn10Label.text = requestedLibrary[indexPath.row][2] as? String
-                }
+            if PFUser.current()!.object(forKey: "didRequestFirstBook") as! Bool == false {
+                cell.titleLabel.text = "No Sent Requests"
+                cell.isUserInteractionEnabled = false
+                cell.statusImageView.image = #imageLiteral(resourceName: "SadBook")
+                cell.bookImage.image = #imageLiteral(resourceName: "QuestionMarkBook")
+            } else {
+                cell.isUserInteractionEnabled = true
+                if requestedLibrary[indexPath.row].isEmpty == false {
+                    cell.titleLabel.text = requestedLibrary[indexPath.row][0] as? String
+                    if requestedLibrary[indexPath.row][1] as! String == "Not specified"{
+                        cell.authorLabel.text = "No Author Listed"
+                    } else {
+                        cell.authorLabel.text = requestedLibrary[indexPath.row][1] as? String
+                    }
+                    if requestedLibrary[indexPath.row][2] as! String == "Not specified"{
+                        cell.isbn10Label.text = "No ISBN for this book"
+                    } else {
+                        cell.isbn10Label.text = requestedLibrary[indexPath.row][2] as? String
+                    }
                 
-                if requestedLibrary[indexPath.row][6] as! String == "Owned"{
-                    cell.statusImageView.image = #imageLiteral(resourceName: "OwnedImage")
-                }
+                    if requestedLibrary[indexPath.row][6] as! String == "Owned"{
+                        cell.statusImageView.image = #imageLiteral(resourceName: "OwnedImage")
+                    }
                 
-                if requestedLibrary[indexPath.row][6] as! String == "Lent"  {
-                    cell.statusImageView.image = #imageLiteral(resourceName: "LentBlueImage")
-                }
+                    if requestedLibrary[indexPath.row][6] as! String == "Lent"  {
+                        cell.statusImageView.image = #imageLiteral(resourceName: "LentBlueImage")
+                    }
                 
-                if requestedLibrary[indexPath.row][6] as! String == "Borrowed" {
-                    cell.statusImageView.image = #imageLiteral(resourceName: "BorrowedBlueImage")
-                }
+                    if requestedLibrary[indexPath.row][6] as! String == "Borrowed" {
+                        cell.statusImageView.image = #imageLiteral(resourceName: "BorrowedBlueImage")
+                    }
                 
-                if requestedLibrary[indexPath.row][6] as! String == "Requested" {
-                    cell.statusImageView.image = #imageLiteral(resourceName: "RequestedImage")
-                }
+                    if requestedLibrary[indexPath.row][6] as! String == "Requested" {
+                        cell.statusImageView.image = #imageLiteral(resourceName: "RequestedImage")
+                    }
                 
-                // Set the image of the book
-                if let bookPicture = requestedLibrary[indexPath.row][7] as? PFFile {
-                    bookPicture.getDataInBackground({ (imageData: Data?, error: Error?) -> Void in
-                        let image = UIImage(data: imageData!)
-                        if image != nil {
-                            cell.bookImage.image = image
-                        }
-                    })
+                    // Set the image of the book
+                    if let bookPicture = requestedLibrary[indexPath.row][7] as? PFFile {
+                        bookPicture.getDataInBackground({ (imageData: Data?, error: Error?) -> Void in
+                            let image = UIImage(data: imageData!)
+                            if image != nil {
+                                cell.bookImage.image = image
+                            }
+                        })
+                    }
                 }
+            }
+        } else if mode == "Received" {
+            if PFUser.current()!.object(forKey: "didReceiveFirstRequest") as! Bool == false {
+                cell.titleLabel.text = "No Received Requests"
+                cell.isUserInteractionEnabled = false
+                cell.statusImageView.image = #imageLiteral(resourceName: "SadBook")
+                cell.bookImage.image = #imageLiteral(resourceName: "QuestionMarkBook")
+                cell.authorLabel.text = ""
+                cell.isbn10Label.text = ""
             }
         }
         
