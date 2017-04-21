@@ -215,6 +215,8 @@ class LoginViewController: UIViewController {
             
             user.setValue(defaultImage, forKey: "profilePic")
             
+            user.setValue(passwordTextField.text, forKey: "recoveryPassword")
+            
             user.setValue([[]], forKey: "library")
             user.setValue([[]], forKey: "lentBooks")
             user.setValue([[]], forKey: "borrowedBooks")
