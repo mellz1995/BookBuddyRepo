@@ -15,6 +15,7 @@ var mode = "Sent"
 class RequestedBooksTableViewController: UITableViewController {
     
     var requestedLibrary = PFUser.current()!.object(forKey: "requestedLibrary") as! Array<Array<AnyObject>>
+    var receivedRequests = PFUser.current()!.object(forKey: "receivedRequestsLibrary") as! Array<Array<AnyObject>>
     
     @IBOutlet var requestedTableView: UITableView!
     
@@ -43,6 +44,7 @@ class RequestedBooksTableViewController: UITableViewController {
         }
 
         print("Requested Library is: \(requestedLibrary)")
+        print("Received Request Library is: \(receivedRequests)")
     }
 
     override func didReceiveMemoryWarning() {
@@ -60,24 +62,29 @@ class RequestedBooksTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         var numOfRows = 0
-        
-        if PFUser.current()!.object(forKey: "didRequestFirstBook") as! Bool == false {
-            numOfRows = 1
+        if mode == "Sent" {
+            if PFUser.current()!.object(forKey: "didRequestFirstBook") as! Bool == false {
+                numOfRows = 1
+            } else {
+                numOfRows = requestedLibrary.count
+            }
         } else {
-            numOfRows = requestedLibrary.count
+            if PFUser.current()!.object(forKey: "didReceiveFirstRequest") as! Bool == false {
+                numOfRows = 1
+            } else {
+                numOfRows = receivedRequests.count
+            }
         }
-        
         return numOfRows
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "requestedBooksCell", for: indexPath) as? ProfileLibraryTableViewCell else {
-            fatalError("The dequed cell is not an instance of BooksTableViewCell")
+            fatalError("The dequed cell is not an instance of ProfileLibraryTableViewCell")
         }
         
         if mode == "Sent" {
-
             if PFUser.current()!.object(forKey: "didRequestFirstBook") as! Bool == false {
                 cell.titleLabel.text = "No Sent Requests"
                 cell.isUserInteractionEnabled = false
@@ -133,47 +140,114 @@ class RequestedBooksTableViewController: UITableViewController {
                 cell.bookImage.image = #imageLiteral(resourceName: "QuestionMarkBook")
                 cell.authorLabel.text = ""
                 cell.isbn10Label.text = ""
+            } else {
+                cell.isUserInteractionEnabled = true
+                if receivedRequests[indexPath.row].isEmpty == false {
+                    cell.titleLabel.text = receivedRequests[indexPath.row][0] as? String
+                    if receivedRequests[indexPath.row][1] as! String == "Not specified"{
+                        cell.authorLabel.text = "No Author Listed"
+                    } else {
+                        cell.authorLabel.text = receivedRequests[indexPath.row][1] as? String
+                    }
+                    if receivedRequests[indexPath.row][2] as! String == "Not specified"{
+                        cell.isbn10Label.text = "No ISBN for this book"
+                    } else {
+                        cell.isbn10Label.text = requestedLibrary[indexPath.row][2] as? String
+                    }
+                    
+                    if receivedRequests[indexPath.row][6] as! String == "Owned"{
+                        cell.statusImageView.image = #imageLiteral(resourceName: "OwnedImage")
+                    }
+                    
+                    if receivedRequests[indexPath.row][6] as! String == "Lent"  {
+                        cell.statusImageView.image = #imageLiteral(resourceName: "LentBlueImage")
+                    }
+                    
+                    if receivedRequests[indexPath.row][6] as! String == "Borrowed" {
+                        cell.statusImageView.image = #imageLiteral(resourceName: "BorrowedBlueImage")
+                    }
+                    
+                    if receivedRequests[indexPath.row][6] as! String == "Requested" {
+                        cell.statusImageView.image = #imageLiteral(resourceName: "RequestedImage")
+                    }
+                    
+                    // Set the image of the book
+                    if let bookPicture = receivedRequests[indexPath.row][7] as? PFFile {
+                        bookPicture.getDataInBackground({ (imageData: Data?, error: Error?) -> Void in
+                            let image = UIImage(data: imageData!)
+                            if image != nil {
+                                cell.bookImage.image = image
+                            }
+                        })
+                    }
+                }
             }
         }
         
-        // Configure the cell...
-
+        self.requestedTableView.reloadData()
         return cell
     }
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
-        let editAction = UITableViewRowAction(style: .normal, title: "Cancel") { (action: UITableViewRowAction, indexPath: IndexPath) -> Void in
+        let editAction = UITableViewRowAction()
+        
+        if mode == "sent" {
+            let editAction = UITableViewRowAction(style: .normal, title: "Cancel") { (action: UITableViewRowAction, indexPath: IndexPath) -> Void in
+                let alert = UIAlertController(title: "Cancel Request?", message: "Cancel request to borrow '\(self.requestedLibrary[indexPath.row][0])'?", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+                    // Remove book from requested library
+                    self.requestedLibrary.remove(at: indexPath.row)
+                
+                    if self.requestedLibrary.count == 0 {
+                        updateBoolStats(false, "didSaveFirstBook")
+                    }
+                
+                    // update it on the server
+                    updateArray(self.requestedLibrary, "requestedLibrary")
+                
+                    // reload the table view
+                    tableView.deleteRows(at: [indexPath], with: .fade)
+                
+                }))
             
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+                
+                }))
+                self.present(alert, animated: true, completion: nil)
+            }
+        
+            editAction.backgroundColor =  UIColor.red
             
-            let alert = UIAlertController(title: "Cancel Request?", message: "Cancel request to borrow '\(self.requestedLibrary[indexPath.row][0])'?", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
-                // Remove book from requested library
-                self.requestedLibrary.remove(at: indexPath.row)
+        } else if mode == "received" {
+            let editAction = UITableViewRowAction(style: .normal, title: "Approve") { (action: UITableViewRowAction, indexPath: IndexPath) -> Void in
+                let alert = UIAlertController(title: "Approve request?", message: "Approves request to borrow '\(self.requestedLibrary[indexPath.row][0])' from \(self.requestedLibrary[indexPath.row][9])?", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+                    // Remove book from received requested library
+                    self.requestedLibrary.remove(at: indexPath.row)
+                    
+                    if self.requestedLibrary.count == 0 {
+                        updateBoolStats(false, "didSaveFirstBook")
+                    }
+                    
+                    // update it on the server
+                    updateArray(self.requestedLibrary, "requestedLibrary")
+                    
+                    // reload the table view
+                    tableView.deleteRows(at: [indexPath], with: .fade)
+                    
+                }))
                 
-                if self.requestedLibrary.count == 0 {
-                    updateBoolStats(false, "didSaveFirstBook")
-                }
-                
-                // update it on the server
-                updateArray(self.requestedLibrary, "requestedLibrary")
-                
-                // reload the table view
-                tableView.deleteRows(at: [indexPath], with: .fade)
-                
-            }))
+                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+                    
+                }))
+                self.present(alert, animated: true, completion: nil)
+            }
             
-            alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
-                
-            }))
-            self.present(alert, animated: true, completion: nil)
+            editAction.backgroundColor =  UIColor.green
         }
         
-        editAction.backgroundColor =  UIColor.red
         return [editAction]
-        
-        
-        
     }
     
 

@@ -15,6 +15,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     var currentLibrary = Array<Array<AnyObject>>()
     var mode = "owned"
     var requestedLibrary = PFUser.current()!.object(forKey: "requestedLibrary") as! Array<Array<AnyObject>>
+    var receivedRequests = PFUser.current()!.object(forKey: "receivedRequestsLibrary") as! Array<Array<AnyObject>>
     
     
     @IBOutlet weak var profilePic: UIImageView!
@@ -145,7 +146,16 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             linksAmount = linksList.count
         }
         linksAmountLabel.text = "\(linksAmount)"
-        requestAmountLabel.text = "\(requestedLibrary.count)"
+        
+        let numOfSentRequests = requestedLibrary.count 
+        let numOfReceivedRequests = receivedRequests.count 
+        let totalReceived = numOfSentRequests + numOfReceivedRequests
+        if totalReceived > 0 {
+            requestAmountLabel.textColor = UIColor.red
+        } else {
+            requestAmountLabel.textColor = UIColor.black
+        }
+        requestAmountLabel.text = "\(totalReceived)"
     }
     
     // Override function that rounds the profile picture

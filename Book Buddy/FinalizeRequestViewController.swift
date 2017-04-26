@@ -108,30 +108,6 @@ class FinalizeRequestViewController: UIViewController {
                                             })
                                             
                                         }
-//                                        user.setValue(self.requestedUserReceivedReqeuests, forKey: "receivedRequestsLibrary")
-//                                        user.saveInBackground(block: { (success, error) in
-//                                            if error != nil {
-//                                                print("Error with saving recieved")
-//                                                // Clear the requestedBook array
-//                                                requestedBookArray.removeAll()
-//                                                self.finalRequestedBookArray.removeAll()
-//                                                print("Requested Book Array Cleared!")
-//                                            }
-//                                            else {
-//                                                print("Successfully saved received")
-//                                            }
-//                                        })
-                                        
-//                                        let addRequest = PFObject(className: "AddRequests")
-//                                        addRequest["currentUser"] = ["__type": "Pointer", "className": "_User", "objectId": PFUser.current()?.objectId]
-//                                        addRequest["requestedUser"] = ["__type": "Pointer", "className": "_User", "objectId": user.objectId!, "receivedRequestsLibrary": self.finalRequestedBookArray]
-//                                        addRequest.saveInBackground { (success, error) -> Void in
-//                                            if error != nil {
-//                                                print(error!)
-//                                            } else {
-//                                                print("The request was successfully saved")
-//                                            }
-//                                        }
                                     } else {
                                         
                                     }
