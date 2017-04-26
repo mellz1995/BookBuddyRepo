@@ -147,8 +147,22 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         linksAmountLabel.text = "\(linksAmount)"
         
-        let numOfSentRequests = requestedLibrary.count 
-        let numOfReceivedRequests = receivedRequests.count 
+        let didRequestFirstBook = PFUser.current()!.object(forKey: "didRequestFirstBook") as! Bool
+        let didReceiveFirstRequest = PFUser.current()!.object(forKey: "didReceiveFirstRequest") as! Bool
+        
+        var numOfSentRequests = 0
+        
+        if didRequestFirstBook == true {
+            numOfSentRequests = requestedLibrary.count
+        }
+        
+        var numOfReceivedRequests = 0
+        
+        if didReceiveFirstRequest == true {
+            numOfReceivedRequests = receivedRequests.count
+        }
+        
+        
         let totalReceived = numOfSentRequests + numOfReceivedRequests
         if totalReceived > 0 {
             requestAmountLabel.textColor = UIColor.red

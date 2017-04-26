@@ -28,6 +28,7 @@
 		568906921E69C3D70044C016 /* WishListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568906911E69C3D70044C016 /* WishListTableViewController.swift */; };
 		568906961E69C4420044C016 /* WishListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568906951E69C4420044C016 /* WishListCell.swift */; };
 		568906981E69D5A50044C016 /* WishListBookInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568906971E69D5A50044C016 /* WishListBookInformationViewController.swift */; };
+		568C48441EB0E5A900CD2AA0 /* RequestedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568C48431EB0E5A900CD2AA0 /* RequestedCell.swift */; };
 		569C1EB81E4C40B400428785 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569C1EB71E4C40B400428785 /* LoginViewController.swift */; };
 		569C1EBA1E4C40E400428785 /* BarcodeReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 569C1EB91E4C40E400428785 /* BarcodeReaderViewController.swift */; };
 		56A371381E4CBB7700FC064E /* Parse.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56594BA11E4C17C100F6A60A /* Parse.framework */; };
@@ -102,6 +103,7 @@
 		568906911E69C3D70044C016 /* WishListTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WishListTableViewController.swift; sourceTree = "<group>"; };
 		568906951E69C4420044C016 /* WishListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WishListCell.swift; sourceTree = "<group>"; };
 		568906971E69D5A50044C016 /* WishListBookInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WishListBookInformationViewController.swift; sourceTree = "<group>"; };
+		568C48431EB0E5A900CD2AA0 /* RequestedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RequestedCell.swift; sourceTree = "<group>"; };
 		569C1EB71E4C40B400428785 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		569C1EB91E4C40E400428785 /* BarcodeReaderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarcodeReaderViewController.swift; sourceTree = "<group>"; };
 		56A3713A1E4CBD9100FC064E /* libstdc++.6.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.tbd"; path = "usr/lib/libstdc++.6.tbd"; sourceTree = SDKROOT; };
@@ -242,6 +244,7 @@
 				56F911361E6DC103004C08D6 /* FriendsCell.swift */,
 				567A9DF71E54B0FA00DB2930 /* Information.swift */,
 				56460B7E1E952F1D003D2DC5 /* ProfileLibraryTableViewCell.swift */,
+				568C48431EB0E5A900CD2AA0 /* RequestedCell.swift */,
 				56BBD7B61E4E730A00E3677F /* SearchAPI.swift */,
 				56431FDC1E6712EA007404C4 /* SearchedUserLibraryCell.swift */,
 				56E68E531E647A020029D497 /* SearchUsernameCell.swift */,
@@ -486,6 +489,7 @@
 				56594B731E4C16FE00F6A60A /* AppDelegate.swift in Sources */,
 				56E9FF3A1E97EDC700EDBA2B /* RequestedNavigationViewController.swift in Sources */,
 				56DE1DB21E6388C500402774 /* DeletedBooksTableViewCell.swift in Sources */,
+				568C48441EB0E5A900CD2AA0 /* RequestedCell.swift in Sources */,
 				56431FDF1E6720CE007404C4 /* UserLibraryBookInformationViewController.swift in Sources */,
 				56F911351E6DC0E3004C08D6 /* FriendsTableViewController.swift in Sources */,
 				56DE1DB61E6390C900402774 /* DeletedBookInformationViewController.swift in Sources */,

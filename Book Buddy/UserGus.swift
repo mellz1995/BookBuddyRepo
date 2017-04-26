@@ -63,10 +63,10 @@ func updateArray(_ changeStat: Array<Array<AnyObject>>, _ key: String) {
     // Save User Variables
     PFUser.current()?.saveInBackground(block: { (success, error) in
         if error != nil {
-            print("Error with saving \(key)")
+            print("Error with saving \(key) for \(PFUser.current()!.username!): \(error!)")
         }
         else {
-            print("Successfully saved \(key)")
+            print("Successfully saved \(key) for \(PFUser.current()!.username!)")
         }
     })
 }

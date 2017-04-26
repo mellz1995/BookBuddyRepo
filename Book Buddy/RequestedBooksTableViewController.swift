@@ -16,6 +16,7 @@ class RequestedBooksTableViewController: UITableViewController {
     
     var requestedLibrary = PFUser.current()!.object(forKey: "requestedLibrary") as! Array<Array<AnyObject>>
     var receivedRequests = PFUser.current()!.object(forKey: "receivedRequestsLibrary") as! Array<Array<AnyObject>>
+    var didRequestFirstBook = PFUser.current()!.object(forKey: "didRequestFirstBook") as! Bool
     
     @IBOutlet var requestedTableView: UITableView!
     
@@ -39,8 +40,10 @@ class RequestedBooksTableViewController: UITableViewController {
         navigationItem.title = "Requested"
         
         // Change the book's status to requested
-        for i in 0..<requestedLibrary.count {
-            requestedLibrary[i][6] = "Requested" as AnyObject
+        if didRequestFirstBook == true {
+            for i in 0..<requestedLibrary.count {
+                requestedLibrary[i][6] = "Requested" as AnyObject
+            }
         }
 
         print("Requested Library is: \(requestedLibrary)")
@@ -80,8 +83,8 @@ class RequestedBooksTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "requestedBooksCell", for: indexPath) as? ProfileLibraryTableViewCell else {
-            fatalError("The dequed cell is not an instance of ProfileLibraryTableViewCell")
+        guard let cell = requestedTableView.dequeueReusableCell(withIdentifier: "requestedBooksCell", for: indexPath) as? RequestedCell else {
+            fatalError("The dequed cell is not an instance of RequestedCell")
         }
         
         if mode == "Sent" {
@@ -183,8 +186,8 @@ class RequestedBooksTableViewController: UITableViewController {
                 }
             }
         }
-        
-        self.requestedTableView.reloadData()
+        //cell.authorLabel.text = "Melvin"
+        //self.requestedTableView.reloadData()
         return cell
     }
     
@@ -265,13 +268,13 @@ class RequestedBooksTableViewController: UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         switch(segue.identifier ?? ""){
-        case "deletedInformation":
+        case "requestedInformation":
             os_log("Showing requestd book's information", log: OSLog.default, type: .debug)
             
             guard let requestedBookInformationViewController = segue.destination as? RequestedBookInformationViewController else {
                 fatalError("Unexpected sender: \(String(describing: sender))")
             }
-            guard let selectedUserCell = sender as? ProfileLibraryTableViewCell else {
+            guard let selectedUserCell = sender as? RequestedCell else {
                 fatalError("The selected cell is not being displayed by the table")
             }
             
@@ -279,10 +282,18 @@ class RequestedBooksTableViewController: UITableViewController {
                 fatalError("The selected cell is not being displayed by the table")
             }
             
-            let selectedRequestedBook = requestedLibrary[indexPath.row]
-            requestedBookInformationViewController.requestedBookInformation = selectedRequestedBook
+            var selectedBook = Array<AnyObject>()
             
-        case "BackToSearchSeg":
+            if mode == "Sent"{
+            
+                selectedBook = requestedLibrary[indexPath.row]
+            } else {
+                selectedBook = receivedRequests[indexPath.row]
+            }
+            
+            requestedBookInformationViewController.requestedBookInformation = selectedBook
+            
+        case "BackToProfile":
             os_log("Going back to search", log: OSLog.default, type: .debug)
             
         default:
