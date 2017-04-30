@@ -25,6 +25,7 @@
  10 Book Id
  11 Date of the book requested to be borrowed
  12 The user that's requesting to borrow the book
+ 13 The book is claimed returned
  */
 
 

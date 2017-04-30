@@ -37,6 +37,7 @@ class BooksTableViewController: UITableViewController {
             currentLibrary = PFUser.current()!.object(forKey: "lentBooks") as! Array<Array<AnyObject>>
             libraryMode = "lent"
             print("Mode is \(libraryMode)")
+            print("Lent: \(currentLibrary)")
             self.tableView.reloadData()
         }
     }
@@ -263,16 +264,34 @@ class BooksTableViewController: UITableViewController {
                         cell.isbn10Label.text = currentLibrary[indexPath.row][2] as? String
                     }
                     
-                    if currentLibrary[indexPath.row][6] as! String == "Owned"{
-                        cell.statusImageView.image = #imageLiteral(resourceName: "OwnedImage")
-                    }
+                    if currentLibrary[indexPath.row].count>11 {
+                        if currentLibrary[indexPath.row][13] as! String == "Claim Returned"{
+                            cell.statusImageView.image = #imageLiteral(resourceName: "ExclamationImage")
+                        } else {
+                            if currentLibrary[indexPath.row][6] as! String == "Owned"{
+                                cell.statusImageView.image = #imageLiteral(resourceName: "OwnedImage")
+                            }
+                            
+                            if currentLibrary[indexPath.row][6] as! String == "Lent"  {
+                                cell.statusImageView.image = #imageLiteral(resourceName: "LentBlueImage")
+                            }
+                            
+                            if currentLibrary[indexPath.row][6] as! String == "Borrowed" {
+                                cell.statusImageView.image = #imageLiteral(resourceName: "BorrowedBlueImage")
+                            }
+                        }
+                    } else {
+                        if currentLibrary[indexPath.row][6] as! String == "Owned"{
+                            cell.statusImageView.image = #imageLiteral(resourceName: "OwnedImage")
+                        }
                     
-                    if currentLibrary[indexPath.row][6] as! String == "Lent"  {
-                        cell.statusImageView.image = #imageLiteral(resourceName: "LentBlueImage")
-                    }
+                        if currentLibrary[indexPath.row][6] as! String == "Lent"  {
+                            cell.statusImageView.image = #imageLiteral(resourceName: "LentBlueImage")
+                        }
                     
-                    if currentLibrary[indexPath.row][6] as! String == "Borrowed" {
-                        cell.statusImageView.image = #imageLiteral(resourceName: "BorrowedBlueImage")
+                        if currentLibrary[indexPath.row][6] as! String == "Borrowed" {
+                            cell.statusImageView.image = #imageLiteral(resourceName: "BorrowedBlueImage")
+                        }
                     }
                     
                     // Set the image of the book

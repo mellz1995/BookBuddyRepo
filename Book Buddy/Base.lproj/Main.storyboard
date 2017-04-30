@@ -894,6 +894,23 @@
                                     <constraint firstAttribute="height" constant="41" id="WK9-cT-EMc"/>
                                 </constraints>
                             </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Book Due: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yFy-bq-Rwt">
+                                <rect key="frame" x="0.0" y="204" width="171" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pxx-pd-V4T">
+                                <rect key="frame" x="199" y="200" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Return">
+                                    <color key="titleColor" red="0.01453442258883253" green="0.01453442258883253" blue="0.01453442258883253" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="returnAction:" destination="GdF-in-R4N" eventType="touchUpInside" id="zrU-yX-QdC"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.012886563315987587" green="0.45937305688858032" blue="0.88728392124176025" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -905,25 +922,35 @@
                     <connections>
                         <outlet property="authorLabel" destination="8vN-nN-3ua" id="A2t-GD-c7A"/>
                         <outlet property="authorTextField" destination="Lia-3d-rbJ" id="dRG-rG-icj"/>
+                        <outlet property="authorTextFieldImage" destination="9WM-XF-4Oz" id="lAC-ZM-VGw"/>
                         <outlet property="bannerView" destination="c1u-4t-1pI" id="hRC-tO-CVG"/>
+                        <outlet property="bookDueLabel" destination="yFy-bq-Rwt" id="XlX-iC-9u0"/>
                         <outlet property="bookImage" destination="Mte-81-2tz" id="3lq-BL-2uY"/>
+                        <outlet property="changeButtonOutlet" destination="bKn-Oz-5Ib" id="hev-n3-ddR"/>
+                        <outlet property="clearButtonOutlet" destination="B1Q-Uu-yhI" id="kjB-ga-Opr"/>
                         <outlet property="isbn10TextField" destination="7Sd-tP-tjT" id="gXn-v9-J8a"/>
+                        <outlet property="isbn10TextFieldImage" destination="DfZ-YX-ff8" id="lp0-kG-HIs"/>
                         <outlet property="isbn10label" destination="CsG-qV-9TY" id="r7D-Hd-zNk"/>
                         <outlet property="isbn13Label" destination="SLq-Y0-cd3" id="VyD-iQ-cAB"/>
                         <outlet property="isbn13TextField" destination="42i-PJ-o0r" id="SMv-Bl-LV1"/>
+                        <outlet property="isbn13TextFieldImage" destination="wDg-wn-tnM" id="s7B-fZ-jSW"/>
                         <outlet property="languageLabel" destination="cZ3-JF-kUt" id="OHj-75-1ny"/>
+                        <outlet property="languageTextFieldImage" destination="YDg-45-Jgu" id="cbj-ha-9TD"/>
                         <outlet property="lanuguageTextField" destination="yFi-a3-gca" id="tel-4Z-kCu"/>
                         <outlet property="ownerLabel" destination="QQB-ci-cAF" id="bHX-tH-sf7"/>
                         <outlet property="publisherLabel" destination="xa1-HR-Cwj" id="2PY-u4-mjm"/>
                         <outlet property="publisherTextField" destination="Coy-cC-DIB" id="wJX-j2-n06"/>
+                        <outlet property="publisherTextFieldImage" destination="yvH-ii-m7z" id="kXX-Nr-Esv"/>
+                        <outlet property="returnOutlet" destination="pxx-pd-V4T" id="3D0-rq-3Yq"/>
                         <outlet property="saveButtonOutlet" destination="lF9-ds-MyQ" id="eEV-GS-j3F"/>
                         <outlet property="titleLabel" destination="OCk-Fi-rhR" id="tFr-YQ-byb"/>
                         <outlet property="titleTextField" destination="TQ4-MQ-UqW" id="gfb-rd-s8X"/>
+                        <outlet property="titleTextFieldImage" destination="6uB-Hy-STp" id="N6G-je-fHh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N6f-sP-Krv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3700" y="631.93403298350825"/>
+            <point key="canvasLocation" x="1604" y="-1343.4782608695652"/>
         </scene>
         <!--User Library Book Information View Controller-->
         <scene sceneID="LX4-vo-7NR">
