@@ -17,6 +17,16 @@ class RequestedBooksTableViewController: UITableViewController {
     var requestedLibrary = PFUser.current()!.object(forKey: "requestedLibrary") as! Array<Array<AnyObject>>
     var receivedRequests = PFUser.current()!.object(forKey: "receivedRequestsLibrary") as! Array<Array<AnyObject>>
     var didRequestFirstBook = PFUser.current()!.object(forKey: "didRequestFirstBook") as! Bool
+    var didReceiveFirstRequest = PFUser.current()!.object(forKey: "didReceiveFirstRequest") as! Bool
+    
+    var currentLibrary = PFUser.current()!.object(forKey: "requestedLibrary") as! Array<Array<AnyObject>>
+    
+    @IBAction func backButtonAction(_ sender: UIBarButtonItem) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let view = storyboard.instantiateViewController(withIdentifier: "ProfilePage")
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        appDelegate.window?.rootViewController = view
+    }
     
     @IBOutlet var requestedTableView: UITableView!
     
@@ -41,6 +51,7 @@ class RequestedBooksTableViewController: UITableViewController {
         
         // Change the book's status to requested
         if didRequestFirstBook == true {
+            print("DidRequestFirstBook is: \(didRequestFirstBook)")
             for i in 0..<requestedLibrary.count {
                 requestedLibrary[i][6] = "Requested" as AnyObject
             }
@@ -66,14 +77,19 @@ class RequestedBooksTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         var numOfRows = 0
         if mode == "Sent" {
+            currentLibrary.removeAll()
             if PFUser.current()!.object(forKey: "didRequestFirstBook") as! Bool == false {
+                currentLibrary = PFUser.current()!.object(forKey: "requestedLibrary") as! Array<Array<AnyObject>>
                 numOfRows = 1
             } else {
+                
                 numOfRows = requestedLibrary.count
             }
-        } else {
+        } else if mode == "Received" {
+            currentLibrary.removeAll()
             if PFUser.current()!.object(forKey: "didReceiveFirstRequest") as! Bool == false {
                 numOfRows = 1
+                currentLibrary = PFUser.current()!.object(forKey: "receivedRequestsLibrary") as! Array<Array<AnyObject>>
             } else {
                 numOfRows = receivedRequests.count
             }
@@ -93,6 +109,8 @@ class RequestedBooksTableViewController: UITableViewController {
                 cell.isUserInteractionEnabled = false
                 cell.statusImageView.image = #imageLiteral(resourceName: "SadBook")
                 cell.bookImage.image = #imageLiteral(resourceName: "QuestionMarkBook")
+                cell.authorLabel.text = ""
+                cell.isbn10Label.text = ""
             } else {
                 cell.isUserInteractionEnabled = true
                 if requestedLibrary[indexPath.row].isEmpty == false {
@@ -155,7 +173,7 @@ class RequestedBooksTableViewController: UITableViewController {
                     if receivedRequests[indexPath.row][2] as! String == "Not specified"{
                         cell.isbn10Label.text = "No ISBN for this book"
                     } else {
-                        cell.isbn10Label.text = requestedLibrary[indexPath.row][2] as? String
+                        cell.isbn10Label.text = receivedRequests[indexPath.row][2] as? String
                     }
                     
                     if receivedRequests[indexPath.row][6] as! String == "Owned"{
@@ -193,10 +211,10 @@ class RequestedBooksTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
-        let editAction = UITableViewRowAction()
+        var requestEditAction = UITableViewRowAction()
         
         if mode == "sent" {
-            let editAction = UITableViewRowAction(style: .normal, title: "Cancel") { (action: UITableViewRowAction, indexPath: IndexPath) -> Void in
+            requestEditAction = UITableViewRowAction(style: .normal, title: "Cancel") { (action: UITableViewRowAction, indexPath: IndexPath) -> Void in
                 let alert = UIAlertController(title: "Cancel Request?", message: "Cancel request to borrow '\(self.requestedLibrary[indexPath.row][0])'?", preferredStyle: UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
                     // Remove book from requested library
@@ -220,10 +238,10 @@ class RequestedBooksTableViewController: UITableViewController {
                 self.present(alert, animated: true, completion: nil)
             }
         
-            editAction.backgroundColor =  UIColor.red
+            requestEditAction.backgroundColor =  UIColor.red
             
         } else if mode == "received" {
-            let editAction = UITableViewRowAction(style: .normal, title: "Approve") { (action: UITableViewRowAction, indexPath: IndexPath) -> Void in
+           requestEditAction = UITableViewRowAction(style: .normal, title: "Approve") { (action: UITableViewRowAction, indexPath: IndexPath) -> Void in
                 let alert = UIAlertController(title: "Approve request?", message: "Approves request to borrow '\(self.requestedLibrary[indexPath.row][0])' from \(self.requestedLibrary[indexPath.row][9])?", preferredStyle: UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
                     // Remove book from received requested library
@@ -247,10 +265,10 @@ class RequestedBooksTableViewController: UITableViewController {
                 self.present(alert, animated: true, completion: nil)
             }
             
-            editAction.backgroundColor =  UIColor.green
+            requestEditAction.backgroundColor =  UIColor.green
         }
         
-        return [editAction]
+        return [requestEditAction]
     }
     
 

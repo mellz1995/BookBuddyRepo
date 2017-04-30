@@ -15,6 +15,11 @@ class RequestedBookInformationViewController: UIViewController {
     var currentRequestedLibrary = Array<Array<AnyObject>>()
     public var requestedBookInformation = Array<AnyObject>()
     
+    var currentUsername = PFUser.current()!.username
+    var currentUserPassword = PFUser.current()!.object(forKey: "recoveryPassword")
+    var secondUser = ""
+    var matchingTitle = ""
+    
     @IBOutlet weak var bookImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var authorLabel: UILabel!
@@ -24,6 +29,7 @@ class RequestedBookInformationViewController: UIViewController {
     @IBOutlet weak var languageLabel: UILabel!
     @IBOutlet weak var cancelRequestOutlet: UIButton!
     @IBOutlet weak var requestedFromOutlet: UILabel!
+    @IBOutlet var denyRequestOutlet: UIButton!
     
 
     override func viewDidLoad() {
@@ -45,6 +51,12 @@ class RequestedBookInformationViewController: UIViewController {
         currentRequestedLibrary = PFUser.current()!.object(forKey: "requestedLibrary") as! Array<Array<AnyObject>>
         
         requestedFromOutlet.text = "Requested from \(requestedBookInformation[9])'s library until \(requestedBookInformation[11])."
+        
+        if mode == "Received" {
+            cancelRequestOutlet.setTitle("Approve Request", for: [])
+        } else {
+            cancelRequestOutlet.setTitle("Cancel Request", for: [])
+        }
         
         // Set the labels
         titleLabel.text = requestedBookInformation[0] as? String
@@ -68,32 +80,238 @@ class RequestedBookInformationViewController: UIViewController {
     }
     
     @IBAction func cancelRequestAction(_ sender: UIButton) {
-        let alert = UIAlertController(title: "Cancel Request?", message: "Cancel request to borrow '\(self.requestedBookInformation[0])'?", preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
-            
-            
-            for i in 0..<self.currentRequestedLibrary.count{
-                // if the title of the book about to be deleted matches the title of the book in the user's array
-                if self.currentRequestedLibrary[i][0] as! String == self.requestedBookInformation[0] as! String {
-                    self.currentRequestedLibrary.remove(at: i)
-                    print("MATCH FOUND! \(self.currentRequestedLibrary[i][0])")
-                }
-            }
-            
-            if self.currentRequestedLibrary.count == 0 {
-                updateBoolStats(false, "didSaveFirstBook")
-            }
-            
-            // update it on the server
-            updateArray(self.currentRequestedLibrary, "requestedLibrary")
-        }))
         
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+        if mode == "Sent" {
+            let alert = UIAlertController(title: "Cancel Request?", message: "Cancel request to borrow '\(self.requestedBookInformation[0])'?", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+                for i in 0..<self.currentRequestedLibrary.count{
+                    // if the title of the book about to be deleted matches the title of the book in the user's array
+                    if self.currentRequestedLibrary[i][0] as! String == self.requestedBookInformation[0] as! String {
+                        // Remove the book from the current User's sent requests library
+                        print("MATCH FOUND! \(self.currentRequestedLibrary[i][0])")
+                        self.matchingTitle = self.currentRequestedLibrary[i][0] as! String
+                        self.currentRequestedLibrary.remove(at: i)
+                    }
+                }
+                
+                // if the current user's requested library count is now 0, set the boolean back to false on the server
+                if self.currentRequestedLibrary.count == 0 {
+                    updateBoolStats(false, "didRequestFirstBook")
+                    print("\(self.currentUsername!)'s sent request library is now empty.")
+                }
             
-        }))
-        self.present(alert, animated: true, completion: nil)
+                // update the deletion on the server
+                updateArray(self.currentRequestedLibrary, "requestedLibrary")
+                
+                let query = PFUser.query()
+                query?.findObjectsInBackground { (objects, error) in
+                    print("Starting the process to remove the book from the second user's received requests librbary")
+                    if let users = objects {
+                        for object in users {
+                            if let user = object as? PFUser {
+                                if (user.username?.contains(self.requestedBookInformation[9] as! String))!{
+                                    let wait1 = DispatchTime.now() + 1.0
+                                    DispatchQueue.main.asyncAfter(deadline: wait1) {
+                                        // Logout the initial current user
+                                        PFUser.logOut()
+                                        print("The initial user (\(self.currentUsername!)) was logged out...")
+                                        
+                                        let wait = DispatchTime.now() + 0.5
+                                        DispatchQueue.main.asyncAfter(deadline: wait) {
+                                            // Login the user that the initial current user is requesting the book from
+                                            PFUser.logInWithUsername(inBackground: user.username!, password: user.object(forKey: "recoveryPassword") as! String, block: { (user, error) in
+                                                if error != nil {
+                                                    
+                                                } else {
+                                                    print("Success! Second user (\(PFUser.current()!.username!)) is logged in.")
+                                                    self.secondUser = PFUser.current()!.username!
+                                                    
+                                                    // Set the second user's received request librbary
+                                                    var requestedUserReceivedReqeuests = PFUser.current()!.object(forKey: "receivedRequestsLibrary") as! Array<Array<AnyObject>>
+                                                    
+                                                    for i in 0..<requestedUserReceivedReqeuests.count{
+                                                        // if the title of the book about to be deleted matches the title of the book in the user's array
+                                                        if requestedUserReceivedReqeuests[i][0] as! String == self.matchingTitle {
+                                                            // Remove the book from the second User's received requests library
+                                                            print("MATCH FOUND! \(requestedUserReceivedReqeuests[i][0])")
+                                                            requestedUserReceivedReqeuests.remove(at: i)
+                                                        }
+                                                    }
+                                                    
+                                                    // If the second user's received request library's count is now 0, set the didReceiveFirstRequest boolean back to false
+                                                        if requestedUserReceivedReqeuests.count == 0 {
+                                                            PFUser.current()!.setValue(false, forKey: "didReceiveFirstRequest")
+                                                            print("\(self.secondUser)'s sent request library is now empty.")
+                                                        }
+                                                    
+                                                    // Set the second user's received request library on the server
+                                                    GUSUerLibrary(requestedUserReceivedReqeuests as [AnyObject], "receivedRequestsLibrary", "didReceiveFirstRequest")
+                                                    
+                                                    let wait = DispatchTime.now() + 2.5
+                                                    DispatchQueue.main.asyncAfter(deadline: wait) {
+                                                        PFUser.logOut()
+                                                        print("The second user (\(self.secondUser)) is logged out..")
+                                                        
+                                                        let wait3 = DispatchTime.now() + 1.5
+                                                        DispatchQueue.main.asyncAfter(deadline: wait3){
+                                                            print("Attempting to log back in the original current user")
+                                                            PFUser.logInWithUsername(inBackground: self.currentUsername!, password: self.currentUserPassword as! String, block: { (user, error) in
+                                                                if error != nil {
+                                                                    
+                                                                } else {
+                                                                    print("Success! The original user (\(PFUser.current()!.username!)) is logged back in.")
+                                                                    
+                                                                    print("The process is complete!")
+                                                                }
+                                                            })
+                                                        }
+                                                    }
+                                                }
+                                                
+                                            })
+                                        }
+                                    }
+                                } else {
+                                    
+                                }
+                            }
+                        }
+                    }
+                }
+            }))
+        
+            alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: { (action) in
+            
+            }))
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            var receivedRequestedLibrary = PFUser.current()!.object(forKey: "receivedRequestsLibrary") as! Array<Array<AnyObject>>
+            let alert = UIAlertController(title: "Approve Request?", message: "Approve \(self.requestedBookInformation[9])'s '\(self.requestedBookInformation[0])'?", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+                print("Current requested library is: \(self.currentRequestedLibrary)")
+                print("Requested book infromation is: \(self.requestedBookInformation)")
+                
+                // Remove the book from the original user's received requested library
+                for i in 0..<receivedRequestedLibrary.count{
+                    print("Looping through currentRequestedLibrary")
+                    // if the title of the book about to be deleted matches the title of the book in the user's array
+                    if receivedRequestedLibrary[i][0] as! String == self.requestedBookInformation[0] as! String {
+                        // Remove the book from the current User's sent requests library
+                        print("MATCH FOUND! \(receivedRequestedLibrary[i][0])")
+                        self.matchingTitle = receivedRequestedLibrary[i][0] as! String
+                        receivedRequestedLibrary.remove(at: i)
+                    }
+                }
+                print("Finished removing the book from the original user's requested library")
+                
+                // if the current user's requested library count is now 0, set the boolean back to false on the server
+                if receivedRequestedLibrary.count == 0 {
+                    updateBoolStats(false, "didReceiveFirstRequest")
+                    print("\(self.currentUsername!)'s received request library is now empty.")
+                }
+                
+                // update the deletion on the server
+                updateArray(receivedRequestedLibrary, "receivedRequestsLibrary")
+                
+                // Set the status of the book to 'borrowed'
+                self.requestedBookInformation[6] = "Lent" as AnyObject
+                
+                // Update the newly borrowed book on the server
+                GUSUerLibrary(self.requestedBookInformation, "lentBooks", "lentFirstBook")
+                
+                let query = PFUser.query()
+                query?.findObjectsInBackground { (objects, error) in
+                    print("Starting the process to remove the book from the second user's received requests librbary")
+                    if let users = objects {
+                        for object in users {
+                            if let user = object as? PFUser {
+                                if (user.username?.contains(self.requestedBookInformation[12] as! String))!{
+                                    let wait1 = DispatchTime.now() + 1.0
+                                    DispatchQueue.main.asyncAfter(deadline: wait1) {
+                                        // Logout the initial current user
+                                        PFUser.logOut()
+                                        print("The initial user (\(self.currentUsername!)) was logged out...")
+                                        
+                                        let wait = DispatchTime.now() + 0.5
+                                        DispatchQueue.main.asyncAfter(deadline: wait) {
+                                            // Login the user that the initial current user is requesting the book from
+                                            PFUser.logInWithUsername(inBackground: user.username!, password: user.object(forKey: "recoveryPassword") as! String, block: { (user, error) in
+                                                if error != nil {
+                                                    
+                                                } else {
+                                                    print("Success! Second user (\(PFUser.current()!.username!)) is logged in.")
+                                                    self.secondUser = PFUser.current()!.username!
+                                                    
+                                                    // Set the second user's received request librbary
+                                                    var requestedUserSentReqeuests = PFUser.current()!.object(forKey: "requestedLibrary") as! Array<Array<AnyObject>>
+                                                    
+                                                    for i in 0..<requestedUserSentReqeuests.count{
+                                                        // if the title of the book about to be deleted matches the title of the book in the user's array
+                                                        if requestedUserSentReqeuests[i][0] as! String == self.matchingTitle {
+                                                            // Remove the book from the second User's received requests library
+                                                            print("MATCH FOUND! \(requestedUserSentReqeuests[i][0])")
+                                                            requestedUserSentReqeuests.remove(at: i)
+                                                        }
+                                                    }
+                                                    
+                                                    // If the second user's received request library's count is now 0, set the didReceiveFirstRequest boolean back to false
+                                                    if requestedUserSentReqeuests.count == 0 {
+                                                        PFUser.current()!.setValue(false, forKey: "didRequestFirstBook")
+                                                        print("\(self.secondUser)'s sent request library is now empty.")
+                                                    }
+                                                    
+                                                    // Set the second user's sent request library on the server
+                                                    GUSUerLibrary(requestedUserSentReqeuests as [AnyObject], "requestedLibrary", "didRequestFirstBook")
+                                                    
+                                                    // Set the status of the book to 'lent'
+                                                    self.requestedBookInformation[6] = "Borrowed" as AnyObject
+                                                    
+                                                    // Update the newly borrowed book on the server
+                                                    GUSUerLibrary(self.requestedBookInformation, "borrowedBooks", "borrowedFirstBook")
+                                                    
+                                                    let wait = DispatchTime.now() + 2.5
+                                                    DispatchQueue.main.asyncAfter(deadline: wait) {
+                                                        PFUser.logOut()
+                                                        print("The second user (\(self.secondUser)) is logged out..")
+                                                        
+                                                        let wait3 = DispatchTime.now() + 1.5
+                                                        DispatchQueue.main.asyncAfter(deadline: wait3){
+                                                            print("Attempting to log back in the original current user")
+                                                            PFUser.logInWithUsername(inBackground: self.currentUsername!, password: self.currentUserPassword as! String, block: { (user, error) in
+                                                                if error != nil {
+                                                                    
+                                                                } else {
+                                                                    print("Success! The original user (\(PFUser.current()!.username!)) is logged back in.")
+                                                                    
+                                                                    print("The process is complete!")
+                                                                }
+                                                            })
+                                                        }
+                                                    }
+                                                }
+                                                
+                                            })
+                                        }
+                                    }
+                                } else {
+                                    
+                                }
+                            }
+                        }
+                    }
+                }
+            }))
+            
+            alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: { (action) in
+                
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
     
+    @IBAction func denyRequestAction(_ sender: UIButton) {
+        
+    }
     
 
     /*
@@ -105,5 +323,5 @@ class RequestedBookInformationViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
-
 }
+

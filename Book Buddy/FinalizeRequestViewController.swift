@@ -85,6 +85,9 @@ class FinalizeRequestViewController: UIViewController {
                                                             print("Success! Second user (\(PFUser.current()!.username!)) is logged in.")
                                                             self.secondUser = PFUser.current()!.username!
                                                             
+                                                            // Append the user who's requesting to borrow the book at index 12
+                                                            self.finalRequestedBookArray.append(self.originalUsername! as AnyObject)
+                                                            
                                                             self.requestedUserReceivedReqeuests = PFUser.current()!.object(forKey: "receivedRequestsLibrary") as! Array<Array<AnyObject>>
                                                             self.requestedUserReceivedReqeuests.append(self.finalRequestedBookArray)
                                                             

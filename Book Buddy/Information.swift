@@ -24,6 +24,7 @@
  9 Owner of the book
  10 Book Id
  11 Date of the book requested to be borrowed
+ 12 The user that's requesting to borrow the book
  */
 
 
@@ -43,9 +44,6 @@
  1 Username
  2 User's photo
  */
-
-
-
 
 
 /**

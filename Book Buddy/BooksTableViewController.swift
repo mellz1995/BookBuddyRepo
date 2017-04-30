@@ -11,12 +11,37 @@ import Parse
 import os.log
 import GoogleMobileAds
 
+var libraryMode = "owned"
+
 class BooksTableViewController: UITableViewController {
     
     var currentLibrary = Array<Array<AnyObject>>()
     var editButtonIsActive = false
     
-    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var segmentedControlOutlet: UISegmentedControl!
+    @IBAction func segmentedControlAction(_ sender: UISegmentedControl) {
+        if segmentedControlOutlet.selectedSegmentIndex == 0 {
+            currentLibrary.removeAll()
+            libraryMode = "owned"
+            print("Mode is \(libraryMode)")
+            currentLibrary = PFUser.current()?.object(forKey: "library") as! Array<Array<AnyObject>>
+            self.tableView.reloadData()
+        } else if segmentedControlOutlet.selectedSegmentIndex == 1 {
+            currentLibrary.removeAll()
+            libraryMode = "borrowed"
+            print("Mode is \(libraryMode)")
+            currentLibrary = PFUser.current()!.object(forKey: "borrowedBooks") as! Array<Array<AnyObject>>
+            self.tableView.reloadData()
+        } else if segmentedControlOutlet.selectedSegmentIndex == 2 {
+            currentLibrary.removeAll()
+            currentLibrary = PFUser.current()!.object(forKey: "lentBooks") as! Array<Array<AnyObject>>
+            libraryMode = "lent"
+            print("Mode is \(libraryMode)")
+            self.tableView.reloadData()
+        }
+    }
+    
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +52,8 @@ class BooksTableViewController: UITableViewController {
         
         tableView.dataSource = self
         tableView.delegate = self
+        
+        libraryMode = "owned"
         
         // Load currentLibrary
         currentLibrary = PFUser.current()?.object(forKey: "library") as! Array<Array<AnyObject>>
@@ -89,10 +116,26 @@ class BooksTableViewController: UITableViewController {
         var numOfRows = 0
         
         // Gets the number of rows in the section
-        if PFUser.current()!.object(forKey: "didSaveFirstBook") as! Bool == false {
-            numOfRows = 1
-        } else {
-            numOfRows = currentLibrary.count
+        if libraryMode == "owned"{
+            if PFUser.current()!.object(forKey: "didSaveFirstBook") as! Bool == false {
+                numOfRows = 1
+            } else {
+                numOfRows = currentLibrary.count
+            }
+        } else if libraryMode == "borrowed" {
+            if PFUser.current()!.object(forKey: "borrowedFirstBook") as! Bool == false {
+                numOfRows = 1
+            } else {
+                numOfRows = currentLibrary.count
+            }
+            
+        } else if libraryMode == "lent" {
+            if PFUser.current()!.object(forKey: "lentFirstBook") as! Bool == false {
+                numOfRows = 1
+            } else {
+                numOfRows = currentLibrary.count
+            }
+            
         }
      
         return numOfRows
@@ -105,49 +148,146 @@ class BooksTableViewController: UITableViewController {
             fatalError("The dequed cell is not an instance of BooksTableViewCell")
         }
         
-        if PFUser.current()!.object(forKey: "didSaveFirstBook") as! Bool == false {
-            cell.titleLabel.text = "No books"
-            cell.isUserInteractionEnabled = false
-            cell.statusImageView.image = #imageLiteral(resourceName: "SadBook")
-            cell.bookImage.image = #imageLiteral(resourceName: "QuestionMarkBook")
-        } else {
-            cell.isUserInteractionEnabled = true
-            if currentLibrary[indexPath.row].isEmpty == false {
-                cell.titleLabel.text = currentLibrary[indexPath.row][0] as? String
-                if currentLibrary[indexPath.row][1] as! String == "Not specified"{
-                    cell.authorLabel.text = "No Author Listed"
-                } else {
-                    cell.authorLabel.text = currentLibrary[indexPath.row][1] as? String
-                }
-                if currentLibrary[indexPath.row][2] as! String == "Not specified"{
-                    cell.isbn10Label.text = "No ISBN for this book"
-                } else {
-                    cell.isbn10Label.text = currentLibrary[indexPath.row][2] as? String
-                }
+        if libraryMode == "owned" {
+            if PFUser.current()!.object(forKey: "didSaveFirstBook") as! Bool == false {
+                cell.titleLabel.text = "No owned books"
+                cell.isUserInteractionEnabled = false
+                cell.statusImageView.image = #imageLiteral(resourceName: "SadBook")
+                cell.bookImage.image = #imageLiteral(resourceName: "QuestionMarkBook")
+                cell.authorLabel.text = ""
+                cell.isbn10Label.text = ""
+            } else {
+                cell.isUserInteractionEnabled = true
+                if currentLibrary[indexPath.row].isEmpty == false {
+                    cell.titleLabel.text = currentLibrary[indexPath.row][0] as? String
+                    if currentLibrary[indexPath.row][1] as! String == "Not specified"{
+                        cell.authorLabel.text = "No Author Listed"
+                    } else {
+                        cell.authorLabel.text = currentLibrary[indexPath.row][1] as? String
+                    }
+                    if currentLibrary[indexPath.row][2] as! String == "Not specified"{
+                        cell.isbn10Label.text = "No ISBN for this book"
+                    } else {
+                        cell.isbn10Label.text = currentLibrary[indexPath.row][2] as? String
+                    }
         
-                if currentLibrary[indexPath.row][6] as! String == "Owned"{
-                    cell.statusImageView.image = #imageLiteral(resourceName: "OwnedImage")
-                }
+                    if currentLibrary[indexPath.row][6] as! String == "Owned"{
+                        cell.statusImageView.image = #imageLiteral(resourceName: "OwnedImage")
+                    }
         
-                if currentLibrary[indexPath.row][6] as! String == "Lent"  {
-                    cell.statusImageView.image = #imageLiteral(resourceName: "LentBlueImage")
-                }
+                    if currentLibrary[indexPath.row][6] as! String == "Lent"  {
+                        cell.statusImageView.image = #imageLiteral(resourceName: "LentBlueImage")
+                    }
         
-                if currentLibrary[indexPath.row][6] as! String == "Borrowed" {
-                    cell.statusImageView.image = #imageLiteral(resourceName: "BorrowedBlueImage")
-                }
+                    if currentLibrary[indexPath.row][6] as! String == "Borrowed" {
+                        cell.statusImageView.image = #imageLiteral(resourceName: "BorrowedBlueImage")
+                    }
         
-                // Set the image of the book
-                if let bookPicture = currentLibrary[indexPath.row][7] as? PFFile {
-                    bookPicture.getDataInBackground({ (imageData: Data?, error: Error?) -> Void in
-                        let image = UIImage(data: imageData!)
-                        if image != nil {
-                            cell.bookImage.image = image
-                        }
-                    })
+                    // Set the image of the book
+                    if let bookPicture = currentLibrary[indexPath.row][7] as? PFFile {
+                        bookPicture.getDataInBackground({ (imageData: Data?, error: Error?) -> Void in
+                            let image = UIImage(data: imageData!)
+                            if image != nil {
+                                cell.bookImage.image = image
+                            }
+                        })
+                    }
+                }
+            }
+        } else if libraryMode == "borrowed" {
+            if PFUser.current()!.object(forKey: "borrowedFirstBook") as! Bool == false {
+                cell.titleLabel.text = "No borrowed books"
+                cell.isUserInteractionEnabled = false
+                cell.statusImageView.image = #imageLiteral(resourceName: "SadBook")
+                cell.bookImage.image = #imageLiteral(resourceName: "QuestionMarkBook")
+                cell.authorLabel.text = ""
+                cell.isbn10Label.text = ""
+            } else {
+                cell.isUserInteractionEnabled = true
+                if currentLibrary[indexPath.row].isEmpty == false {
+                    cell.titleLabel.text = currentLibrary[indexPath.row][0] as? String
+                    if currentLibrary[indexPath.row][1] as! String == "Not specified"{
+                        cell.authorLabel.text = "No Author Listed"
+                    } else {
+                        cell.authorLabel.text = currentLibrary[indexPath.row][1] as? String
+                    }
+                    if currentLibrary[indexPath.row][2] as! String == "Not specified"{
+                        cell.isbn10Label.text = "No ISBN for this book"
+                    } else {
+                        cell.isbn10Label.text = currentLibrary[indexPath.row][2] as? String
+                    }
+                    
+                    if currentLibrary[indexPath.row][6] as! String == "Owned"{
+                        cell.statusImageView.image = #imageLiteral(resourceName: "OwnedImage")
+                    }
+                    
+                    if currentLibrary[indexPath.row][6] as! String == "Lent"  {
+                        cell.statusImageView.image = #imageLiteral(resourceName: "LentBlueImage")
+                    }
+                    
+                    if currentLibrary[indexPath.row][6] as! String == "Borrowed" {
+                        cell.statusImageView.image = #imageLiteral(resourceName: "BorrowedBlueImage")
+                    }
+                    
+                    // Set the image of the book
+                    if let bookPicture = currentLibrary[indexPath.row][7] as? PFFile {
+                        bookPicture.getDataInBackground({ (imageData: Data?, error: Error?) -> Void in
+                            let image = UIImage(data: imageData!)
+                            if image != nil {
+                                cell.bookImage.image = image
+                            }
+                        })
+                    }
+                }
+            }
+        } else if libraryMode == "lent" {
+            if PFUser.current()!.object(forKey: "lentFirstBook") as! Bool == false {
+                cell.titleLabel.text = "No lent books"
+                cell.isUserInteractionEnabled = false
+                cell.statusImageView.image = #imageLiteral(resourceName: "SadBook")
+                cell.bookImage.image = #imageLiteral(resourceName: "QuestionMarkBook")
+                cell.authorLabel.text = ""
+                cell.isbn10Label.text = ""
+            } else {
+                cell.isUserInteractionEnabled = true
+                if currentLibrary[indexPath.row].isEmpty == false {
+                    cell.titleLabel.text = currentLibrary[indexPath.row][0] as? String
+                    if currentLibrary[indexPath.row][1] as! String == "Not specified"{
+                        cell.authorLabel.text = "No Author Listed"
+                    } else {
+                        cell.authorLabel.text = currentLibrary[indexPath.row][1] as? String
+                    }
+                    if currentLibrary[indexPath.row][2] as! String == "Not specified"{
+                        cell.isbn10Label.text = "No ISBN for this book"
+                    } else {
+                        cell.isbn10Label.text = currentLibrary[indexPath.row][2] as? String
+                    }
+                    
+                    if currentLibrary[indexPath.row][6] as! String == "Owned"{
+                        cell.statusImageView.image = #imageLiteral(resourceName: "OwnedImage")
+                    }
+                    
+                    if currentLibrary[indexPath.row][6] as! String == "Lent"  {
+                        cell.statusImageView.image = #imageLiteral(resourceName: "LentBlueImage")
+                    }
+                    
+                    if currentLibrary[indexPath.row][6] as! String == "Borrowed" {
+                        cell.statusImageView.image = #imageLiteral(resourceName: "BorrowedBlueImage")
+                    }
+                    
+                    // Set the image of the book
+                    if let bookPicture = currentLibrary[indexPath.row][7] as? PFFile {
+                        bookPicture.getDataInBackground({ (imageData: Data?, error: Error?) -> Void in
+                            let image = UIImage(data: imageData!)
+                            if image != nil {
+                                cell.bookImage.image = image
+                            }
+                        })
+                    }
                 }
             }
         }
+        
     return cell
     }
 
@@ -208,24 +348,6 @@ class BooksTableViewController: UITableViewController {
         }    
     }
     
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-        let moveObject = self.currentLibrary[fromIndexPath.row]
-        currentLibrary.remove(at: fromIndexPath.row)
-        currentLibrary.insert(moveObject, at: fromIndexPath.row)
-    }
- 
-
-    
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
- */
-
     
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

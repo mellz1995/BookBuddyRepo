@@ -10,13 +10,15 @@ import UIKit
 import Parse
 import GoogleMobileAds
 
+var modeFromProfile = "owned"
+
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     var currentLibrary = Array<Array<AnyObject>>()
-    var mode = "owned"
     var requestedLibrary = PFUser.current()!.object(forKey: "requestedLibrary") as! Array<Array<AnyObject>>
     var receivedRequests = PFUser.current()!.object(forKey: "receivedRequestsLibrary") as! Array<Array<AnyObject>>
     
+    @IBOutlet weak var requestsButtonOutlet: UIButton!
     
     @IBOutlet weak var profilePic: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -36,7 +38,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var requestAmountLabel: UILabel!
     
     @IBAction func ownedAction(_ sender: UIButton) {
-        mode = "owned"
+        modeFromProfile = "owned"
         ownedOutlet.alpha = 1
         borrowedOutlet.alpha = 0.5
         lentOutlet.alpha = 0.5
@@ -45,13 +47,12 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         currentLibrary.removeAll()
         
         currentLibrary = PFUser.current()?.object(forKey: "library") as! Array<Array<AnyObject>>
-        
-        //viewDidLoad()
+  
         tableViewMel.reloadData()
     }
     
     @IBAction func borrowedAction(_ sender: UIButton) {
-        mode = "borrowed"
+        modeFromProfile = "borrowed"
         ownedOutlet.alpha = 0.5
         borrowedOutlet.alpha = 1.0
         lentOutlet.alpha = 0.5
@@ -59,12 +60,13 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         currentLibrary.removeAll()
         
-        //viewDidLoad()
-        //tableViewMel.reloadData()
+        currentLibrary = PFUser.current()!.object(forKey: "borrowedBooks") as! Array<Array<AnyObject>>
+        
+        tableViewMel.reloadData()
     }
     
     @IBAction func lentAction(_ sender: UIButton) {
-        mode = "lent"
+        modeFromProfile = "lent"
         ownedOutlet.alpha = 0.5
         borrowedOutlet.alpha = 0.5
         lentOutlet.alpha = 1.0
@@ -72,12 +74,14 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         currentLibrary.removeAll()
         
-        //viewDidLoad()
-        //tableViewMel.reloadData()
+        currentLibrary = PFUser.current()!.object(forKey: "lentBooks") as! Array<Array<AnyObject>>
+        
+        tableViewMel.reloadData()
+        
     }
     
     @IBAction func deletedAction(_ sender: UIButton) {
-        mode = "deleted"
+        modeFromProfile = "deleted"
         ownedOutlet.alpha = 0.5
         borrowedOutlet.alpha = 0.5
         lentOutlet.alpha = 0.5
@@ -87,7 +91,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         currentLibrary = PFUser.current()?.object(forKey: "deletedLibrary") as! Array<Array<AnyObject>>
         
-        //viewDidLoad()
         tableViewMel.reloadData()
     }
     
@@ -106,11 +109,17 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 
         nameLabel.text = "\(PFUser.current()!.username!)"
         
-        mode = "owned"
+        modeFromProfile = "owned"
         
         refresh()
         
-        
+//        if PFUser.current()!.object(forKey: "didRequestFirstBook") as! Bool == false && PFUser.current()!.object(forKey: "didReceiveFirstRequest") as! Bool {
+//            requestsButtonOutlet.isEnabled = false
+//            requestsButtonOutlet.alpha = 0.2
+//        } else {
+//            requestsButtonOutlet.isEnabled = true
+//            requestsButtonOutlet.alpha = 1.0
+//        }
         
         // Load the current library
         currentLibrary = PFUser.current()?.object(forKey: "library") as! Array<Array<AnyObject>>
@@ -207,7 +216,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         // Gets the number of rows in the section
         
-        if mode == "owned" {
+        if modeFromProfile == "owned" {
         
             if PFUser.current()!.object(forKey: "didSaveFirstBook") as! Bool == false {
                 numOfRows = 1
@@ -215,12 +224,25 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                 numOfRows = currentLibrary.count
             }
             
-        } else if mode == "deleted" {
+        } else if modeFromProfile == "deleted" {
             if PFUser.current()!.object(forKey: "didDeleteFirstBook") as! Bool == false {
                 numOfRows = 1
             } else {
                 numOfRows = currentLibrary.count
             }
+        } else if modeFromProfile == "borrowed" {
+            if PFUser.current()!.object(forKey: "borrowedFirstBook") as! Bool == false {
+                numOfRows = 1
+            } else {
+                numOfRows = currentLibrary.count
+            }
+        } else if modeFromProfile == "lent" {
+            if PFUser.current()!.object(forKey: "lentFirstBook") as! Bool == false {
+                numOfRows = 1
+            } else {
+                numOfRows = currentLibrary.count
+            }
+            print("Mode is lent")
         }
         
         return numOfRows
@@ -233,7 +255,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         cell.multipleSelectionBackgroundView?.alpha = 0.3
         
-        if mode == "owned" {
+        if modeFromProfile == "owned" {
             if PFUser.current()!.object(forKey: "didSaveFirstBook") as! Bool == false {
                 cell.titleLabel.text = "No books"
                 cell.isUserInteractionEnabled = false
@@ -278,11 +300,62 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                 }
             }
             
-        } else if mode == "deleted" {
+        } else if modeFromProfile == "deleted" {
             if PFUser.current()!.object(forKey: "didDeleteFirstBook") as! Bool == false {
                 //deleteAllBooksOutlet.isEnabled = false
                 editButtonItem.isEnabled = false
-                cell.titleLabel.text = "No Books"
+                cell.titleLabel.text = "No Deleted Books"
+                cell.authorLabel.text = ""
+                cell.isbn10Label.text = ""
+                cell.isUserInteractionEnabled = false
+                cell.bookImage.image = #imageLiteral(resourceName: "QuestionMarkBook")
+                cell.statusImageView.image = #imageLiteral(resourceName: "SadBook")
+            } else {
+                //deleteAllBooksOutlet.isEnabled = true
+                editButtonItem.isEnabled = true
+                //restoreAllButtonOutlet.isEnabled = true
+                cell.isUserInteractionEnabled = true
+                if currentLibrary[indexPath.row].isEmpty == false {
+                    cell.titleLabel.text = currentLibrary[indexPath.row][0] as? String
+                    if currentLibrary[indexPath.row][1] as! String == "Not specified"{
+                        cell.authorLabel.text = "No Author Listed"
+                    } else {
+                        cell.authorLabel.text = currentLibrary[indexPath.row][1] as? String
+                    }
+                    if currentLibrary[indexPath.row][2] as! String == "Not specified"{
+                        cell.isbn10Label.text = "No ISBN for this book"
+                    } else {
+                        cell.isbn10Label.text = currentLibrary[indexPath.row][2] as? String
+                    }
+                    
+                    if currentLibrary[indexPath.row][6] as! String == "Owned"{
+                        cell.statusImageView.image = #imageLiteral(resourceName: "OwnedImage")
+                    }
+                    
+                    if currentLibrary[indexPath.row][6] as! String == "Lent"  {
+                        cell.statusImageView.image = #imageLiteral(resourceName: "LentBlueImage")
+                    }
+                    
+                    if currentLibrary[indexPath.row][6] as! String == "Borrowed" {
+                        cell.statusImageView.image = #imageLiteral(resourceName: "BorrowedBlueImage")
+                    }
+                    
+                    // Set the image of the book
+                    if let bookPicture = currentLibrary[indexPath.row][7] as? PFFile {
+                        bookPicture.getDataInBackground({ (imageData: Data?, error: Error?) -> Void in
+                            let image = UIImage(data: imageData!)
+                            if image != nil {
+                                cell.bookImage.image = image
+                            }
+                        })
+                    }
+                }
+            }
+        } else if modeFromProfile == "borrowed" {
+            if PFUser.current()!.object(forKey: "borrowedFirstBook") as! Bool == false {
+                //deleteAllBooksOutlet.isEnabled = false
+                editButtonItem.isEnabled = false
+                cell.titleLabel.text = "No Borrowed Books"
                 cell.authorLabel.text = ""
                 cell.isbn10Label.text = ""
                 cell.isUserInteractionEnabled = false
@@ -316,6 +389,71 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
                         })
                     }
                 }
+                
+                if currentLibrary[indexPath.row][6] as! String == "Owned"{
+                    cell.statusImageView.image = #imageLiteral(resourceName: "OwnedImage")
+                }
+                
+                if currentLibrary[indexPath.row][6] as! String == "Lent"  {
+                    cell.statusImageView.image = #imageLiteral(resourceName: "LentBlueImage")
+                }
+                
+                if currentLibrary[indexPath.row][6] as! String == "Borrowed" {
+                    cell.statusImageView.image = #imageLiteral(resourceName: "BorrowedBlueImage")
+                }
+            }
+            
+        } else if modeFromProfile == "lent" {
+            if PFUser.current()!.object(forKey: "lentFirstBook") as! Bool == false {
+                print("Lent is \(PFUser.current()!.object(forKey: "lentFirstBook") as! Bool == false)")
+                //deleteAllBooksOutlet.isEnabled = false
+                editButtonItem.isEnabled = false
+                cell.titleLabel.text = "No Lent Books"
+                cell.authorLabel.text = ""
+                cell.isbn10Label.text = ""
+                cell.isUserInteractionEnabled = false
+                cell.bookImage.image = #imageLiteral(resourceName: "QuestionMarkBook")
+                cell.statusImageView.image = #imageLiteral(resourceName: "SadBook")
+            } else {
+                //deleteAllBooksOutlet.isEnabled = true
+                editButtonItem.isEnabled = true
+                //restoreAllButtonOutlet.isEnabled = true
+                cell.isUserInteractionEnabled = true
+                if currentLibrary[indexPath.row].isEmpty == false {
+                    cell.titleLabel.text = currentLibrary[indexPath.row][0] as? String
+                    if currentLibrary[indexPath.row][1] as! String == "Not specified"{
+                        cell.authorLabel.text = "No Author Listed"
+                    } else {
+                        cell.authorLabel.text = currentLibrary[indexPath.row][1] as? String
+                    }
+                    if currentLibrary[indexPath.row][2] as! String == "Not specified"{
+                        cell.isbn10Label.text = "No ISBN for this book"
+                    } else {
+                        cell.isbn10Label.text = currentLibrary[indexPath.row][2] as? String
+                    }
+                    
+                    // Set the image of the book
+                    if let bookPicture = currentLibrary[indexPath.row][7] as? PFFile {
+                        bookPicture.getDataInBackground({ (imageData: Data?, error: Error?) -> Void in
+                            let image = UIImage(data: imageData!)
+                            if image != nil {
+                                cell.bookImage.image = image
+                            }
+                        })
+                    }
+                }
+                
+                if currentLibrary[indexPath.row][6] as! String == "Owned"{
+                    cell.statusImageView.image = #imageLiteral(resourceName: "OwnedImage")
+                }
+                
+                if currentLibrary[indexPath.row][6] as! String == "Lent"  {
+                    cell.statusImageView.image = #imageLiteral(resourceName: "LentBlueImage")
+                }
+                
+                if currentLibrary[indexPath.row][6] as! String == "Borrowed" {
+                    cell.statusImageView.image = #imageLiteral(resourceName: "BorrowedBlueImage")
+                }
             }
         }
         
@@ -340,7 +478,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         // If the user deletes a book
         if editingStyle == .delete {
-                if mode == "owned"{
+                if modeFromProfile == "owned"{
                 let alert = UIAlertController(title: "Delete Book?", message: "Delete '\(currentLibrary[indexPath.row][0])' from your library?", preferredStyle:    UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
                     // Append the deleted book to the server
@@ -364,7 +502,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             
                 self.present(alert, animated: true, completion: nil)
             
-                } else if mode == "deleted" {
+                } else if modeFromProfile == "deleted" {
                     let alert = UIAlertController(title: "Delete Book?", message: "Permanentley '\(currentLibrary[indexPath.row][0])' from your library?", preferredStyle:    UIAlertControllerStyle.alert)
                     alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
                         // Remove this book from the deleted library
