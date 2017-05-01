@@ -28,6 +28,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     @IBOutlet weak var bannerView: GADBannerView!
+    @IBOutlet weak var myQROutlet: UIButton!
     
     @IBOutlet weak var ownedOutlet: UIButton!
     @IBOutlet weak var borrowedOutlet: UIButton!
@@ -191,6 +192,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     override func viewDidAppear(_ animated: Bool) {
         print("View did appear!")
+        mode = "Sent"
         DispatchQueue.main.async {
             super.viewWillAppear(true)
             // Check to see if the user library is empty or not. If it is. Disable the edit button

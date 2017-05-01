@@ -12,6 +12,8 @@ import UserNotifications
 
 class RequestedBookInformationViewController: UIViewController {
     
+    var activityIndicator = UIActivityIndicatorView()
+    
     var currentRequestedLibrary = Array<Array<AnyObject>>()
     public var requestedBookInformation = Array<AnyObject>()
     
@@ -50,7 +52,7 @@ class RequestedBookInformationViewController: UIViewController {
     func setEverythingUp(){
         currentRequestedLibrary = PFUser.current()!.object(forKey: "requestedLibrary") as! Array<Array<AnyObject>>
         
-        requestedFromOutlet.text = "Requested from \(requestedBookInformation[9])'s library until \(requestedBookInformation[11])."
+        requestedFromOutlet.text = "Requested from \(requestedBookInformation[12]) until \(requestedBookInformation[11])."
         
         if mode == "Received" {
             cancelRequestOutlet.setTitle("Approve Request", for: [])
@@ -84,6 +86,16 @@ class RequestedBookInformationViewController: UIViewController {
         if mode == "Sent" {
             let alert = UIAlertController(title: "Cancel Request?", message: "Cancel request to borrow '\(self.requestedBookInformation[0])'?", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+                
+                // Start the activity spinner
+                self.activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+                self.activityIndicator.center = self.view.center
+                self.activityIndicator.hidesWhenStopped = true
+                self.activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+                self.view.addSubview(self.activityIndicator)
+                self.activityIndicator.startAnimating()
+                UIApplication.shared.beginIgnoringInteractionEvents()
+                
                 for i in 0..<self.currentRequestedLibrary.count{
                     // if the title of the book about to be deleted matches the title of the book in the user's array
                     if self.currentRequestedLibrary[i][0] as! String == self.requestedBookInformation[0] as! String {
@@ -162,6 +174,14 @@ class RequestedBookInformationViewController: UIViewController {
                                                                     print("Success! The original user (\(PFUser.current()!.username!)) is logged back in.")
                                                                     
                                                                     print("The process is complete!")
+                                                                    
+                                                                    self.activityIndicator.stopAnimating()
+                                                                    UIApplication.shared.endIgnoringInteractionEvents()
+                                                                    
+                                                                    let successAlert = UIAlertController(title: "Complete!", message: "The cancellation of your request is complete!", preferredStyle: UIAlertControllerStyle.alert)
+                                                                    successAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
+                                                                    }))
+                                                                    self.present(successAlert, animated: true, completion: nil)
                                                                 }
                                                             })
                                                         }
@@ -186,8 +206,19 @@ class RequestedBookInformationViewController: UIViewController {
             self.present(alert, animated: true, completion: nil)
         } else {
             var receivedRequestedLibrary = PFUser.current()!.object(forKey: "receivedRequestsLibrary") as! Array<Array<AnyObject>>
-            let alert = UIAlertController(title: "Approve Request?", message: "Approve \(self.requestedBookInformation[9])'s '\(self.requestedBookInformation[0])'?", preferredStyle: UIAlertControllerStyle.alert)
+            let alert = UIAlertController(title: "Approve Request?", message: "Approve \(self.requestedBookInformation[9])'s request to borrow '\(self.requestedBookInformation[0])' until \(requestedBookInformation[11])?", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+                // Start the activity spinner
+                self.activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+                self.activityIndicator.center = self.view.center
+                self.activityIndicator.hidesWhenStopped = true
+                self.activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+                self.view.addSubview(self.activityIndicator)
+                self.activityIndicator.startAnimating()
+                UIApplication.shared.beginIgnoringInteractionEvents()
+                
+                
+                
                 print("Current requested library is: \(self.currentRequestedLibrary)")
                 print("Requested book infromation is: \(self.requestedBookInformation)")
                 
@@ -254,6 +285,8 @@ class RequestedBookInformationViewController: UIViewController {
                                                         }
                                                     }
                                                     
+                                                    print("RequestedUsersSentRequests count is \(requestedUserSentReqeuests.count)")
+                                                    
                                                     // If the second user's received request library's count is now 0, set the didReceiveFirstRequest boolean back to false
                                                     if requestedUserSentReqeuests.count == 0 {
                                                         PFUser.current()!.setValue(false, forKey: "didRequestFirstBook")
@@ -284,6 +317,14 @@ class RequestedBookInformationViewController: UIViewController {
                                                                     print("Success! The original user (\(PFUser.current()!.username!)) is logged back in.")
                                                                     
                                                                     print("The process is complete!")
+                                                                    
+                                                                    self.activityIndicator.stopAnimating()
+                                                                    UIApplication.shared.endIgnoringInteractionEvents()
+                                                                    
+                                                                    let successAlert = UIAlertController(title: "Complete!", message: "The approval of your request has completed!", preferredStyle: UIAlertControllerStyle.alert)
+                                                                    successAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
+                                                                    }))
+                                                                    self.present(successAlert, animated: true, completion: nil)
                                                                 }
                                                             })
                                                         }

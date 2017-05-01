@@ -264,7 +264,7 @@ class BooksTableViewController: UITableViewController {
                         cell.isbn10Label.text = currentLibrary[indexPath.row][2] as? String
                     }
                     
-                    if currentLibrary[indexPath.row].count>11 {
+                    if currentLibrary[indexPath.row].count>13 {
                         if currentLibrary[indexPath.row][13] as! String == "Claim Returned"{
                             cell.statusImageView.image = #imageLiteral(resourceName: "ExclamationImage")
                         } else {

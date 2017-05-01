@@ -19,6 +19,10 @@ class SearchedUserInformationViewController: UIViewController, UITableViewDelega
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if comingFromSearch == true {
+            userInforomation = userInformationArray[0]
+        }
 
         print("Userinformation array is \(userInforomation)")
         
@@ -53,6 +57,8 @@ class SearchedUserInformationViewController: UIViewController, UITableViewDelega
     }
     
     func setEverythingUp(){
+        
+        
         usernameLabel.text = userInforomation[0] as? String
         currentUser = (userInforomation[0] as? String)!
         userProfilePic.image = userInforomation[1] as? UIImage

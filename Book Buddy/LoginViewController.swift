@@ -176,7 +176,7 @@ class LoginViewController: UIViewController {
         self.dismissKeyboard()
         
         // Set the defualt image
-        let defaultImage = PFFile(data: UIImageJPEGRepresentation(#imageLiteral(resourceName: "smily"), 1.0)!)
+        let defaultImage = PFFile(data: UIImageJPEGRepresentation(#imageLiteral(resourceName: "SadBook"), 1.0)!)
         
         
         // Check to see if all required fields are filled

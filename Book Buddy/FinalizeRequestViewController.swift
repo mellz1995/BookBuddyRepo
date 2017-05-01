@@ -11,6 +11,7 @@ import Parse
 
 class FinalizeRequestViewController: UIViewController {
     
+    var activityIndicator = UIActivityIndicatorView()
     var finalRequestedBookArray = Array<AnyObject>()
     var requestedUserReceivedReqeuests = Array<Array<AnyObject>>()
     var originalUsername = PFUser.current()!.username
@@ -40,18 +41,29 @@ class FinalizeRequestViewController: UIViewController {
     @IBAction func finalizeRequestAction(_ sender: UIButton) {
         let alert = UIAlertController(title: "Finalize Request?", message: "Request to borrow '\(requestedBookArray[0])'?", preferredStyle: UIAlertControllerStyle.alert)
                 alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+                    
+                    // Start the activity spinner
+                    self.activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+                    self.activityIndicator.center = self.view.center
+                    self.activityIndicator.hidesWhenStopped = true
+                    self.activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+                    self.view.addSubview(self.activityIndicator)
+                    self.activityIndicator.startAnimating()
+                    UIApplication.shared.beginIgnoringInteractionEvents()
                 
                     // add the book to the current user's requested library
                     self.finalRequestedBookArray = requestedBookArray as Array<AnyObject>
                     
                     // Format the data
                     let dateFormatter = DateFormatter()
-                    dateFormatter.dateFormat = "dd MMM yyyy"
+                    dateFormatter.dateFormat = "MMM dd, yyyy"
                     let selectedDate = dateFormatter.string(from: self.dataPicker.date)
                     print("The selected date is ", selectedDate)
                     
                     // Add the date to index 11 of the finalRequestedBookArray
                     self.finalRequestedBookArray.append(selectedDate as AnyObject)
+                    
+                    self.finalRequestedBookArray[6] = "Requested" as AnyObject
             
                     // Add the requested book to the user's requested library
                     GUSUerLibrary(self.finalRequestedBookArray as [AnyObject], "requestedLibrary", "didRequestFirstBook")
@@ -109,6 +121,13 @@ class FinalizeRequestViewController: UIViewController {
                                                                             print("Success! The original user (\(PFUser.current()!.username!)) is logged back in.")
                                                                             
                                                                             print("The process is complete!")
+                                                                            self.activityIndicator.stopAnimating()
+                                                                            UIApplication.shared.endIgnoringInteractionEvents()
+                                                                            
+                                                                            let successAlert = UIAlertController(title: "Complete!", message: "The request was successfully made!", preferredStyle: UIAlertControllerStyle.alert)
+                                                                            successAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
+                                                                            }))
+                                                                            self.present(successAlert, animated: true, completion: nil)
                                                                         }
                                                                     })
                                                                 }

@@ -10,6 +10,7 @@ import AVFoundation
 
 var scannedBarcode = ""
 var scanned = false
+import Parse
 
 class BarcodeReaderViewController: UIViewController, AVCaptureMetadataOutputObjectsDelegate {
     
@@ -102,12 +103,90 @@ class BarcodeReaderViewController: UIViewController, AVCaptureMetadataOutputObje
     func displayAlert(_ title: String, _ message: String, _ confirmation: String){
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
         alert.addAction(UIAlertAction(title: confirmation, style: .default, handler: { (action) in
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let view = storyboard.instantiateViewController(withIdentifier: "NewBook")
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.window?.rootViewController = view
-            self.captureSession?.stopRunning()
-            searchScannedResult(scannedBarcode)
+            if comingFromSearch == true {
+                let query = PFUser.query()
+                query?.findObjectsInBackground { (objects, error) in
+                    if let users = objects {
+                        for object in users {
+                            if let user = object as? PFUser {
+                                // Set the contents of the search field to lowercase
+                                let lowerCaseSearch = scannedBarcode
+                                
+                                // Delete the space at the end
+                                let noSpaces = lowerCaseSearch.replacingOccurrences(of: " ", with: "")
+                                
+                                // If the user's username matches the search value append it to the array
+                                if (user.username?.contains(noSpaces))!{
+                                    print("Username is \(user.username!)")
+                                    individualUserArray.append(user.username as AnyObject)
+                                    if let userPicture = user.object(forKey: "profilePic")! as? PFFile {
+                                        userPicture.getDataInBackground({ (imageData: Data?, error: Error?) -> Void in
+                                            let image = UIImage(data: imageData!)
+                                            if image != nil {
+                                                // Append the image to index 1
+                                                print("An Image was found! Adding it to the array!")
+                                                individualUserArray.append(image!)
+                                                
+                                                // Append the user's object ID
+                                                individualUserArray.append(user.objectId as AnyObject)
+                                                
+                                                
+                                                var didSaveFirst = false
+                                                
+                                                if user.object(forKey: "didSaveFirstBook") as! Bool == false {
+                                                    didSaveFirst = false
+                                                } else {
+                                                    didSaveFirst = true
+                                                }
+                                                
+                                                // Append the user's DidAddFirstBook to array
+                                                individualUserArray.append(didSaveFirst as AnyObject)
+                                                
+                                                // Append all of the user's information into the full user's array
+                                                userInformationArray.append(individualUserArray)
+                                                print("UserinformationArray is : \(userInformationArray)")
+                                                
+                                                // Check to see if the user has a library
+                                                if user.value(forKey: "didSaveFirstBook") as! Bool == false {
+                                                    print("\(user.username!)'s library is empty")
+                                                } else {
+                                                    print("\(user.username!)'s library is not empty. Appending to array...")
+                                                    searcedUserLibraryArray = user.value(forKey: "library") as! Array<Array<AnyObject>>
+                                                    print()
+                                                    print("\(user.username!)'s library has \(searcedUserLibraryArray.count) book(s)")
+                                                    print("\(user.username!)'s library is \(searcedUserLibraryArray)")
+                                                }
+                                                
+                                                if comingFromSearch == true {
+                                                    let this = SearchedUserInformationViewController()
+                                                    
+                                                    this.userInforomation = userInformationArray[0]
+                                                }
+                                                
+                                                
+                                                // Send the user back to the search user's table view if we found a match
+                                                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                                                let view = storyboard.instantiateViewController(withIdentifier: "SearchedUsersProfile")
+                                                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                                                appDelegate.window?.rootViewController = view
+                                            }
+                                        })
+                                    }
+                                } else {
+                                    
+                                }
+                            }
+                        }
+                    }
+                }
+            } else {
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let view = storyboard.instantiateViewController(withIdentifier: "NewBook")
+                let appDelegate = UIApplication.shared.delegate as! AppDelegate
+                appDelegate.window?.rootViewController = view
+                self.captureSession?.stopRunning()
+                searchScannedResult(scannedBarcode)
+            }
         }))
         self.present(alert, animated: true, completion: nil)
     }
@@ -141,6 +220,8 @@ class BarcodeReaderViewController: UIViewController, AVCaptureMetadataOutputObje
                 displayAlert("Barcode Found!!", metadataObj.stringValue, "Let's searh it!")
                 backButtonOutlet.alpha = 0
                 backButtonOutlet.isEnabled = false
+                
+                
             }
         }
     }

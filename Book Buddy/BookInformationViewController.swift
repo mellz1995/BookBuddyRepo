@@ -13,6 +13,7 @@ import GoogleMobileAds
 
 class BookInformationViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
+    var activityIndicator = UIActivityIndicatorView()
     var currentLibrary = Array<Array<AnyObject>>()
     public var bookInformationArray = Array<AnyObject>()
     public var newBookInformationArray = Array<Any>() // For when the user edits something
@@ -137,7 +138,14 @@ class BookInformationViewController: UIViewController, UINavigationControllerDel
                         if self.bookInformationArray[13] as! String == "Claim Returned" {
                             let alert = UIAlertController(title: "Book is Claimed Returned!", message: "\(self.bookInformationArray[12]) claimed they returned '\(self.bookInformationArray[0])'.", preferredStyle: UIAlertControllerStyle.alert)
                             alert.addAction(UIAlertAction(title: "Confirm Return", style: .default, handler: { (action) in
-                                
+                                // Start the activity spinner
+                                self.activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+                                self.activityIndicator.center = self.view.center
+                                self.activityIndicator.hidesWhenStopped = true
+                                self.activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+                                self.view.addSubview(self.activityIndicator)
+                                self.activityIndicator.startAnimating()
+                                UIApplication.shared.beginIgnoringInteractionEvents()
                                 
                                 // Remove the book from the current user's lent books
                                 for i in 0..<self.currentLibrary.count {
@@ -218,6 +226,14 @@ class BookInformationViewController: UIViewController, UINavigationControllerDel
                                                                                     print("Success! The original user (\(PFUser.current()!.username!)) is logged back in.")
                                                                                     
                                                                                     print("The process is complete!")
+                                                                                    
+                                                                                    self.activityIndicator.stopAnimating()
+                                                                                    UIApplication.shared.endIgnoringInteractionEvents()
+                                                                                    
+                                                                                    let successAlert = UIAlertController(title: "Complete!", message: "The confirmation of the returned book is complete!", preferredStyle: UIAlertControllerStyle.alert)
+                                                                                    successAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
+                                                                                    }))
+                                                                                    self.present(successAlert, animated: true, completion: nil)
                                                                                 }
                                                                             })
                                                                         }
@@ -395,6 +411,15 @@ class BookInformationViewController: UIViewController, UINavigationControllerDel
             let alert = UIAlertController(title: "Return book?", message: "Return '\(bookInformationArray[0])' to \(bookInformationArray[9])?", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
                 
+                // Start the activity spinner
+                self.activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
+                self.activityIndicator.center = self.view.center
+                self.activityIndicator.hidesWhenStopped = true
+                self.activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+                self.view.addSubview(self.activityIndicator)
+                self.activityIndicator.startAnimating()
+                UIApplication.shared.beginIgnoringInteractionEvents()
+                
                 /* LOGIC TO MARK A BOOK AS 'CLAIMED RETURNED
                     Append the book at index 13 to 'Claim Returned'
                     Add the newly book in place of the book in the user's current library
@@ -475,6 +500,20 @@ class BookInformationViewController: UIViewController, UINavigationControllerDel
                                                                     print("Success! The original user (\(PFUser.current()!.username!)) is logged back in.")
                                                                     
                                                                     print("The process is complete!")
+                                                                    
+                                                                    self.activityIndicator.stopAnimating()
+                                                                    UIApplication.shared.endIgnoringInteractionEvents()
+                                                                    
+                                                                    let successAlert = UIAlertController(title: "Complete!", message: "The request was successfully made!", preferredStyle: UIAlertControllerStyle.alert)
+                                                                    successAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
+                                                                        let alert2 = UIAlertController(title: "One thing...", message: "\(self.bookInformationArray[9]) will have to approve that '\(self.bookInformationArray[0])' was returned.", preferredStyle: UIAlertControllerStyle.alert)
+                                                                        alert2.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
+                                                                            
+                                                                            
+                                                                        }))
+                                                                        self.present(alert2, animated: true, completion: nil)
+                                                                    }))
+                                                                    self.present(successAlert, animated: true, completion: nil)
                                                                 }
                                                             })
                                                         }
@@ -492,13 +531,6 @@ class BookInformationViewController: UIViewController, UINavigationControllerDel
                         }
                     }
                 }
-                
-                let alert2 = UIAlertController(title: "One thing...", message: "\(self.bookInformationArray[9]) will have to approve that '\(self.bookInformationArray[0])' was returned.", preferredStyle: UIAlertControllerStyle.alert)
-                alert2.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action) in
-                    
-                    
-                }))
-                self.present(alert2, animated: true, completion: nil)
             }))
             
             alert.addAction(UIAlertAction(title: "No", style: .cancel, handler: { (action) in

@@ -22,6 +22,7 @@
 		56594B7A1E4C16FE00F6A60A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 56594B791E4C16FE00F6A60A /* Assets.xcassets */; };
 		56594B7D1E4C16FE00F6A60A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 56594B7B1E4C16FE00F6A60A /* LaunchScreen.storyboard */; };
 		56594BA21E4C17C100F6A60A /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56594BA01E4C17C100F6A60A /* Bolts.framework */; };
+		566CA0751EB7677A00B7897A /* MyQRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 566CA0741EB7677A00B7897A /* MyQRViewController.swift */; };
 		567A9DF81E54B0FA00DB2930 /* Information.swift in Sources */ = {isa = PBXBuildFile; fileRef = 567A9DF71E54B0FA00DB2930 /* Information.swift */; };
 		568779701E5DD234009395DA /* BooksTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5687796F1E5DD234009395DA /* BooksTableViewCell.swift */; };
 		568779721E5DD5ED009395DA /* BooksTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 568779711E5DD5ED009395DA /* BooksTableViewController.swift */; };
@@ -97,6 +98,7 @@
 		56594B8E1E4C16FE00F6A60A /* Book BuddyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Book BuddyUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		56594BA01E4C17C100F6A60A /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
 		56594BA11E4C17C100F6A60A /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Parse.framework; sourceTree = "<group>"; };
+		566CA0741EB7677A00B7897A /* MyQRViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyQRViewController.swift; sourceTree = "<group>"; };
 		567A9DF71E54B0FA00DB2930 /* Information.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Information.swift; sourceTree = "<group>"; };
 		5687796F1E5DD234009395DA /* BooksTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BooksTableViewCell.swift; sourceTree = "<group>"; };
 		568779711E5DD5ED009395DA /* BooksTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BooksTableViewController.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 				56F911341E6DC0E3004C08D6 /* FriendsTableViewController.swift */,
 				569C1EB71E4C40B400428785 /* LoginViewController.swift */,
 				5634D5E41E510E5500B91725 /* MainMenuViewController.swift */,
+				566CA0741EB7677A00B7897A /* MyQRViewController.swift */,
 				564D22321E5B2FCB00AB7E65 /* NewBookViewController.swift */,
 				56460B781E952756003D2DC5 /* ProfileViewController.swift */,
 				56E9FF371E97E1D700EDBA2B /* RequestedBookInformationViewController.swift */,
@@ -473,6 +476,7 @@
 				568906921E69C3D70044C016 /* WishListTableViewController.swift in Sources */,
 				56DE1DB41E63893500402774 /* DeletedBooksTableViewController.swift in Sources */,
 				56431FDD1E6712EA007404C4 /* SearchedUserLibraryCell.swift in Sources */,
+				566CA0751EB7677A00B7897A /* MyQRViewController.swift in Sources */,
 				569C1EB81E4C40B400428785 /* LoginViewController.swift in Sources */,
 				56BBD7B71E4E730A00E3677F /* SearchAPI.swift in Sources */,
 				56460B791E952756003D2DC5 /* ProfileViewController.swift in Sources */,

@@ -53,7 +53,7 @@ class RequestedBooksTableViewController: UITableViewController {
         if didRequestFirstBook == true {
             print("DidRequestFirstBook is: \(didRequestFirstBook)")
             for i in 0..<requestedLibrary.count {
-                requestedLibrary[i][6] = "Requested" as AnyObject
+               // requestedLibrary[i][6] = "Requested" as AnyObject
             }
         }
 

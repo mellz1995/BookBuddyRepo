@@ -15,8 +15,11 @@ var userInformationArray = Array<Array<AnyObject>>()
 var individualUserArray = Array<AnyObject>()
 var searcedUserLibraryArray = Array<Array<AnyObject>>()
 
+var comingFromSearch = false
+
 class SearchUsersViewController: UIViewController {
     
+    @IBOutlet weak var cameraOutlet: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Allows dismissal of keyboard on tap anywhere on screen besides the keyboard itself
@@ -27,6 +30,8 @@ class SearchUsersViewController: UIViewController {
         searcedUserLibraryArray.removeAll()
         individualUserArray.removeAll()
         print("Arrays cleared!")
+        
+        comingFromSearch = false
         
     }
 
@@ -43,6 +48,9 @@ class SearchUsersViewController: UIViewController {
         view.endEditing(true)
     }
     
+    @IBAction func camerButtonAction(_ sender: UIButton) {
+        comingFromSearch = true
+    }
     
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var searchButtonOutlet: UIButton!
@@ -103,6 +111,7 @@ class SearchUsersViewController: UIViewController {
                                             print("\(user.username!)'s library has \(searcedUserLibraryArray.count) book(s)")
                                             print("\(user.username!)'s library is \(searcedUserLibraryArray)")
                                         }
+                                        
                                         
                                         
                                         // Send the user back to the search user's table view if we found a match
