@@ -261,7 +261,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         
         if modeFromProfile == "owned" {
             if PFUser.current()!.object(forKey: "didSaveFirstBook") as! Bool == false {
-                cell.titleLabel.text = "No books"
+                cell.titleLabel.text = "No owned books"
                 cell.isUserInteractionEnabled = false
                 cell.statusImageView.image = #imageLiteral(resourceName: "SadBook")
                 cell.bookImage.image = #imageLiteral(resourceName: "QuestionMarkBook")

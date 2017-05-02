@@ -53,7 +53,8 @@ class RequestedBookInformationViewController: UIViewController {
             cancelRequestOutlet.setImage(#imageLiteral(resourceName: "ApproveRequestButton"), for: [])
             requestedFromOutlet.text = "Requested from \(requestedBookInformation[12]) until \(requestedBookInformation[11])."
         } else {
-            requestedFromOutlet.text = "Requested from \(requestedBookInformation[12]) until \(requestedBookInformation[11])."
+            //requestedFromOutlet.text = "Requested from \(requestedBookInformation[12]) until \(requestedBookInformation[11])."
+            requestedFromOutlet.alpha = 0
            cancelRequestOutlet.setImage(#imageLiteral(resourceName: "CancelRequestButton"), for: [])
         }
         

@@ -211,67 +211,67 @@ class RequestedBooksTableViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        
-        var requestEditAction = UITableViewRowAction()
-        
-        if mode == "sent" {
-            requestEditAction = UITableViewRowAction(style: .normal, title: "Cancel") { (action: UITableViewRowAction, indexPath: IndexPath) -> Void in
-                let alert = UIAlertController(title: "Cancel Request?", message: "Cancel request to borrow '\(self.requestedLibrary[indexPath.row][0])'?", preferredStyle: UIAlertControllerStyle.alert)
-                alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
-                    // Remove book from requested library
-                    self.requestedLibrary.remove(at: indexPath.row)
-                
-                    if self.requestedLibrary.count == 0 {
-                        updateBoolStats(false, "didSaveFirstBook")
-                    }
-                
-                    // update it on the server
-                    updateArray(self.requestedLibrary, "requestedLibrary")
-                
-                    // reload the table view
-                    tableView.deleteRows(at: [indexPath], with: .fade)
-                
-                }))
-            
-                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
-                
-                }))
-                self.present(alert, animated: true, completion: nil)
-            }
-        
-            requestEditAction.backgroundColor =  UIColor.red
-            
-        } else if mode == "received" {
-           requestEditAction = UITableViewRowAction(style: .normal, title: "Approve") { (action: UITableViewRowAction, indexPath: IndexPath) -> Void in
-                let alert = UIAlertController(title: "Approve request?", message: "Approves request to borrow '\(self.requestedLibrary[indexPath.row][0])' from \(self.requestedLibrary[indexPath.row][9])?", preferredStyle: UIAlertControllerStyle.alert)
-                alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
-                    // Remove book from received requested library
-                    self.requestedLibrary.remove(at: indexPath.row)
-                    
-                    if self.requestedLibrary.count == 0 {
-                        updateBoolStats(false, "didSaveFirstBook")
-                    }
-                    
-                    // update it on the server
-                    updateArray(self.requestedLibrary, "requestedLibrary")
-                    
-                    // reload the table view
-                    tableView.deleteRows(at: [indexPath], with: .fade)
-                    
-                }))
-                
-                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
-                    
-                }))
-                self.present(alert, animated: true, completion: nil)
-            }
-            
-            requestEditAction.backgroundColor =  UIColor.green
-        }
-        
-        return [requestEditAction]
-    }
+//    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+//        
+//        var requestEditAction = UITableViewRowAction()
+//        
+//        if mode == "sent" {
+//            requestEditAction = UITableViewRowAction(style: .normal, title: "Cancel") { (action: UITableViewRowAction, indexPath: IndexPath) -> Void in
+//                let alert = UIAlertController(title: "Cancel Request?", message: "Cancel request to borrow '\(self.requestedLibrary[indexPath.row][0])'?", preferredStyle: UIAlertControllerStyle.alert)
+//                alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+//                    // Remove book from requested library
+//                    self.requestedLibrary.remove(at: indexPath.row)
+//                
+//                    if self.requestedLibrary.count == 0 {
+//                        updateBoolStats(false, "didSaveFirstBook")
+//                    }
+//                
+//                    // update it on the server
+//                    updateArray(self.requestedLibrary, "requestedLibrary")
+//                
+//                    // reload the table view
+//                    tableView.deleteRows(at: [indexPath], with: .fade)
+//                
+//                }))
+//            
+//                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+//                
+//                }))
+//                self.present(alert, animated: true, completion: nil)
+//            }
+//        
+//            requestEditAction.backgroundColor =  UIColor.red
+//            
+//        } else if mode == "received" {
+//           requestEditAction = UITableViewRowAction(style: .normal, title: "Approve") { (action: UITableViewRowAction, indexPath: IndexPath) -> Void in
+//                let alert = UIAlertController(title: "Approve request?", message: "Approves request to borrow '\(self.requestedLibrary[indexPath.row][0])' from \(self.requestedLibrary[indexPath.row][9])?", preferredStyle: UIAlertControllerStyle.alert)
+//                alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+//                    // Remove book from received requested library
+//                    self.requestedLibrary.remove(at: indexPath.row)
+//                    
+//                    if self.requestedLibrary.count == 0 {
+//                        updateBoolStats(false, "didSaveFirstBook")
+//                    }
+//                    
+//                    // update it on the server
+//                    updateArray(self.requestedLibrary, "requestedLibrary")
+//                    
+//                    // reload the table view
+//                    tableView.deleteRows(at: [indexPath], with: .fade)
+//                    
+//                }))
+//                
+//                alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
+//                    
+//                }))
+//                self.present(alert, animated: true, completion: nil)
+//            }
+//            
+//            requestEditAction.backgroundColor =  UIColor.green
+//        }
+//        
+//        return [requestEditAction]
+//    }
     
 
     

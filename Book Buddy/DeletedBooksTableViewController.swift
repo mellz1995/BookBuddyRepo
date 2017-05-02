@@ -154,16 +154,26 @@ class DeletedBooksTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             
-            currentLibrary.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
+            let alert = UIAlertController(title: "Permanently delete '\(currentLibrary[indexPath.row][0])'?", message: "Warning. You can not undo this action.", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { (action) in
+                self.currentLibrary.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+                
+                if self.currentLibrary.count == 0 {
+                    updateBoolStats(false, "didDeleteFirstBook")
+                }
+                updateArray(self.currentLibrary, "deletedLibrary")
+                
+                self.tableView.reloadData()
+                self.viewDidLoad()
+            }))
             
-            if currentLibrary.count == 0 {
-                updateBoolStats(false, "didDeleteFirstBook")
-            }
-            updateArray(currentLibrary, "deletedLibrary")
+            alert.addAction(UIAlertAction(title: "Don't delete", style: .cancel, handler: { (action) in
+                
+            }))
+            self.present(alert, animated: true, completion: nil)
             
-            self.tableView.reloadData()
-            self.viewDidLoad()
+            
             
         } else if editingStyle == .insert {
             // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view

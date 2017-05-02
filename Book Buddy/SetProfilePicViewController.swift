@@ -41,7 +41,7 @@ class SetProfilePicViewController: UIViewController, UINavigationControllerDeleg
     
     @IBAction func clearButtonAction(_ sender: UIButton) {
         let alert = UIAlertController(title: "Clear photo?", message: "Do you want to clear this photo?", preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "Yes, clear", style: .default, handler: { (action) in
+        alert.addAction(UIAlertAction(title: "Yes, clear", style: .destructive, handler: { (action) in
             self.profilePicView.image = #imageLiteral(resourceName: "InitialSadBook")
             updateBoolStats(false, "didSetProfilePic")
             self.setProfilePic = false
@@ -49,7 +49,7 @@ class SetProfilePicViewController: UIViewController, UINavigationControllerDeleg
             self.clearButtonOutlet.isEnabled = false
         }))
         
-        alert.addAction(UIAlertAction(title: "No, don't clear", style: .default, handler: { (action) in
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
             let imagePickerController = UIImagePickerController()
             imagePickerController.delegate = self
             imagePickerController.sourceType = UIImagePickerControllerSourceType.photoLibrary
@@ -83,9 +83,9 @@ class SetProfilePicViewController: UIViewController, UINavigationControllerDeleg
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             profilePicView.image = image
             // Uncomment the next three lines when done with testing
-            //let uploadableImage = PFFile(data: UIImageJPEGRepresentation(image, 1.0)!)
-            //updateBoolStats(true, "didSetProfilePic")
-            //updateProfilePic(uploadableImage!, "profilePic")
+            let uploadableImage = PFFile(data: UIImageJPEGRepresentation(image, 1.0)!)
+            updateBoolStats(true, "didSetProfilePic")
+            updateProfilePic(uploadableImage!, "profilePic")
             setProfilePic = true
         } else {
             self.displayAlert("Error processing image file", "There was an error processing the image file. Please try again.", "Ok")

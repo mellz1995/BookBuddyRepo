@@ -332,7 +332,7 @@ class BooksTableViewController: UITableViewController {
         // If the user deletes a book
         if editingStyle == .delete {
             let alert = UIAlertController(title: "Delete Book?", message: "Delete '\(currentLibrary[indexPath.row][0])' from your library?", preferredStyle:    UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+            alert.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { (action) in
                 // Append the deleted book to the server
                 GUSUerLibrary(self.currentLibrary[indexPath.row], "deletedLibrary", "didDeleteFirstBook")
                 

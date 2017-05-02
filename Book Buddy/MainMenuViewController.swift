@@ -23,6 +23,8 @@ class MainMenuViewController: UIViewController, UINavigationControllerDelegate, 
     var friendsIDArray = Array<Any>()
     var friendsArray = Array<Any>()
     
+    var didAddFirstFriend = false
+    
     @IBOutlet weak var bannerView: GADBannerView!
 
     
@@ -30,6 +32,9 @@ class MainMenuViewController: UIViewController, UINavigationControllerDelegate, 
     var currentFriends = PFUser.current()!.object(forKey: "friends") as! Array<Array<Any>>
     
     override func viewDidLoad() {
+        
+        
+        
         bannerView.alpha = 1
         print("Google Mobile Ads SDK version: " + GADRequest.sdkVersion())
         
@@ -97,7 +102,7 @@ class MainMenuViewController: UIViewController, UINavigationControllerDelegate, 
     
     @IBAction func logoutButtonAction(_ sender: UIButton) {
         let alert = UIAlertController(title: "Logut?", message: "Are you sure you want to log out?", preferredStyle: UIAlertControllerStyle.alert)
-        alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
+        alert.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { (action) in
             PFUser.logOut()
             // Send the user to the main menu
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -106,7 +111,7 @@ class MainMenuViewController: UIViewController, UINavigationControllerDelegate, 
             appDelegate.window?.rootViewController = view
         }))
         
-        alert.addAction(UIAlertAction(title: "No, cancel", style: .default, handler: { (action) in
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
             
         }))
         self.present(alert, animated: true, completion: nil)
@@ -178,55 +183,62 @@ class MainMenuViewController: UIViewController, UINavigationControllerDelegate, 
     @IBOutlet weak var linksButtonOutlet: UIButton!
     @IBAction func linksButtonAction(_ sender: UIButton) {
         // Perform the action of getting the user's friends
-        if PFUser.current()!.object(forKey: "didAddFirstFrend") as! Bool == false {
-            let alert = UIAlertController(title: "Oops", message: "It doesn't look like you have any friends.", preferredStyle: UIAlertControllerStyle.alert)
-            alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action) in
-               
-                self.present(alert, animated: true, completion: nil)
-            }))
-        } else {
+        
+        let alert = UIAlertController(title: "Oops", message: "It doesn't look like you have any friends.", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action) in
+            
+            self.present(alert, animated: true, completion: nil)
+        }))
+        
+//        if PFUser.current()!.object(forKey: "didAddFirstFrend") as! Bool == false {
+//            let alert = UIAlertController(title: "Oops", message: "It doesn't look like you have any friends.", preferredStyle: UIAlertControllerStyle.alert)
+//            alert.addAction(UIAlertAction(title: "Okay", style: .default, handler: { (action) in
+//               
+//                self.present(alert, animated: true, completion: nil)
+//            }))
+ //       } else {
             // Get the user's ID's and append them to the friendsArray. This will be information
-            for i in 0..<currentFriends.count {
-                friendsIDArray.append(currentFriends[i][0])
-            }
+//            for i in 0..<currentFriends.count {
+//                friendsIDArray.append(currentFriends[i][0])
+//            }
             
-            let query = PFUser.query()
-            query?.findObjectsInBackground(block: { (objects, error) in
-                if let users = objects {
-                    for object in users {
-                        if let user = object as? PFUser {
-                            // Loop through the friendsIDArray to get the ID's to get the current username
-                            for j in 0..<self.friendsArray.count{
-                                if user.objectId == self.friendsArray[j] as? String{
-                                    self.friendsArray.append(user.objectId!)
-                                    self.friendsArray.append(user.username!)
-                                    
-                                    // Get the user's profile picture and append it as well
-                                    if let userPicture = user.object(forKey: "profilePic")! as? PFFile {
-                                        userPicture.getDataInBackground({ (imageData: Data?, error: Error?) -> Void in
-                                            let image = UIImage(data: imageData!)
-                                            if image != nil {
-                                                // Append the image to index 1
-                                                self.friendsArray.append(image!)
-                                            }
-                                        })
-                                    }
-                                }
-                            }
-                            
-                        }
-                    }
-                    // Append the currentFriendsArray
-                    self.currentFriends.append(self.friendsArray)
-                    print("The friends array is \(self.currentFriends)")
-                }
-            })
+//            let query = PFUser.query()
+//            query?.findObjectsInBackground(block: { (objects, error) in
+//                if let users = objects {
+//                    for object in users {
+//                        if let user = object as? PFUser {
+//                            // Loop through the friendsIDArray to get the ID's to get the current username
+//                            for j in 0..<self.friendsArray.count{
+//                                if user.objectId == self.friendsArray[j] as? String{
+//                                    self.friendsArray.append(user.objectId!)
+//                                    self.friendsArray.append(user.username!)
+//                                    
+//                                    // Get the user's profile picture and append it as well
+//                                    if let userPicture = user.object(forKey: "profilePic")! as? PFFile {
+//                                        userPicture.getDataInBackground({ (imageData: Data?, error: Error?) -> Void in
+//                                            let image = UIImage(data: imageData!)
+//                                            if image != nil {
+//                                                // Append the image to index 1
+//                                                self.friendsArray.append(image!)
+//                                            }
+//                                        })
+//                                    }
+//                                }
+//                            }
+//                            
+//                        }
+//                    }
+//                    // Append the currentFriendsArray
+//                    self.currentFriends.append(self.friendsArray)
+//                    print("The friends array is \(self.currentFriends)")
+//                }
+//            })
             
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let view = storyboard.instantiateViewController(withIdentifier: "Links")
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            appDelegate.window?.rootViewController = view
-        }
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            let view = storyboard.instantiateViewController(withIdentifier: "Links")
+//            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//            appDelegate.window?.rootViewController = view
+//        }
     }
     
 
