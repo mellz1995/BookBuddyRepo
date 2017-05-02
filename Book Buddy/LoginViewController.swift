@@ -16,8 +16,13 @@ class LoginViewController: UIViewController {
     var springWithDamping = 3.0
     var whatsThis = false
 
+    @IBOutlet weak var generateButtonOutlet: UIButton!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        generateButtonOutlet.isEnabled = false
+        generateButtonOutlet.alpha = 0
         
         // Check to see if a user is already logged in or not
         if PFUser.current() != nil {

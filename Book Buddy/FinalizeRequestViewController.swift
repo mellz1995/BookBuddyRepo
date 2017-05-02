@@ -20,7 +20,7 @@ class FinalizeRequestViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        refreshServerData()
         setEverythingUp()
     }
 

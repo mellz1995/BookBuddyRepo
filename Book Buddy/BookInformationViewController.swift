@@ -124,8 +124,10 @@ class BookInformationViewController: UIViewController, UINavigationControllerDel
                 // Change the 'Change' button to 'Return'
                 changeButtonOutlet.setImage(#imageLiteral(resourceName: "ReturnButton"), for: [])
                 
-                returnOutlet.isEnabled = true
-                returnOutlet.alpha = 1
+//                returnOutlet.isEnabled = true
+//                returnOutlet.alpha = 1
+                
+                bookDueLabel.text = "Book due on \(bookInformationArray[11])"
                 
             } else if libraryMode == "lent" {
                 currentLibrary = PFUser.current()?.object(forKey: "lentBooks") as! Array<Array<AnyObject>>
@@ -285,8 +287,8 @@ class BookInformationViewController: UIViewController, UINavigationControllerDel
             changeButtonOutlet.alpha = 1
             
             bookDueLabel.alpha = 0
-            returnOutlet.isEnabled = false
-            returnOutlet.alpha = 0
+            //returnOutlet.isEnabled = false
+            //returnOutlet.alpha = 0
         }
         
         // Set the textFields

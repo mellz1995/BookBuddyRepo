@@ -19,7 +19,6 @@ class SearchedUserInformationViewController: UIViewController, UITableViewDelega
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         if comingFromSearch == true {
             userInforomation = userInformationArray[0]
         }

@@ -16,7 +16,6 @@ class FriendsTableViewController: UITableViewController {
         super.viewDidLoad()
         print()
         print("CurrentFriendsArray from the TableView is \(currentFriends)")
-        
         navigationItem.title = "Your Links"
     }
 

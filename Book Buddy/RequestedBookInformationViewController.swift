@@ -39,9 +39,6 @@ class RequestedBookInformationViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         setEverythingUp()
-        
-        
-       
     }
 
     override func didReceiveMemoryWarning() {
@@ -52,12 +49,12 @@ class RequestedBookInformationViewController: UIViewController {
     func setEverythingUp(){
         currentRequestedLibrary = PFUser.current()!.object(forKey: "requestedLibrary") as! Array<Array<AnyObject>>
         
-        requestedFromOutlet.text = "Requested from \(requestedBookInformation[12]) until \(requestedBookInformation[11])."
-        
         if mode == "Received" {
-            cancelRequestOutlet.setTitle("Approve Request", for: [])
+            cancelRequestOutlet.setImage(#imageLiteral(resourceName: "ApproveRequestButton"), for: [])
+            requestedFromOutlet.text = "Requested from \(requestedBookInformation[12]) until \(requestedBookInformation[11])."
         } else {
-            cancelRequestOutlet.setTitle("Cancel Request", for: [])
+            requestedFromOutlet.text = "Requested from \(requestedBookInformation[12]) until \(requestedBookInformation[11])."
+           cancelRequestOutlet.setImage(#imageLiteral(resourceName: "CancelRequestButton"), for: [])
         }
         
         // Set the labels
@@ -206,7 +203,7 @@ class RequestedBookInformationViewController: UIViewController {
             self.present(alert, animated: true, completion: nil)
         } else {
             var receivedRequestedLibrary = PFUser.current()!.object(forKey: "receivedRequestsLibrary") as! Array<Array<AnyObject>>
-            let alert = UIAlertController(title: "Approve Request?", message: "Approve \(self.requestedBookInformation[9])'s request to borrow '\(self.requestedBookInformation[0])' until \(requestedBookInformation[11])?", preferredStyle: UIAlertControllerStyle.alert)
+            let alert = UIAlertController(title: "Approve Request?", message: "Approve \(self.requestedBookInformation[12])'s request to borrow '\(self.requestedBookInformation[0])' until \(requestedBookInformation[11])?", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { (action) in
                 // Start the activity spinner
                 self.activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50))
@@ -287,14 +284,14 @@ class RequestedBookInformationViewController: UIViewController {
                                                     
                                                     print("RequestedUsersSentRequests count is \(requestedUserSentReqeuests.count)")
                                                     
+                                                    // Set the second user's sent request library on the server
+                                                    GUSUerLibrary(requestedUserSentReqeuests as [AnyObject], "requestedLibrary", "didRequestFirstBook")
+                                                    
                                                     // If the second user's received request library's count is now 0, set the didReceiveFirstRequest boolean back to false
                                                     if requestedUserSentReqeuests.count == 0 {
                                                         PFUser.current()!.setValue(false, forKey: "didRequestFirstBook")
                                                         print("\(self.secondUser)'s sent request library is now empty.")
                                                     }
-                                                    
-                                                    // Set the second user's sent request library on the server
-                                                    GUSUerLibrary(requestedUserSentReqeuests as [AnyObject], "requestedLibrary", "didRequestFirstBook")
                                                     
                                                     // Set the status of the book to 'lent'
                                                     self.requestedBookInformation[6] = "Borrowed" as AnyObject

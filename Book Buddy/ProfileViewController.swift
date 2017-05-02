@@ -99,6 +99,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        refreshServerData()
+        
         bannerView.alpha = 1
         print("Google Mobile Ads SDK version: " + GADRequest.sdkVersion())
         // You have to add your app id when you register your admob account!! This is just a test ad that won't make you any money, fool

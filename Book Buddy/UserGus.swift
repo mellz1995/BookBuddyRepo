@@ -131,6 +131,15 @@ func getPFFileVersionOfImage(_ image: UIImage) -> PFFile {
     return uploadableImage!
 }
 
+func refreshServerData(){
+    do {
+        try PFUser.current()!.fetch()
+        print("Fetching server data")
+    } catch {
+        print("Error loading server data")
+    }
+}
+
 
 
 

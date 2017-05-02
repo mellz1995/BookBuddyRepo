@@ -32,6 +32,8 @@ class MainMenuViewController: UIViewController, UINavigationControllerDelegate, 
     override func viewDidLoad() {
         bannerView.alpha = 1
         print("Google Mobile Ads SDK version: " + GADRequest.sdkVersion())
+        
+        refreshServerData()
 
         bannerView.adUnitID = "ca-app-pub-9692686923892592/9608344067"
         bannerView.rootViewController = self
@@ -226,6 +228,7 @@ class MainMenuViewController: UIViewController, UINavigationControllerDelegate, 
             appDelegate.window?.rootViewController = view
         }
     }
+    
 
     /*
     // MARK: - Navigation

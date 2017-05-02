@@ -47,14 +47,16 @@ class RequestedBooksTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        refreshServerData()
+        
         navigationItem.title = "Requested"
         
         // Change the book's status to requested
         if didRequestFirstBook == true {
             print("DidRequestFirstBook is: \(didRequestFirstBook)")
-            for i in 0..<requestedLibrary.count {
-               // requestedLibrary[i][6] = "Requested" as AnyObject
-            }
+//            for i in 0..<requestedLibrary.count {
+//               // requestedLibrary[i][6] = "Requested" as AnyObject
+//            }
         }
 
         print("Requested Library is: \(requestedLibrary)")

@@ -17,7 +17,6 @@ class WishListTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         comingFromWishList = true
         
         navigationItem.rightBarButtonItem = editButtonItem

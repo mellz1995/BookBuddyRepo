@@ -12,7 +12,6 @@ class RequestedNavigationViewController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         navigationItem.title = "Requested"
 
         // Do any additional setup after loading the view.

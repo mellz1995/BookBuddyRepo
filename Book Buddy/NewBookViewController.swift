@@ -30,6 +30,7 @@ class NewBookViewController: UIViewController, UINavigationControllerDelegate, U
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        refreshServerData()
         
         bannerView.alpha = 1
         print("Google Mobile Ads SDK version: " + GADRequest.sdkVersion())

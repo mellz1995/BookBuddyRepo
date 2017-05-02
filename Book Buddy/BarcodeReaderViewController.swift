@@ -217,7 +217,7 @@ class BarcodeReaderViewController: UIViewController, AVCaptureMetadataOutputObje
                 scannedBarcode = metadataObj.stringValue
                 captureSession?.stopRunning()
                 
-                displayAlert("Barcode Found!!", metadataObj.stringValue, "Let's searh it!")
+                displayAlert("Barcode Found!!", metadataObj.stringValue, "Let's search it!")
                 backButtonOutlet.alpha = 0
                 backButtonOutlet.isEnabled = false
                 

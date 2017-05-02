@@ -13,7 +13,6 @@ class ViewProfilePictureViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         if PFUser.current()!.object(forKey: "didSetProfilePic") as! Bool == false{
             // profilePictureOutlet.setImage(#imageLiteral(resourceName: "InitialSadBook"), for: [])
             profilePicture.image = #imageLiteral(resourceName: "InitialSadBook")

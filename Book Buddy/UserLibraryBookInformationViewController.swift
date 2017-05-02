@@ -17,7 +17,6 @@ class UserLibraryBookInformationViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setEverythingUp()
     }
 
